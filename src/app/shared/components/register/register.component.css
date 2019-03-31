@@ -1,0 +1,9 @@
+.register-box {
+    width: 360px;
+    margin: 7% auto;
+    margin-top: 0%;
+    margin-right: auto;
+    margin-bottom: 7%;
+    margin-left: auto;
+}
+.disabled{cursor: not-allowed;}

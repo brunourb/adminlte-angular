@@ -1,0 +1,4 @@
+enum storageType {
+  user,
+  details
+}
