@@ -24,7 +24,8 @@ export class MailComposeComponent implements OnInit {
   @ViewChild('editor') editor;
 
   constructor(
-    private skillService: SkillService) {
+    private skillService: SkillService,
+    private userService: UserService) {
   }
 
   ngOnInit() {
@@ -48,6 +49,6 @@ export class MailComposeComponent implements OnInit {
   }
 
   bindSkills() {
-    this.mailsTo = this.skillService.getAllSkill();
+    this.mailsTo = this.userService.getAll();
   }
 }
