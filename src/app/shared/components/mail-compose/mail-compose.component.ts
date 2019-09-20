@@ -13,17 +13,25 @@ import { User } from '../../../shared/models/user';
 export class MailComposeComponent implements OnInit {
   submitted = false;
   mailsTo: any;
-
+  registerForm: FormGroup;
   @ViewChild('editor') editor;
 
-  constructor(
+  constructor(private formBuilder: FormBuilder,
     private userService: UserService) {
   }
 
   ngOnInit() {
     this.bindMailToList();
+    this.bindRegistrationFormGroup();
   }
-
+  bindRegistrationFormGroup() {
+    this.registerForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
   ngAfterViewInit() {
     this.editor.setTheme("eclipse");
     this.editor.getEditor().setOptions({

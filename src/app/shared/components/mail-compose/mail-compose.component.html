@@ -2,11 +2,9 @@
 	<div class="box-header with-border">
 		<h3 class="box-title">Compose New Message</h3>
 	</div>
-
 	<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" autocomplete="off">
 		<div class="box-body">
 			<div class="form-group">
-
 				<ng-select [items]="mailsTo" bindLabel="name" bindValue="id" [multiple]="true" placeholder="Select emails" clearAllText="Clear"
 				 formControlName="skillIds">
 				</ng-select>
@@ -27,5 +25,4 @@
         <button type="reset" class="btn btn-default" [routerLink]="'/mail/inbox'"><i class="fa fa-times"></i> Discard</button>
     </div>
 	</form>
-
 </div>
