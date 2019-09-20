@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
-const routes: Routes = [
+const routes: Routes = [ 
   {
     path: '',
     loadChildren: './layout/admin/admin-layout.module#AdminLayoutModule',    
