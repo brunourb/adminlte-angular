@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserGridComponent } from './user-grid.component';
+import { MailGridComponent } from './mail-grid.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Routes, RouterModule } from '@angular/router';
 @NgModule({
@@ -10,10 +10,10 @@ import { Routes, RouterModule } from '@angular/router';
     NgxDatatableModule,
   ],
   declarations: [
-    UserGridComponent,
+    MailGridComponent,
   ],
   exports: [
-    UserGridComponent,
+    MailGridComponent,
   ]
 }) 
 export class MailGridModule { }

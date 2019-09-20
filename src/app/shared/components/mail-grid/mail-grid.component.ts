@@ -1,8 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable } from '@angular/core';
 import { Observable, of } from "rxjs";
 import { delay, map } from "rxjs/operators";
-import { AppSettings } from '../../../core/services/app-settings.service';
-import { UserService } from '../../../core/services/application/user.service';
+import { MessageService } from '../../../core/services/application/message.service';
 import { User } from '../../../shared/models/user';
 import { PagedData, CorporateEmployee, Page } from '../../../shared/models/page';
 
@@ -20,7 +19,7 @@ export class MailGridComponent implements OnInit {
   loadingIndicator: boolean = false;
   pageInfo: any;
 
-  constructor(private userService: UserService) {
+  constructor(private messageService: MessageService) {
     this.page.pageNumber = 0;
     this.page.size = 10;
   }
@@ -30,31 +29,15 @@ export class MailGridComponent implements OnInit {
   }
 
   setPage(pageInfo) {
-    
     this.loadingIndicator = true;
     this.pageInfo = pageInfo;
-
     this.page.pageNumber = pageInfo.offset;
-    this.userService.getResults(this.page).subscribe(pagedData => {
-      this.page = pagedData.page;
-      this.rows = pagedData.data;
-      this.loadingIndicator = false;      
-    });
+    console.log(this.messageService.getMessage());
+    // this.messageService.getMessage(this.page).subscribe(pagedData => {
+    //   this.page = pagedData.page;
+    //   this.rows = pagedData.data;
+    //   this.loadingIndicator = false;      
+    // });
   }
-  delete(id) {
-    this.deleteUser(id);
-  }
-  deleteUser(id): void {
-    if (id !== 1) {
-      this.userService.delete(id)
-        .subscribe(
-          data => {
-            this.setPage({ offset: 0 });
-          },
-          error => {
-            console.log(error);
-          }
-        );
-    }
-  }
+  
 }

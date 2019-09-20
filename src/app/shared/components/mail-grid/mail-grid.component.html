@@ -1,64 +1,72 @@
-<section class="content">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="box box-primary">
-				<div class="box-header">
-					<h3 class="box-title">Mail List</h3>
-				</div>
-				<div class="box-body table-responsive ">
-					<!-- <ngx-datatable class="material" [rows]="rows" [columnMode]="'standard'" [headerHeight]="45" [footerHeight]="45" [rowHeight]="'auto'"
-					 [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber" [limit]="page.size" (page)='setPage($event)'
-					 [loadingIndicator]="loadingIndicator">
-						<ngx-datatable-column name="id" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="25">
-							<ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-								<a [routerLink]="['/admin/user/detail',row.id]">{{row.id}}</a>
-							</ng-template>
-						</ngx-datatable-column>
-						<ngx-datatable-column name="username" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="220">
-							<ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-								<a [routerLink]="['/admin/user/detail',row.id]">{{row.username}}</a>
-							</ng-template>
-						</ngx-datatable-column>
-						<ngx-datatable-column name="firstName" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="180">
-							<ng-template>
-								{{value}}
-							</ng-template>
-						</ngx-datatable-column>
-						<ngx-datatable-column name="lastName" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="180">
-							<ng-template>
-								{{value}}
-							</ng-template>
-						</ngx-datatable-column>
-						<ngx-datatable-column name="password" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="180">
-							<ng-template ngx-datatable-header-template>
-								password
-							</ng-template>
-							<ng-template>
-								{{value}}
-							</ng-template>
-						</ngx-datatable-column>
-						<ngx-datatable-column [draggable]="true" [canAutoResize]="true" [width]="10">
-							<ng-template ngx-datatable-header-template>
-								<i class="fa fa-trash" aria-hidden="true"></i>
-								</ng-template>
-								<ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-									<div *ngIf="row.id===1">
-                    <i class="fa fa-trash disabled" aria-hidden="true" style="color: #DBDBDB;"></i>
-                  </div>
-                  <div *ngIf="row.id!==1">
-                    <i class="fa fa-trash " aria-hidden="true" (click)="delete(row.id)" style="cursor:pointer"></i>
-                  </div>
-								</ng-template>
-							</ngx-datatable-column>
-						</ngx-datatable> -->
-					</div>
-					<div class="box-footer">
-						<div class="col-md-12">
-							<button type="button" class="btn btn-primary" [routerLink]="'/admin/user/add'"><i class="fa fa-plus-square"></i>
-                Add User</button>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Inbox</h3>
+        <div class="box-tools pull-right">
+            <div class="has-feedback">
+                <input type="text" class="form-control input-sm" placeholder="Search Mail">
+                <span class="glyphicon glyphicon-search form-control-feedback"></span>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-</section>
+    <div class="box-body no-padding">
+        <div class="mailbox-controls">
+            <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+            </button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
+            </div>
+            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+            <div class="pull-right">
+                1-50/200
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive mailbox-messages">
+            <table class="table table-hover table-striped">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="icheckbox_flat-blue" aria-checked="false" aria-disabled="false"
+                                style="position: relative;"><input type="checkbox"
+                                    style="position: absolute; opacity: 0;"><ins class="iCheck-helper"
+                                    style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                            </div>
+                        </td>
+                        <td class="mailbox-star"><a [class.disabled]="true"><i class="fa fa-star text-yellow"></i></a>
+                        </td>
+                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
+                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to
+                            this problem...
+                        </td>
+                        <td class="mailbox-attachment"></td>
+                        <td class="mailbox-date">5 mins ago</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="box-footer no-padding">
+        <div class="mailbox-controls">
+            <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+            </button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
+            </div>
+            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+            <div class="pull-right">
+                1-50/200
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
