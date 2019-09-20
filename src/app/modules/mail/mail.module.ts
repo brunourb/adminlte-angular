@@ -9,9 +9,6 @@ import { InboxComponent } from './mail-box/inbox/component/inbox.component';
 import { MailBoxRootComponent } from './mail-box/mail-box-root.component';
 import { ReadMailComponent } from './mail-box/read/component/read-mail.component';
 import { MailMenuModule } from '../../shared/components/mail-menu/mail-menu.module';
-import { MailComposeModule } from '../../shared/components/mail-compose/mail-compose.module';
-
-import { ComposeComponent } from './mail-box/compose/component/compose.component';
 
 @NgModule({
   imports: [
