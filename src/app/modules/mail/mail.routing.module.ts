@@ -40,7 +40,7 @@ const routes: Routes = [
             },
           },
           {
-            path: 'compose', component: ComposeMComponent,
+            path: 'compose', component: ComposeMailComponent,
             canActivate: [AuthGuard],
             data: {
               breadcrumb: 'Compose ',
