@@ -38,7 +38,20 @@ const routes: Routes = [
           icon: 'fa fa-home',
           show: false
         },
-      }
+      },
+      {
+        path: 'menu', loadChildren: '../../modules/dashboard/dashboard.module#DashboardModule',
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumb: 'Dashboard',
+          breadcrumbs: 'Dashboard',
+          title: 'Dashboard Title',
+          smallText: 'Dashboard Small Text',
+          isHome: true,
+          icon: 'fa fa-home',
+          show: false
+        },
+      },
     ]
   }
 ];
