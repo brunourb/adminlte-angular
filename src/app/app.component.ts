@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
         });
   }
   private initMessageDatabase(): void {
-    let message: Message =    {
+    let message: Message = {
       id: 1,
       imgSource: "https://github.com/Genuine-Identity.png",
       team: "Support Team",
@@ -61,10 +61,10 @@ export class AppComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          console.log(data);
+          // console.log(data);
         },
         error => {
-          console.log(error);
+          // console.log(error);
         });
   }
 

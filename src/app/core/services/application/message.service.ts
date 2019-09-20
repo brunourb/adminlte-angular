@@ -15,7 +15,7 @@ import { PagedData, CorporateEmployee, Page } from '../../../shared/models/page'
 export class MessageService {
   messages: Message[];
   constructor(private http: HttpClient) { }
-  
+
   public register(message: Message) {
     return this.http.post(`/message/register`, message);
   }

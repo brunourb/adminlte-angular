@@ -122,15 +122,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
       }
       if (request.url.endsWith('/message/register') && request.method === 'POST') {
-        let newUser = request.body;
-        let duplicateUser = users.filter(user => { return user.username === newUser.username; }).length;
-        if (duplicateUser) {
-          return throwError({ error: { message: 'Username "' + newUser.username + '" is already taken' } });
-        }
-        newUser.id = (newUser.username === 'intelchiprules@yahoo.co.in') ? 1 : users.length + 1;
-        users.push(newUser);
-        this.localStorage.setItem('db.users', JSON.stringify(_.sortBy(users, user => user.id)));
-        return of(new HttpResponse({ status: 200 }));
+         console.log("request.body");
+        console.log(request.body);
+        console.log("request.body");
+        // let newUser = request.body;
+        // let duplicateUser = users.filter(user => { return user.username === newUser.username; }).length;
+        // if (duplicateUser) {
+        //   return throwError({ error: { message: 'Username "' + newUser.username + '" is already taken' } });
+        // }
+        // newUser.id = (newUser.username === 'intelchiprules@yahoo.co.in') ? 1 : users.length + 1;
+        // users.push(newUser);
+        // this.localStorage.setItem('db.users', JSON.stringify(_.sortBy(users, user => user.id)));
+        // return of(new HttpResponse({ status: 200 }));
       }
       /* Message Fake backend service Ends here*/
 
