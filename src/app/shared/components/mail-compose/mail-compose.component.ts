@@ -5,7 +5,7 @@ import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable,
   styleUrls: ['./mail-compose.component.css'],
 })
 export class MailComposeComponent implements OnInit {
-   
+
   constructor() { }
   ngOnInit() { }
   @ViewChild('editor') editor;
@@ -14,10 +14,6 @@ export class MailComposeComponent implements OnInit {
       showLineNumbers: true,
       tabSize: 2
     });
-
-    this.editor.mode = 'text';
-     
-
     this.editor.getEditor().commands.addCommand({
       name: "showOtherCompletions",
       bindKey: "Ctrl-.",
