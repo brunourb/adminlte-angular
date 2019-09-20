@@ -50,8 +50,22 @@
               <a [routerLink]="'/dashboard'"><i class="fa fa-pie-chart"></i>Dashboard 1</a>
             </li>
           </ul>
-        </li>      
+        </li>
+
+        <li class="treeview" [routerLinkActive]="'active'" >
+          <a style="cursor:pointer">
+            <i class="fa fa-dashboard"></i>
+            <span>Dashbard</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li [routerLinkActive]="'active'">
+              <a [routerLink]="'/mail'"><i class="fa fa-pie-chart"></i>ail</a>
+            </li>
+          </ul>
+        </li>        
       </ul>
     </section>
 </aside>
-

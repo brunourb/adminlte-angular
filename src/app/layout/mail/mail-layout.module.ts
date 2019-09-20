@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MailLayoutRoutingModule } from './mail-layout.routing.module'
-import { MailLayoutComponent } from './mail-layout.component'
+import { MailLayoutComponent } from './mail-layout.component';
 import { FooterModule } from '../../shared/components/footer/footer.module';
 import { HeaderModule } from '../../shared/components/header/header.module';
 import { MainSidebarModule } from '../../shared/components/main-sidebar/main-sidebar.module';
