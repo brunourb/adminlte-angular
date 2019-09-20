@@ -10,18 +10,17 @@ import { MailBoxRootComponent } from './mail-box/mail-box-root.component';
 import { ReadMailComponent } from './mail-box/read/component/read-mail.component';
 import { MailMenuModule } from '../../shared/components/mail-menu/mail-menu.module';
 
-
 @NgModule({
   imports: [
     CommonModule,
     MailRoutingModule,
     FormsModule,
     MailGridModule,
-   
+    MailMenuModule
   ],
   declarations: [
     MailComponent,
-    InboxComponent ,
+    InboxComponent,
     MailBoxRootComponent,
     ReadMailComponent
   ],
