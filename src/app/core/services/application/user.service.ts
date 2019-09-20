@@ -9,13 +9,16 @@ import { first } from 'rxjs/operators';
 
 import { User } from '../../../shared/models/index';
 import { PagedData, CorporateEmployee, Page } from '../../../shared/models/page';
+import { NgSelectModule, NgOption } from '@ng-select/ng-select';
 
 @Injectable()
 export class UserService {
   users: User[];
+  private usersInOption: NgOption[];
+
   constructor(private http: HttpClient) { }
 
-  getAll() {  
+  getAll() {
     return this.http.get<User[]>(`/users`);
   }
 
@@ -34,7 +37,7 @@ export class UserService {
   delete(id: number) {
     return this.http.delete(`/users/` + id);
   }
-
+   
   /**
    * A method that mocks a paged server response
    * @param page The selected page
