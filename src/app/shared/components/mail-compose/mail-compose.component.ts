@@ -11,8 +11,8 @@ import { User } from '../../../shared/models/user';
 })
 export class MailComposeComponent implements OnInit {
   submitted = false;
-  mailsTo: NgOption[];
-  private userMailOption: NgOption[]
+  mailsTo: any;
+
   @ViewChild('editor') editor;
 
   constructor(
@@ -20,7 +20,7 @@ export class MailComposeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.bindSkills();
+    this.bindMailToList();
   }
 
   ngAfterViewInit() {
@@ -35,24 +35,32 @@ export class MailComposeComponent implements OnInit {
     })
   }
 
-  getValue() {
-    console.log(this.editor.value);
-  }
 
-  bindSkills() {
+  bindMailToList() {
     this.userService.getAll().subscribe(
       data => {
-       
         this.bindUserMailOption(data);
       },
       error => {
         console.log(error);
       });
   }
-  bindUserMailOption(u: any) {
-    for (let i in u) {
-      console.log(u.data); // "0", "1", "2",
-    }
-    
+  bindUserMailOption(users: User[]) {
+    let To: NgOption[] = [];
+    users.forEach(function (data) {
+      var option: NgOption = {
+        id: data.id,
+        name: data.username
+      }
+      console.log(option)
+      console.log("this.mailsTo")
+      To.push(option);
+
+    });
+    this.mailsTo = To;
   }
+  getValue() {
+    console.log(this.editor.value);
+  }
+
 }
