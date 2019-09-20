@@ -14,9 +14,10 @@ import { PagedData, CorporateEmployee, Page } from '../../../shared/models/page'
 @Injectable()
 export class MessageService {
   messages: Message[];
-  constructor() {
+  constructor(private http: HttpClient) { }
+  public register(message: Message) {
+    return this.http.post(`/message/register`, message);
   }
-
   public getMessage(): Message[] {
     let message: Message[] = [
       {

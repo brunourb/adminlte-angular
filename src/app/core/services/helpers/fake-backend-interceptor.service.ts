@@ -110,7 +110,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
 
       /* Message Fake backend service Starts here*/
-      if (request.url.match(/\/users\/\d+$/) && request.method === 'GET') {
+      if (request.url.match(/\/message\/\d+$/) && request.method === 'GET') {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
           let id = parseInt(urlParts[urlParts.length - 1]);
@@ -120,6 +120,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
         }
+      }
+      if (request.url.endsWith('/message/register') && request.method === 'POST') {
+        let newUser = request.body;
+        let duplicateUser = users.filter(user => { return user.username === newUser.username; }).length;
+        if (duplicateUser) {
+          return throwError({ error: { message: 'Username "' + newUser.username + '" is already taken' } });
+        }
+        newUser.id = (newUser.username === 'intelchiprules@yahoo.co.in') ? 1 : users.length + 1;
+        users.push(newUser);
+        this.localStorage.setItem('db.users', JSON.stringify(_.sortBy(users, user => user.id)));
+        return of(new HttpResponse({ status: 200 }));
       }
       /* Message Fake backend service Ends here*/
 

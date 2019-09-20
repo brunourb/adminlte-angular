@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
 
   private initFakeBackendDatabase(): void {
     this.initUserDatabase();
+    this.initMessageDatabase();
   }
 
   private initUserDatabase(): void {
@@ -42,6 +43,22 @@ export class AppComponent implements OnInit {
         },
         error => {
           //console.log(error);
+        });
+  }
+  private initMessageDatabase(): void {
+    let user = new User("intelchiprules@yahoo.co.in",
+      "admin@123",
+      "Girish",
+      "Nandgawe",
+      "B.E. Computers", [1, 2, 4, 6, 7, 8, 9, 10], 1);
+    this.userService.register(user)
+      .pipe(first())
+      .subscribe(
+        data => {
+          console.log(data);
+        },
+        error => {
+          console.log(error);
         });
   }
 
