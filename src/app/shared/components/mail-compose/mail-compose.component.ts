@@ -23,7 +23,6 @@ export class MailComposeComponent implements OnInit {
   }
 
   getValue() {
-    console.log(this.editor.value)
-    console.log(eval(this.editor.value));
+    console.log(this.editor.value);
   }
 }
