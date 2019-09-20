@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MailComponent } from './mail.component';
-import { InboxComponent } from './mail-box/inbox/component/inbox.component'
+
 import { AuthGuardService as AuthGuard } from '../../core/services/guards/auth-guard.service';
 
+import { MailComponent } from './mail.component';
+import { InboxComponent } from './mail-box/inbox/component/inbox.component';
+import { MailBoxRootComponent } from './mail-box/mail-box-root.component.ts';
 const routes: Routes = [
   {
-    path: '',
-    component: MailComponent,
+    // path: '',
+    // component: AdminComponent,
     children: [
       {
-        path: '', component: InboxComponent,
+        path: 'mail', component: MailBoxRootComponent,
         canActivate: [AuthGuard],
         data: {
           breadcrumb: 'MailBox',
@@ -21,6 +23,47 @@ const routes: Routes = [
           icon: 'fa fa-home',
           show: false
         },
+        children: [
+          {
+            // path: '', component: UserListComponent,
+            // canActivate: [AuthGuard],
+            // data: {
+            //   breadcrumb: 'User',
+            //   breadcrumbs: 'User',
+            //   title: 'User Title',
+            //   smallText: 'User Small Text',
+            //   isHome: true,
+            //   icon: 'fa fa-home',
+            //   show: false
+            // },
+          },
+          {
+            // path: 'add', component: AddUserComponent,
+            // canActivate: [AuthGuard],
+            // data: {
+            //   breadcrumb: 'Register User',
+            //   breadcrumbs: 'Register User',
+            //   title: 'Register User Title',
+            //   smallText: 'Register User Small Text',
+            //   isHome: true,
+            //   icon: 'fa fa-home',
+            //   show: false
+            // },
+          },
+          {
+            // path: 'detail/:id', component: UserDetailComponent,
+            // canActivate: [AuthGuard],
+            // data: {
+            //   breadcrumb: 'User Details',
+            //   breadcrumbs: 'User Details',
+            //   title: 'User Details Title',
+            //   smallText: 'User Details Small Text',
+            //   isHome: true,
+            //   icon: 'fa fa-home',
+            //   show: false
+            // },
+          },
+        ]
       },
     ]
   }
