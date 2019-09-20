@@ -13,10 +13,10 @@ const routes: Routes = [
         path: '', component: InboxComponent,
         canActivate: [AuthGuard],
         data: {
-          breadcrumb: 'Dashboard',
-          breadcrumbs: 'Dashboard',
-          title: 'Dashboard Title',
-          smallText: 'Dashboard Small Text',
+          breadcrumb: 'MailBox',
+          breadcrumbs: 'MailBox',
+          title: 'MailBox',
+          smallText: '13 New Messages',
           isHome: true,
           icon: 'fa fa-home',
           show: false

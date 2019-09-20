@@ -44,7 +44,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {
           breadcrumb: 'Mail',
-          breadcrumbs: 'Dashboard',
+          breadcrumbs: 'Mail',
           title: 'Dashboard Title',
           smallText: 'Dashboard Small Text',
           isHome: true,
