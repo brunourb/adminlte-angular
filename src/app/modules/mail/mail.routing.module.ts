@@ -6,19 +6,21 @@ import { AuthGuardService as AuthGuard } from '../../core/services/guards/auth-g
 import { MailComponent } from './mail.component';
 import { InboxComponent } from './mail-box/inbox/component/inbox.component';
 import { MailBoxRootComponent } from './mail-box/mail-box-root.component';
+import { ReadMailComponent } from './mail-box/read/component/read-mail.component';
+
 
 const routes: Routes = [
   {
-    // path: '',
-    // component: AdminComponent,
+    path: '',
+    component: MailComponent,
     children: [
       {
-        path: 'mail', component: MailBoxRootComponent,
+        path: '', component: MailBoxRootComponent,
         canActivate: [AuthGuard],
         data: {
-          breadcrumb: 'MailBox',
-          breadcrumbs: 'MailBox',
-          title: 'MailBox',
+          breadcrumb: 'inbox',
+          breadcrumbs: 'inbox',
+          title: 'inbox',
           smallText: '13 New Messages',
           isHome: true,
           icon: 'fa fa-home',
@@ -26,30 +28,28 @@ const routes: Routes = [
         },
         children: [
           {
-            path: '', component: InboxComponent,
+            path: 'inbox', component: InboxComponent,
             canActivate: [AuthGuard],
-            data: {
-              breadcrumb: 'mail',
-              breadcrumbs: 'mail',
-              title: 'mail Title',
-              smallText: 'mail Small Text',
+            data: {              
+              title: 'Inbox',
+              smallText: '13 New Messages',
               isHome: true,
               icon: 'fa fa-home',
               show: false
             },
           },
           {
-            // path: 'add', component: AddUserComponent,
-            // canActivate: [AuthGuard],
-            // data: {
-            //   breadcrumb: 'Register User',
-            //   breadcrumbs: 'Register User',
-            //   title: 'Register User Title',
-            //   smallText: 'Register User Small Text',
-            //   isHome: true,
-            //   icon: 'fa fa-home',
-            //   show: false
-            // },
+            path: 'read', component: AddUserComponent,
+            canActivate: [AuthGuard],
+            data: {
+              breadcrumb: 'Register User',
+              breadcrumbs: 'Register User',
+              title: 'Register User Title',
+              smallText: 'Register User Small Text',
+              isHome: true,
+              icon: 'fa fa-home',
+              show: false
+            },
           },
           {
             // path: 'detail/:id', component: UserDetailComponent,
