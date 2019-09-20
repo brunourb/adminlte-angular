@@ -5,7 +5,8 @@ import { AuthGuardService as AuthGuard } from '../../core/services/guards/auth-g
 
 import { MailComponent } from './mail.component';
 import { InboxComponent } from './mail-box/inbox/component/inbox.component';
-import { MailBoxRootComponent } from './mail-box/mail-box-root.component.ts';
+import { MailBoxRootComponent } from './mail-box/mail-box-root.component';
+
 const routes: Routes = [
   {
     // path: '',
@@ -25,17 +26,17 @@ const routes: Routes = [
         },
         children: [
           {
-            // path: '', component: UserListComponent,
-            // canActivate: [AuthGuard],
-            // data: {
-            //   breadcrumb: 'User',
-            //   breadcrumbs: 'User',
-            //   title: 'User Title',
-            //   smallText: 'User Small Text',
-            //   isHome: true,
-            //   icon: 'fa fa-home',
-            //   show: false
-            // },
+            path: '', component: InboxComponent,
+            canActivate: [AuthGuard],
+            data: {
+              breadcrumb: 'mail',
+              breadcrumbs: 'mail',
+              title: 'mail Title',
+              smallText: 'mail Small Text',
+              isHome: true,
+              icon: 'fa fa-home',
+              show: false
+            },
           },
           {
             // path: 'add', component: AddUserComponent,
