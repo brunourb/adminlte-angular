@@ -8,7 +8,7 @@ import { MessageService } from './core/services/application/message.service';
 import { SkillService } from './core/services/application/skill.service';
 import { NavigationCancel, Event, NavigationEnd, NavigationError, NavigationStart, Router, ActivatedRoute } from '@angular/router';
 import { Message } from './shared/models/message';
-import { LocalStorageService } from '../../core/services/helpers/local-storage.service';
+import { LocalStorageService } from './core/services/helpers/local-storage.service';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.localStorage.setItem('db.users', null);
+    // this.localStorage.setItem('db.users', null);
     this.initFakeBackendDatabase();
   }
 
