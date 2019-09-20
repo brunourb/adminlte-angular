@@ -15,4 +15,4 @@ import { Routes, RouterModule } from '@angular/router';
     MailMenuComponent,
   ]
 })
-export class MailMenuModule { }
+export class MailMenuModule { } 
