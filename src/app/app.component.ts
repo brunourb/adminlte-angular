@@ -4,8 +4,10 @@ import * as jQuery from "jquery";
 
 import { User } from './shared/models/index';
 import { UserService } from './core/services/application/user.service';
+import { MessageService } from './core/services/application/message.service';
 import { SkillService } from './core/services/application/skill.service';
 import { NavigationCancel, Event, NavigationEnd, NavigationError, NavigationStart, Router, ActivatedRoute } from '@angular/router';
+import { Message } from './shared/models/message';
 
 @Component({
   selector: 'my-app',
@@ -17,7 +19,8 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService,
     private skillService: SkillService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -46,12 +49,15 @@ export class AppComponent implements OnInit {
         });
   }
   private initMessageDatabase(): void {
-    let user = new User("intelchiprules@yahoo.co.in",
-      "admin@123",
-      "Girish",
-      "Nandgawe",
-      "B.E. Computers", [1, 2, 4, 6, 7, 8, 9, 10], 1);
-    this.userService.register(user)
+    let message: Message =    {
+      id: 1,
+      imgSource: "https://github.com/Genuine-Identity.png",
+      team: "Support Team",
+      time: "5 mins",
+      suggestion: "Why not buy a new awesome theme?"
+    };
+
+    this.messageService.register(message)
       .pipe(first())
       .subscribe(
         data => {
