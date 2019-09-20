@@ -13,7 +13,8 @@ import { User } from '../../../shared/models/user';
 export class MailComposeComponent implements OnInit {
   submitted = false;
   mailsTo: any;
-  registerForm: FormGroup;
+  userDetailsForm: FormGroup;
+  mailToIds: any[];
   @ViewChild('editor') editor;
 
   constructor(private formBuilder: FormBuilder,
@@ -22,14 +23,15 @@ export class MailComposeComponent implements OnInit {
 
   ngOnInit() {
     this.bindMailToList();
-    this.bindRegistrationFormGroup();
+    this.bindFormGroup();
   }
-  bindRegistrationFormGroup() {
-    this.registerForm = this.formBuilder.group({
+  bindFormGroup() {
+    this.userDetailsForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      education: ['', Validators.required],
+      mailToIds: [null, Validators.required],
     });
   }
   ngAfterViewInit() {
@@ -71,12 +73,17 @@ export class MailComposeComponent implements OnInit {
   getValue() {
     console.log(this.editor.value);
   }
+  get f() {
+    return this.userDetailsForm.controls;
+  }
   onSubmit() {
     console.log('a');
-    // this.submitted = true;
-    // if (this.registerForm.invalid) {
-    //   return;
-    // }
+    console.log(this.f.mailToIds.value);
+    this.submitted = true;
+    if (this.userDetailsForm.invalid) {
+      return;
+    }
+
     // let user = new User(this.f.email.value, this.f.password.value, this.f.firstName.value, this.f.lastName.value, "", [], 1);
     // this.userService.register(user)
     //   .pipe(first())
