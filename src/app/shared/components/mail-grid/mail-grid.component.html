@@ -55,7 +55,7 @@
                 <ngx-datatable-column   [resizeable]="true" [draggable]="true"
                     [canAutoResize]="true" [width]="300">
                     <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-                    	<a [routerLink]="['/admin/user/detail',row.id]">{{row.suggestion}}</a>    
+                    	<a [routerLink]="['/mail/read',row.id]">{{row.suggestion}}</a>    
                     </ng-template>
                 </ngx-datatable-column>               
             </ngx-datatable>

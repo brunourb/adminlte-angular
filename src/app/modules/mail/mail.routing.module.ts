@@ -39,7 +39,7 @@ const routes: Routes = [
             },
           },
           {
-            path: 'read', component: AddUserComponent,
+            path: 'read', component: ReadMailComponent,
             canActivate: [AuthGuard],
             data: {
               breadcrumb: 'Register User',
@@ -52,17 +52,17 @@ const routes: Routes = [
             },
           },
           {
-            // path: 'detail/:id', component: UserDetailComponent,
-            // canActivate: [AuthGuard],
-            // data: {
-            //   breadcrumb: 'User Details',
-            //   breadcrumbs: 'User Details',
-            //   title: 'User Details Title',
-            //   smallText: 'User Details Small Text',
-            //   isHome: true,
-            //   icon: 'fa fa-home',
-            //   show: false
-            // },
+            path: 'read/:id', component: ReadMailComponent,
+            canActivate: [AuthGuard],
+            data: {
+              breadcrumb: 'User Details',
+              breadcrumbs: 'User Details',
+              title: 'User Details Title',
+              smallText: 'User Details Small Text',
+              isHome: true,
+              icon: 'fa fa-home',
+              show: false
+            },
           },
         ]
       },

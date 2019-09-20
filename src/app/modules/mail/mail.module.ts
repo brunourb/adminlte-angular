@@ -7,6 +7,7 @@ import { MailRoutingModule } from './mail.routing.module';
 import { MailGridModule } from '../../shared/components/mail-grid/mail-grid.module';
 import { InboxComponent } from './mail-box/inbox/component/inbox.component';
 import { MailBoxRootComponent } from './mail-box/mail-box-root.component';
+import { ReadMailComponent } from './mail-box/read/component/read-mail.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { MailBoxRootComponent } from './mail-box/mail-box-root.component';
   declarations: [
     MailComponent,
     InboxComponent ,
-    MailBoxRootComponent
+    MailBoxRootComponent,
+    ReadMailComponent
   ],
 })
 
