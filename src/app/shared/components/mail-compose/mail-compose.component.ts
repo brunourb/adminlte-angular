@@ -1,17 +1,11 @@
 import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable, ViewChild, AfterViewInit } from '@angular/core';
 import { NgSelectModule, NgOption } from '@ng-select/ng-select';
 import { SkillService } from '../../../core/services/application/skill.service';
-
-
-// import { first } from 'rxjs/operators'
 import { UserService } from '../../../core/services/application/user.service';
-// import { User } from '../../../shared/models/user';
-// import { AlertType, Alert } from '../../models/all';
+import { User } from '../../../shared/models/user';
+
 // import { Observable } from 'rxjs';
 // import { tap } from 'rxjs/operators';
-// import { AlertModule } from '../../widgets/alert/alert.module';
-
-
 
 @Component({
   selector: 'app-mail-compose',
@@ -21,6 +15,7 @@ import { UserService } from '../../../core/services/application/user.service';
 export class MailComposeComponent implements OnInit {
   submitted = false;
   mailsTo: NgOption[];
+  private userMailOption: NgOption[]
   @ViewChild('editor') editor;
 
   constructor(
@@ -50,12 +45,18 @@ export class MailComposeComponent implements OnInit {
   bindSkills() {
     this.userService.getAll().subscribe(
       data => {
+        console.log(data);
         var d = data;
-        console.log(d);
+        this.bindUserMailOption(data);
       },
       error => {
         console.log(error);
       });
-
+  }
+  bindUserMailOption(u: any) {
+    for (let i in u) {
+      console.log(u.data); // "0", "1", "2",
+    }
+    
   }
 }
