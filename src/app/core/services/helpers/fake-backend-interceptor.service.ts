@@ -13,6 +13,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   constructor(private localStorage: LocalStorageService, private userSessionService: UserSessionService) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let users: any[] = JSON.parse(this.localStorage.getItem('db.users')) || [];
+    let messages: any[] = JSON.parse(this.localStorage.getItem('db.message')) || [];
     return of(null).pipe(mergeMap(() => {
       /* User Fake backend service Starts here*/
       if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
@@ -103,6 +104,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
         return of(new HttpResponse({ status: 200 }));
       }
+      /* User Fake backend service Ends here*/
+
+
+
+
+      /* Message Fake backend service Starts here*/
+      if (request.url.match(/\/users\/\d+$/) && request.method === 'GET') {
+        if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+          let urlParts = request.url.split('/');
+          let id = parseInt(urlParts[urlParts.length - 1]);
+          let matchedUsers = users.filter(user => { return user.id === id; });
+          let user = matchedUsers.length ? matchedUsers[0] : null;
+          return of(new HttpResponse({ status: 200, body: user }));
+        } else {
+          return throwError({ error: { message: 'Unauthorised' } });
+        }
+      }
+      /* Message Fake backend service Ends here*/
+
+
       return next.handle(request);
     }))
       .pipe(materialize())
