@@ -23,6 +23,7 @@ import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app.routing.module';
 
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AceEditorModule } from 'ng2-ace-editor';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgxDatatableModule,
     ReactiveFormsModule,
     CoreModule,
-    NgSelectModule
+    NgSelectModule,
+    AceEditorModule
   ],
   declarations: [
     AppComponent

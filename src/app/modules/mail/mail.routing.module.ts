@@ -7,6 +7,7 @@ import { MailBoxRootComponent } from './mail-box/mail-box-root.component';
 import { ReadMailComponent } from './mail-box/read/component/read-mail.component';
 import { ComposeMailComponent } from './mail-box/compose/component/compose-mail.component';
 
+
 const routes: Routes = [
   {
     path: '',
