@@ -4,7 +4,7 @@ import { SkillService } from '../../../core/services/application/skill.service';
 
 
 // import { first } from 'rxjs/operators'
- import { UserService } from '../../../core/services/application/user.service';
+import { UserService } from '../../../core/services/application/user.service';
 // import { User } from '../../../shared/models/user';
 // import { AlertType, Alert } from '../../models/all';
 // import { Observable } from 'rxjs';
@@ -20,10 +20,10 @@ import { SkillService } from '../../../core/services/application/skill.service';
 })
 export class MailComposeComponent implements OnInit {
   submitted = false;
-  mailsTo: NgOption[]; 
+  mailsTo: NgOption[];
   @ViewChild('editor') editor;
 
-  constructor(  
+  constructor(
     private userService: UserService) {
   }
 
@@ -48,6 +48,14 @@ export class MailComposeComponent implements OnInit {
   }
 
   bindSkills() {
-    this.mailsTo = this.userService.getAll();
+    this.userService.getAll().subscribe(
+      data => {
+        var d = data;
+        console.log(d);
+      },
+      error => {
+        console.log(error);
+      });
+
   }
 }
