@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable, ViewChild, AfterViewInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgSelectModule, NgOption } from '@ng-select/ng-select';
 import { SkillService } from '../../../core/services/application/skill.service';
 import { UserService } from '../../../core/services/application/user.service';
@@ -62,5 +63,22 @@ export class MailComposeComponent implements OnInit {
   getValue() {
     console.log(this.editor.value);
   }
-
+  onSubmit() {
+    console.log('a');
+    // this.submitted = true;
+    // if (this.registerForm.invalid) {
+    //   return;
+    // }
+    // let user = new User(this.f.email.value, this.f.password.value, this.f.firstName.value, this.f.lastName.value, "", [], 1);
+    // this.userService.register(user)
+    //   .pipe(first())
+    //   .subscribe(
+    //     data => {
+    //       this.alert = new Alert(AlertType.Success, "Success!", " Registered Successfully!!");
+    //     },
+    //     error => {
+    //       this.alert = new Alert(AlertType.Error, "Failure!", `Registration Failure:-  ${error}`);
+    //     }
+    //   );
+  }
 }
