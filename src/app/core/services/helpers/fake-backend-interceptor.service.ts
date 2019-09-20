@@ -122,7 +122,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
       }
       if (request.url.endsWith('/message/register') && request.method === 'POST') {
-         console.log("request.body");
+        console.log("request.body");
         console.log(request.body);
         console.log("request.body");
         // let newUser = request.body;
