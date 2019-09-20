@@ -20,17 +20,21 @@ import { AlertModule } from '../../widgets/alert/alert.module';
 })
 export class MailComposeComponent implements OnInit {
 
-  id: number;
+  // id: number;
   submitted = false;
-  alert: Alert;
-  user: User;
+  // alert: Alert;
+  // user: User;
 
-  skills: NgOption[];
-  skillIds: any[]
+  mailsTo: NgOption[];
+  // mailsTo: any[]
 
 
-  constructor() { }
-  ngOnInit() { }
+  constructor(
+    private skillService: SkillService
+  ) { }
+  ngOnInit() {
+    this.bindSkills();
+  }
   @ViewChild('editor') editor;
   ngAfterViewInit() {
     this.editor.setTheme("eclipse");
@@ -45,5 +49,8 @@ export class MailComposeComponent implements OnInit {
   }
   getValue() {
     console.log(this.editor.value);
+  }
+  bindSkills() {
+    this.mailsTo = this.skillService.getAllSkill();
   }
 }
