@@ -39,8 +39,8 @@ const routes: Routes = [
           show: false
         },
       },
-      {
-        path: 'menu', loadChildren: '../../modules/dashboard/dashboard.module#DashboardModule',
+      { 
+        path: 'mail', loadChildren: '../../modules/dashboard/dashboard.module#DashboardModule',
         canActivate: [AuthGuard],
         data: {
           breadcrumb: 'Dashboard',
