@@ -45,8 +45,7 @@ export class MailComposeComponent implements OnInit {
   bindSkills() {
     this.userService.getAll().subscribe(
       data => {
-        console.log(data);
-        var d = data;
+       
         this.bindUserMailOption(data);
       },
       error => {
