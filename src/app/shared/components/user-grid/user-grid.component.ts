@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable 
 import { Observable, of } from "rxjs";
 import { delay, map } from "rxjs/operators";
 
-import { AppSettings } from '../../../core/services/app-settings.service'
+// import { AppSettings } from '../../../core/services/app-settings.service'
 import { UserService } from '../../../core/services/application/user.service';
 
 import { User } from '../../../shared/models/user';

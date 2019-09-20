@@ -33,11 +33,10 @@ export class MailGridComponent implements OnInit {
     this.pageInfo = pageInfo;
     this.page.pageNumber = pageInfo.offset;
     console.log(this.messageService.getMessage());
-    // this.messageService.getMessage(this.page).subscribe(pagedData => {
-    //   this.page = pagedData.page;
-    //   this.rows = pagedData.data;
-    //   this.loadingIndicator = false;      
-    // });
+    this.messageService.getResults(this.page).subscribe(pagedData => {
+      this.page = pagedData.page;
+      this.rows = pagedData.data;
+      this.loadingIndicator = false;
+    });
   }
-  
 }
