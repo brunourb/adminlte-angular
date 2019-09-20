@@ -4,9 +4,6 @@ import { SkillService } from '../../../core/services/application/skill.service';
 import { UserService } from '../../../core/services/application/user.service';
 import { User } from '../../../shared/models/user';
 
-// import { Observable } from 'rxjs';
-// import { tap } from 'rxjs/operators';
-
 @Component({
   selector: 'app-mail-compose',
   templateUrl: './mail-compose.component.html',

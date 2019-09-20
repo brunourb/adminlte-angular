@@ -48,6 +48,7 @@ export class UserGridComponent implements OnInit {
     this.deleteUser(id);
   }
   deleteUser(id): void {
+    console.log('a')
     if (id !== 1) {
       this.userService.delete(id)
         .subscribe(
