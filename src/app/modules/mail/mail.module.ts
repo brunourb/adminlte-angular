@@ -8,7 +8,9 @@ import { MailGridModule } from '../../shared/components/mail-grid/mail-grid.modu
 import { InboxComponent } from './mail-box/inbox/component/inbox.component';
 import { MailBoxRootComponent } from './mail-box/mail-box-root.component';
 import { ReadMailComponent } from './mail-box/read/component/read-mail.component';
+import { ComposeMailComponent } from './mail-box/compose/component/compose-mail.component';
 import { MailMenuModule } from '../../shared/components/mail-menu/mail-menu.module';
+import { MailComposeModule } from '../../shared/components/mail-compose/mail-compose.module';
 
 @NgModule({
   imports: [
@@ -24,7 +26,8 @@ import { MailMenuModule } from '../../shared/components/mail-menu/mail-menu.modu
     InboxComponent,
     MailBoxRootComponent,
     ReadMailComponent,
-    ComposeComponent
+    ComposeMailComponent
+   
   ],
 })
 

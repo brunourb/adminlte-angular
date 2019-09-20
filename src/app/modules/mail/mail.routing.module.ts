@@ -5,7 +5,8 @@ import { MailComponent } from './mail.component';
 import { InboxComponent } from './mail-box/inbox/component/inbox.component';
 import { MailBoxRootComponent } from './mail-box/mail-box-root.component';
 import { ReadMailComponent } from './mail-box/read/component/read-mail.component';
-import { ComposeComponent } from './mail-box/compose/component/compose.component';
+import { ComposeMailComponent } from './mail-box/compose/component/compose-mail.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -39,13 +40,13 @@ const routes: Routes = [
             },
           },
           {
-            path: 'compose', component: ComposeComponent,
+            path: 'compose', component: ComposeMComponent,
             canActivate: [AuthGuard],
             data: {
-              breadcrumb: 'Compose User',
-              breadcrumbs: 'Compose User',
-              title: 'Compose User Title',
-              smallText: 'Compose User Small Text',
+              breadcrumb: 'Compose ',
+              breadcrumbs: 'Compose ',
+              title: 'Compose  ',
+              smallText: 'Compose   ',
               isHome: true,
               icon: 'fa fa-home',
               show: false
