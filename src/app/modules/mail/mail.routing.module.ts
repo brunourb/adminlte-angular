@@ -28,9 +28,12 @@ const routes: Routes = [
         },
         children: [
           {
+            path: '', redirectTo: 'inbox'
+          },
+          {
             path: 'inbox', component: InboxComponent,
             canActivate: [AuthGuard],
-            data: {              
+            data: {
               title: 'Inbox',
               smallText: '13 New Messages',
               isHome: true,
