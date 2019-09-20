@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { AuthGuardService as AuthGuard } from '../../core/services/guards/auth-guard.service';
-
 import { MailComponent } from './mail.component';
 import { InboxComponent } from './mail-box/inbox/component/inbox.component';
 import { MailBoxRootComponent } from './mail-box/mail-box-root.component';
 import { ReadMailComponent } from './mail-box/read/component/read-mail.component';
-
 
 const routes: Routes = [
   {
