@@ -5,19 +5,17 @@ import { MailComponent } from './mail.component';
 
 import { MailRoutingModule } from './mail.routing.module';
 
-// import { CardDetailsModule } from '../../shared/components/card-details/card-details.module';
-// import { DashbardControlPanelComponent } from './control-panel/pages/dashboard-control-panel.component'
+import { InboxComponent } from './mail-box/inbox/component/inbox.component'
 
 @NgModule({
   imports: [
     CommonModule,
     MailRoutingModule,
     FormsModule,
-    // CardDetailsModule,
   ],
   declarations: [
     MailComponent,
-    // DashbardControlPanelComponent
+    InboxComponent
   ],
 })
 
