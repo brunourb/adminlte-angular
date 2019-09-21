@@ -49,9 +49,11 @@ export class UserDetailComponent implements OnInit {
       }
     });
   }
+
   bindSkills() {
     this.skills = this.skillService.getAllSkill();
   }
+
   bindFormGroup() {
     this.userDetailsForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -71,7 +73,8 @@ export class UserDetailComponent implements OnInit {
     console.log(this.userDetailsForm);
     if (this.userDetailsForm.invalid) {
       return;
-    } console.log('aasdasdasd')
+    }
+ 
     let user = new User(
       this.user.username,
       this.f.password.value,
@@ -79,6 +82,7 @@ export class UserDetailComponent implements OnInit {
       this.f.lastName.value,
       this.f.education.value,
       this.f.skillIds.value,
+      this.user.team,
       this.user.id
     )
     console.log(user)

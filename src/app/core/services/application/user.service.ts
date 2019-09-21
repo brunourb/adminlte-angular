@@ -37,7 +37,7 @@ export class UserService {
   delete(id: number) {
     return this.http.delete(`/users/` + id);
   }
-   
+
   /**
    * A method that mocks a paged server response
    * @param page The selected page
@@ -63,7 +63,15 @@ export class UserService {
     const end = Math.min((start + page.size), page.totalElements);
     for (let i = start; i < end; i++) {
       const jsonObj = this.users[i];
-      const user = new User(jsonObj.username, jsonObj.password, jsonObj.firstName, jsonObj.lastName, jsonObj.education, jsonObj.skills, jsonObj.id);
+      const user = new User(
+        jsonObj.username,
+        jsonObj.password,
+        jsonObj.firstName,
+        jsonObj.lastName,
+        jsonObj.education,
+        jsonObj.skills,
+        jsonObj.team,
+        jsonObj.id);
       pagedData.data.push(user);
     }
     pagedData.page = page;

@@ -43,10 +43,10 @@
 								<i class="fa fa-trash" aria-hidden="true"></i>
 								</ng-template>
 								<ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-									<div *ngIf="row.id===1">
+									<div *ngIf="row.id===1 || row.id===2 || row.id===3 || row.id===4 || row.id===5 || row.id===6 || row.id===7 || row.id===8">
                     <i class="fa fa-trash disabled" aria-hidden="true" style="color: #DBDBDB;"></i>
                   </div>
-                  <div *ngIf="row.id!==1">
+                  <div *ngIf="row.id!==1 && row.id!==2 && row.id!==3 && row.id!==4  && row.id!==5 && row.id!==6 && row.id!==7 && row.id!==8 ">
                     <i class="fa fa-trash " aria-hidden="true" (click)="delete(row.id)" style="cursor:pointer"></i>
                   </div>
 								</ng-template>

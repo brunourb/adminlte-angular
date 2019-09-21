@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';  
+import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
@@ -88,7 +88,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let currentUser = request.body;
         for (let i = 0; i < users.length; i++) {
           let user = users[i];
-          if (user.username !== "intelchiprules@yahoo.co.in") {
+          if (
+            user.username !== "intelchiprules@yahoo.co.in" &&
+            user.username !== "intelchiprules@fakemail.com" &&
+            user.username !== "spammer@fakemail.com" &&
+            user.username !== "admin@fakemail.com" &&
+            user.username !== "support@fakemail.com" &&
+            user.username !== "design@fakemail.com" &&
+            user.username !== "developer@fakemail.com" &&
+            user.username !== "sales@fakemail.com" &&
+            user.username !== "info@fakemail.com"
+          ) {
             if (user.id === currentUser.id) {
               users.splice(i, 1);
               users.push(currentUser);
@@ -120,9 +130,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if (request.url.match(`/message/id/`) && request.method === 'GET') {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
-          let id = urlParts[urlParts.length - 1];       
+          let id = urlParts[urlParts.length - 1];
           let mail = messages.filter(message => { return message.to === id; });
-                 return of(new HttpResponse({ status: 200, body: mail }));
+          return of(new HttpResponse({ status: 200, body: mail }));
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
         }

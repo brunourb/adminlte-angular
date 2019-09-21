@@ -39,8 +39,8 @@ export class AppComponent implements OnInit {
     this.initMessageDatabase();
   }
 
-  private initUserDatabase(): void { 
-    let user = new User("intelchiprules@yahoo.co.in", "admin@123", "Girish", "Nandgawe", "B.E. Computers", [1, 2, 4, 6, 7, 8, 9, 10], "Super Admin", 1); 
+  private initUserDatabase(): void {
+    let user = new User("intelchiprules@yahoo.co.in", "admin@123", "Girish", "Nandgawe", "B.E. Computers", [1, 2, 4, 6, 7, 8, 9, 10], "Super Admin", 1);
     this.userService.register(user)
       .pipe(first())
       .subscribe(
@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
       );
 
 
-    let support = new User(      "support@fakemail.com", "admin@123", "team", "support", "B.E. Computers", [1, 2, 4, 6, 7, 8, 9, 10], "Support", 4);
+    let support = new User("support@fakemail.com", "admin@123", "team", "support", "B.E. Computers", [1, 2, 4, 6, 7, 8, 9, 10], "Support", 4);
     this.userService.register(support)
       .pipe(first())
       .subscribe(
@@ -111,7 +111,7 @@ export class AppComponent implements OnInit {
         }
       );
 
-    let sales = new User("sales@fakemail.com", "admin@123", "team", "sales", "B.E. Computers", [1, 2, 4, 6, 7, 8, 9, 10], "sales", 1);
+    let sales = new User("sales@fakemail.com", "admin@123", "team", "sales", "B.E. Computers", [1, 2, 4, 6, 7, 8, 9, 10], "sales", 7);
     this.userService.register(sales)
       .pipe(first())
       .subscribe(
@@ -123,7 +123,7 @@ export class AppComponent implements OnInit {
         }
       );
 
-    let info = new User("info@fakemail.com", "admin@123", "team", "info", "B.E. Computers", [1, 2, 4, 6, 7, 8, 9, 10], "info", 1);
+    let info = new User("info@fakemail.com", "admin@123", "team", "info", "B.E. Computers", [1, 2, 4, 6, 7, 8, 9, 10], "info", 8);
 
     this.userService.register(info)
       .pipe(first())
