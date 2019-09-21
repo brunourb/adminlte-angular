@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable } from '@angular/core'; 
+import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable } from '@angular/core';
 import { Observable, of } from "rxjs";
 import { delay, map } from "rxjs/operators";
 import { MessageService } from '../../../core/services/application/message.service';
@@ -14,6 +14,8 @@ import { LocalStorageService } from '../../../core/services/helpers/local-storag
 })
 
 export class MailGridComponent implements OnInit {
+  @Input() messageType: string;
+
   private user: User;
   editing = {};
   page = new Page();
@@ -42,7 +44,7 @@ export class MailGridComponent implements OnInit {
     this.pageInfo = pageInfo;
     this.page.pageNumber = pageInfo.offset;
 
-    this.messageService.getMessages(this.page, this.user.username, "St").subscribe(pagedData => {
+    this.messageService.getMessages(this.page, this.user.username, this.messageType).subscribe(pagedData => {
       this.page = pagedData.page;
       this.rows = pagedData.data;
       console.log(this.rows)
