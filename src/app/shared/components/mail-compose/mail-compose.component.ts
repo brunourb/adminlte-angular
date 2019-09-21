@@ -92,7 +92,6 @@ export class MailComposeComponent implements OnInit {
   }
 
   SendMail(emailid: string, thisObject: any): void {
-
     this.userService.getAll().subscribe(data => {
       for (let i = 0; i < data.length; i++) {
         let user = data[i];
