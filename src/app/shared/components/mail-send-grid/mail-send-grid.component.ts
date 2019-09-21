@@ -14,7 +14,6 @@ import { LocalStorageService } from '../../../core/services/helpers/local-storag
 })
 
 export class MailSendGridComponent implements OnInit {
- 
 
   private user: User;
   editing = {};
