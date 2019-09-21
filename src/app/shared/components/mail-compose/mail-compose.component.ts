@@ -105,7 +105,7 @@ export class MailComposeComponent implements OnInit {
             toName: user.firstName + "  " + user.lastName,
             subject: thisObject.f.subject.value,
             body: thisObject.editor.value,
-            type: thisObject.user.username === "spammer@fakemail.com" ? "Junk" : "starred",
+            type: thisObject.user.username === "spammer@fakemail.com" ? "Junk" : "Starred",
             team: thisObject.user.team,
             time: new Date(),
             suggestion: "",

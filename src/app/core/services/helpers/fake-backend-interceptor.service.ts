@@ -132,7 +132,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
           let id = urlParts[urlParts.length - 1];
-          let mail = messages.filter(message => { return message.to === id && message.type == "tarred"; });
+          let mail = messages.filter(message => { return message.to === id && message.type == "Starred"; });
           return of(new HttpResponse({ status: 200, body: mail }));
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
