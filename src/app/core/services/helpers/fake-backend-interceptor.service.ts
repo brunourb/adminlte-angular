@@ -147,7 +147,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       }
       /* Message Fake backend service Ends here*/
 
-
       return next.handle(request);
     }))
       .pipe(materialize())
