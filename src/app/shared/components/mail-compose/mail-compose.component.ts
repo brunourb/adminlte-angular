@@ -34,10 +34,23 @@ export class MailComposeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.bindUserMails();
     this.bindUserDetails();
     this.bindMailToList();
     this.bindFormGroup();
   }
+  bindUserMails() {
+    console.log('a')
+    this.messageService.isMessageDatabaseIntialize('intelchiprules@yahoo.co.ian')
+      .subscribe(
+        data => {
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
   bindUserDetails() {
     this.user = JSON.parse(this.localStorage.getItem("userSession"));
   }
@@ -87,8 +100,8 @@ export class MailComposeComponent implements OnInit {
       return;
     }
     this.f.mailToIds.value.forEach(function (data) {
-console.log('a')
-    //  thisObject.SendMail(data, thisObject);
+      console.log('a')
+      //  thisObject.SendMail(data, thisObject);
     });
   }
 
@@ -104,10 +117,10 @@ console.log('a')
       body: "content",
       type: "Junk",
       team: "Support Team",
-      time: "5 mins",
+      time: new Date(),
       suggestion: "Why not buy a new awesome theme?",
       imgSource: "https://github.com/Genuine-Identity.png",
-    };   
+    };
     thisObject.messageService.register(message)
       .subscribe(
         data => {

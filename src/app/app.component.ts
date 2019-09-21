@@ -28,9 +28,9 @@ export class AppComponent implements OnInit {
     // localStorage.clear();
     // localStorage.removeItem("db.");
     // this.localStorage.setItem('db.', null);
-    //  this.localStorage.setItem('db.me', null);
-    //   this.localStorage.setItem('db.message', null);
-    //   this.localStorage.setItem('db.messages', null);
+    // this.localStorage.setItem('db.me', null);
+    // this.localStorage.setItem('db.message', null);
+    // this.localStorage.setItem('db.messages', null);
     this.initFakeBackendDatabase();
   }
 
@@ -56,23 +56,43 @@ export class AppComponent implements OnInit {
         });
   }
   private initMessageDatabase(): void {
-    let message: Message = {
-      id: 1,
-      imgSource: "https://github.com/Genuine-Identity.png",
-      team: "Support Team",
-      time: "5 mins",
-      suggestion: "Why not buy a new awesome theme?"
-    };
-
-    this.messageService.register(message)
-      .pipe(first())
+    let checkDatabaseIntialize;
+    this.messageService.isMessageDatabaseIntialize("intelchiprules@yahoo.co.in")
       .subscribe(
         data => {
-          // console.log(data);
+          checkDatabaseIntialize = data;// console.log(data);
         },
         error => {
-          // console.log(error);
+          console.log(error);
         });
+
+
+    if (checkDatabaseIntialize) {
+      let message: Message = {
+        id: 0,
+        from: "intelchiprules@yahoo.co.in",
+        fromName: "Girish" + " " + "Nandgawe",
+        to: "intelchiprules@yahoo.co.in",
+        toName: "Girish" + " " + "Nandgawe",
+        subject: "Well Come",
+        body: "Well Come",
+        type: "Starred",
+        team: "Admin Team",
+        time: new Date(),
+        suggestion: "Well Come?",
+        imgSource: "https://github.com/Genuine-Identity.png",
+      };
+      this.messageService.register(message)
+        .pipe(first())
+        .subscribe(
+          data => {
+            // console.log(data);
+          },
+          error => {
+            // console.log(error);
+          });
+    }
+
   }
 
   private navigationInterceptor(event: Event): void {

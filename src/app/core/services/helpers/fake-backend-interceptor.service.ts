@@ -118,17 +118,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return of(new HttpResponse({ status: 200 }));
       }
 
-      if (request.url.match(/\/message\/\d+$/) && request.method === 'GET') {
+      if (request.url.match(`/message/id`) && request.method === 'GET') {
+        console.log(request.url)
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
-          let id = parseInt(urlParts[urlParts.length - 1]);
-          let matchedUsers = users.filter(user => { return user.id === id; });
-          let user = matchedUsers.length ? matchedUsers[0] : null;
-          return of(new HttpResponse({ status: 200, body: user }));
+          let id = urlParts[urlParts.length - 1];
+          console.log(id);
+          let matchedMessages = messages.filter(message => { return message.to === id; });
+          let mails = matchedMessages.length ? matchedMessages[0] : null;
+          return of(new HttpResponse({ status: 200, body: mails }));
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
         }
-      }      
+      }
+      if (request.url.match(`/message/checkdatabaseintialize/`) && request.method === 'GET') {
+        let urlParts = request.url.split('/');
+        let id = urlParts[urlParts.length - 1];
+        let matchedMessages = messages.filter(message => { return message.to === id; });
+        let mails = matchedMessages.length ? matchedMessages[0] : null;
+        return of(new HttpResponse({ status: 200, body: mails == null ? false : true }));
+      }
       /* Message Fake backend service Ends here*/
 
 

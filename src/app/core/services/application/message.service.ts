@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Message } from '../../../shared/models/message';
 import { map } from 'rxjs/operators';
@@ -19,6 +19,15 @@ export class MessageService {
   public register(message: Message) {
     return this.http.post(`/message/register`, message);
   }
+
+  public getById(emailId: string) {
+    return this.http.get(`/message/id` + emailId);
+  }
+
+  public isMessageDatabaseIntialize(emailId: string) {
+    return this.http.get(`/message/checkdatabaseintialize/` + emailId);
+  }
+
   public getMessage(): Message[] {
     let message: Message[] = [
       {
@@ -52,6 +61,7 @@ export class MessageService {
     ];
     return message;
   }
+
   getAll(): Observable<Message[]> {
     return Observable.of(this.getMessage());
   }

@@ -8,7 +8,7 @@ export interface Message {
   subject: string,
   body: string,
   team: string,
-  time: string,
+  time: string, 
   type: MessageReceivedType,
   suggestion: string,
   imgSource: string,
