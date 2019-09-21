@@ -43,6 +43,7 @@ export class MailComposeComponent implements OnInit {
   bindFormGroup() {
     this.mailComposeForm = this.formBuilder.group({
       mailToIds: [null, Validators.required],
+      subject: [null, Validators.required],
     });
   }
   ngAfterViewInit() {
@@ -91,23 +92,21 @@ export class MailComposeComponent implements OnInit {
   }
 
   SendMail(emailid: string, thisObject: any): void {
-    console.log(thisObject);
-    console.log(")   this.bindUserMailOption(data);");
+
     this.userService.getAll().subscribe(data => {
       for (let i = 0; i < data.length; i++) {
         let user = data[i];
         if (user.username === emailid) {
-
           let message: Message = {
             id: 0,
             from: thisObject.user.username,
             fromName: thisObject.user.firstName + " " + thisObject.user.lastName,
             to: emailid,
             toName: user.firstName + "  " + user.lastName,
-            subject: "Test Subject",
-            body: "content",
-            type: "Junk",
-            team: user.team,
+            subject: thisObject.f.subject.value,
+            body: thisObject.editor.value,
+            type: thisObject.user.username === "spammer@fakemail.com" ? "Junk" : "starred",
+            team: thisObject.user.team,
             time: new Date(),
             suggestion: "",
             imgSource: "https://github.com/Genuine-Identity.png",
@@ -129,7 +128,5 @@ export class MailComposeComponent implements OnInit {
         console.log(error);
       }
     );
-
-
   }
 }

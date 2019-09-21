@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'; 
+import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-import * as jQuery from "jquery";
+import * as jQuery from "jquery"; 
 
 import { User } from './shared/models/index';
 import { UserService } from './core/services/application/user.service';
@@ -25,12 +25,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // localStorage.clear();
-    // localStorage.removeItem("db.");
-    // this.localStorage.setItem('db.', null);
-    // this.localStorage.setItem('db.me', null);
-    // this.localStorage.setItem('db.message', null);
-    // this.localStorage.setItem('db.messages', null);
+    localStorage.clear();
+    localStorage.removeItem("db."); 
+    this.localStorage.setItem('db.', null);
+    this.localStorage.setItem('db.me', null);
+    this.localStorage.setItem('db.message', null);
+    this.localStorage.setItem('db.messages', null);
     this.initFakeBackendDatabase();
   }
 
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   }
 
   private initUserDatabase(): void {
-    let user = new User("intelchiprules@yahoo.co.in", "admin@123", "Girish", "Nandgawe", "B.E. Computers", [1, 2, 4, 6, 7, 8, 9, 10], "Super Admin", 1);
+    let user = new User("intelchiprules@yahoo.co.in", "admin@123", "Girish", "Nandgawe", "B.E. Computers", [1, 2, 4, 6, 7, 8, 9, 10], "Root", 1);
     this.userService.register(user)
       .pipe(first())
       .subscribe(
@@ -150,7 +150,6 @@ export class AppComponent implements OnInit {
       );
   }
   test(checkDatabaseIntialize: any) {
-    console.log(checkDatabaseIntialize)
     if (!checkDatabaseIntialize) {
       let message: Message = {
         id: 0,
@@ -158,12 +157,12 @@ export class AppComponent implements OnInit {
         fromName: "Girish" + " " + "Nandgawe",
         to: "intelchiprules@yahoo.co.in",
         toName: "Girish" + " " + "Nandgawe",
-        subject: "Well Come",
-        body: "Well Come",
+        subject: "Well Come !!!!",
+        body: "Well Come !!!!",
         type: "Starred",
-        team: "Admin Team",
+        team: "Root",
         time: new Date(),
-        suggestion: "Well Come?",
+        suggestion: "Well Come !!!!",
         imgSource: "https://github.com/Genuine-Identity.png",
       };
       this.messageService.register(message)
@@ -174,7 +173,8 @@ export class AppComponent implements OnInit {
           },
           error => {
             // console.log(error);
-          });
+          }
+        );
     }
   }
 
