@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private messageService: MessageService,
-    private localStorage: LocalStorageService,) {
+    private localStorage: LocalStorageService, ) {
   }
 
   ngOnInit() {

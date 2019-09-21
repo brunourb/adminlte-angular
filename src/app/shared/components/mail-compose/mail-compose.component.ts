@@ -87,7 +87,8 @@ export class MailComposeComponent implements OnInit {
       return;
     }
     this.f.mailToIds.value.forEach(function (data) {
-      thisObject.SendMail(data, thisObject);
+console.log('a')
+    //  thisObject.SendMail(data, thisObject);
     });
   }
 

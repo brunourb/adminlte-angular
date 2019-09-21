@@ -114,10 +114,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let message = request.body;
         message.id = messages.length + 1;
         messages.push(message);
-        this.localStorage.setItem('db.messages', JSON.stringify(_.sortBy(users, user => user.id)));
+        this.localStorage.setItem('db.messages', JSON.stringify(_.sortBy(messages, message => message.id)));
         return of(new HttpResponse({ status: 200 }));
       }
-      
+
       if (request.url.match(/\/message\/\d+$/) && request.method === 'GET') {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
@@ -128,8 +128,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
         }
-      }
-      
+      }      
       /* Message Fake backend service Ends here*/
 
 
