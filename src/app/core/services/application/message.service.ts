@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'; 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -20,9 +20,8 @@ export class MessageService {
     return this.http.post(`/message/register`, message);
   }
 
-  public getById(emailId: string) {
-    console.log('a')
-    return this.http.get(`/message/id/` + emailId);
+  public getById(emailId: string, mailType: string) {
+    return this.http.get(`/message/id/` + mailType + `/` + emailId);
   }
 
   public isMessageDatabaseIntialize(emailId: string) {
@@ -66,9 +65,8 @@ export class MessageService {
   public getAll(): Observable<Message[]> {
     return Observable.of(this.getMessage());
   }
-  public getMessages(page: Page, id: string): Observable<PagedData<Message>> {
-    console.log(id)
-    return this.getById(id).flatMap(data => {
+  public getMessages(page: Page, id: string, mailType: string): Observable<PagedData<Message>> {
+    return this.getById(id, mailType).flatMap(data => {
       this.messages = data;
       return of(data).pipe(map(data => this.getPagedData(page)));
     })
@@ -95,11 +93,11 @@ export class MessageService {
       const message: Message = {
         id: jsonObj.id,
         from: jsonObj.suggestion,
-        fromName:  jsonObj.fromName,
-        to:  jsonObj.to,
+        fromName: jsonObj.fromName,
+        to: jsonObj.to,
         toName: jsonObj.toName,
         subject: jsonObj.subject,
-        body:  jsonObj.body,
+        body: jsonObj.body,
         team: jsonObj.team,
         time: jsonObj.time,
         type: jsonObj.type,

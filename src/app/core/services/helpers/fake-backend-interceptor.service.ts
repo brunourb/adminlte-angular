@@ -6,13 +6,17 @@ import { _ } from 'lodash';
 
 import { UserSessionService } from '../../../core/services/application/user-session.service';
 import { LocalStorageService } from '../../../core/services/helpers/local-storage.service';
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
-  constructor(private localStorage: LocalStorageService, private userSessionService: UserSessionService) { }
+  constructor(private localStorage: LocalStorageService, private userSessionService: UserSessionService
+  ) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
     let users: any[] = JSON.parse(this.localStorage.getItem('db.users')) || [];
     let messages: any[] = JSON.parse(this.localStorage.getItem('db.messages')) || [];
+
     return of(null).pipe(mergeMap(() => {
       /* User Fake backend service Starts here*/
       if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
@@ -119,7 +123,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
 
 
-      /* Message Fake backend service Starts here*/
+      /* Message Fake backend service Starts here*/ 
       if (request.url.endsWith('/message/register') && request.method === 'POST') {
         let message = request.body;
         message.id = messages.length + 1;
@@ -131,9 +135,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if (request.url.match(`/message/id/`) && request.method === 'GET') {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
+          let messageType = (urlParts[3] != null || urlParts[3] != undefined) ? (urlParts[3] == "Junk") ? "Junk" : "Starred" : "Starred"
+          console.log(messageType)
+          console.log(messageType)
           let id = urlParts[urlParts.length - 1];
-          let mail = messages.filter(message => { return message.to === id && message.type == "Starred"; });
-          return of(new HttpResponse({ status: 200, body: _.re(mail, message => message.time) }));
+          let mail = messages.filter(message => { return message.to === id && message.type === messageType; });
+          return of(new HttpResponse({ status: 200, body: _.reverse(mail, message => message.time) }));
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
         }

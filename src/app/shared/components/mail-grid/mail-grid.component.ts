@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable } from '@angular/core'; 
 import { Observable, of } from "rxjs";
 import { delay, map } from "rxjs/operators";
 import { MessageService } from '../../../core/services/application/message.service';
@@ -42,7 +42,7 @@ export class MailGridComponent implements OnInit {
     this.pageInfo = pageInfo;
     this.page.pageNumber = pageInfo.offset;
 
-    this.messageService.getMessages(this.page,this.user.username).subscribe(pagedData => {      
+    this.messageService.getMessages(this.page, this.user.username, "Starred").subscribe(pagedData => {
       this.page = pagedData.page;
       this.rows = pagedData.data;
       console.log(this.rows)
