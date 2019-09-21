@@ -29,28 +29,14 @@ export class MailComposeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private localStorage: LocalStorageService,
-    private messageService: MessageService,
-  ) {
+    private messageService: MessageService ) {
   }
 
   ngOnInit() {
-    this.bindUserMails();
     this.bindUserDetails();
     this.bindMailToList();
     this.bindFormGroup();
   }
-  bindUserMails() {
-    console.log('a')
-    this.messageService.isMessageDatabaseIntialize('intelchiprules@yahoo.co.ian')
-      .subscribe(
-        data => {
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
   bindUserDetails() {
     this.user = JSON.parse(this.localStorage.getItem("userSession"));
   }
@@ -100,8 +86,7 @@ export class MailComposeComponent implements OnInit {
       return;
     }
     this.f.mailToIds.value.forEach(function (data) {
-
-      //  thisObject.SendMail(data, thisObject);
+      thisObject.SendMail(data, thisObject);
     });
   }
 

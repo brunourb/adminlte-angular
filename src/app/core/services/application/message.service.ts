@@ -21,7 +21,8 @@ export class MessageService {
   }
 
   public getById(emailId: string) {
-    return this.http.get(`/message/id` + emailId);
+    console.log('a')
+    return this.http.get(`/message/id/` + emailId);
   }
 
   public isMessageDatabaseIntialize(emailId: string) {
@@ -62,8 +63,15 @@ export class MessageService {
     return message;
   }
 
-  getAll(): Observable<Message[]> {
+  public getAll(): Observable<Message[]> {
     return Observable.of(this.getMessage());
+  }
+  public getMessages(page: Page, id: string): Observable<PagedData<Message>> {
+    console.log(id)
+    return this.getById(id).flatMap(data => {
+      this.messages = data;
+      return of(data).pipe(map(data => this.getPagedData(page)));
+    })
   }
   public getResults(page: Page): Observable<PagedData<Message>> {
     return this.getAll().flatMap(data => {
@@ -71,7 +79,6 @@ export class MessageService {
       return of(data).pipe(map(data => this.getPagedData(page)));
     })
   }
-
   /**
    * Package companyData into a PagedData object based on the selected Page
    * @param page The page data used to get the selected data from companyData

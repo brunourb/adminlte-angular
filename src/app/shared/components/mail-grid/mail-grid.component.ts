@@ -4,7 +4,7 @@ import { delay, map } from "rxjs/operators";
 import { MessageService } from '../../../core/services/application/message.service';
 import { User } from '../../../shared/models/user';
 import { PagedData, CorporateEmployee, Page } from '../../../shared/models/page';
-
+import { Message } from '../../../shared/models/message';
 @Component({
   selector: 'app-mail-grid',
   templateUrl: './mail-grid.component.html',
@@ -14,7 +14,7 @@ import { PagedData, CorporateEmployee, Page } from '../../../shared/models/page'
 export class MailGridComponent implements OnInit {
   editing = {};
   page = new Page();
-  rows = new Array<User>();
+  rows = new Array<Message>();
   reorderable: boolean = true;
   loadingIndicator: boolean = false;
   pageInfo: any;
@@ -32,8 +32,10 @@ export class MailGridComponent implements OnInit {
     this.loadingIndicator = true;
     this.pageInfo = pageInfo;
     this.page.pageNumber = pageInfo.offset;
-    console.log(this.messageService.getMessage());
-    this.messageService.getResults(this.page).subscribe(pagedData => {
+
+    this.messageService.getMessages(this.page, "intelchiprules@yahoo.co.in").subscribe(pagedData => {
+      console.log("pagedData")
+      console.log(pagedData)
       this.page = pagedData.page;
       this.rows = pagedData.data;
       this.loadingIndicator = false;
