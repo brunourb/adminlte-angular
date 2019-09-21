@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'; 
+import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -94,10 +94,17 @@ export class MessageService {
       const jsonObj = this.messages[i];
       const message: Message = {
         id: jsonObj.id,
-        imgSource: jsonObj.imgSource,
+        from: jsonObj.suggestion,
+        fromName:  jsonObj.fromName,
+        to:  jsonObj.to,
+        toName: jsonObj.suggestion,
+        subject: jsonObj.suggestion,
+        body:  jsonObj.body,
         team: jsonObj.team,
         time: jsonObj.time,
-        suggestion: jsonObj.suggestion
+        type: jsonObj.type,
+        suggestion: jsonObj.suggestion,
+        imgSource: jsonObj.imgSource,
       };
       pagedData.data.push(message);
     }
