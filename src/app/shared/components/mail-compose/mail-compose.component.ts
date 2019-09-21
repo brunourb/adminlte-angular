@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable, ViewChild, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgSelectModule, NgOption } from '@ng-select/ng-select';
 import { SkillService } from '../../../core/services/application/skill.service';
 import { UserService } from '../../../core/services/application/user.service';
@@ -85,34 +85,51 @@ export class MailComposeComponent implements OnInit {
     if (this.mailComposeForm.invalid) {
       return;
     }
-    this.f.mailToIds.value.forEach(function (data) {
-      thisObject.SendMail(data, thisObject);
+    this.f.mailToIds.value.forEach(function (id) {
+      thisObject.SendMail(id, thisObject);
     });
   }
 
-  SendMail(data: string, thisObject: any): void {
+  SendMail(emailid: string, thisObject: any): void {
     console.log(thisObject);
-    let message: Message = {
-      id: 0,
-      from: thisObject.user.username,
-      fromName: thisObject.user.firstName + " " + thisObject.user.lastName,
-      to: data,
-      toName: "Test Name",
-      subject: "Test Subject",
-      body: "content",
-      type: "Junk",
-      team: "Support Team",
-      time: new Date(),
-      suggestion: "Why not buy a new awesome theme?",
-      imgSource: "https://github.com/Genuine-Identity.png",
-    };
-    thisObject.messageService.register(message)
-      .subscribe(
-        data => {
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        });
+    console.log(")   this.bindUserMailOption(data);");
+    this.userService.getAll().subscribe(data => {
+      for (let i = 0; i < data.length; i++) {
+        let user = data[i];
+        if (user.username === emailid) {
+
+          let message: Message = {
+            id: 0,
+            from: thisObject.user.username,
+            fromName: thisObject.user.firstName + " " + thisObject.user.lastName,
+            to: emailid,
+            toName: user.firstName + "  " + user.lastName,
+            subject: "Test Subject",
+            body: "content",
+            type: "Junk",
+            team: user.team,
+            time: new Date(),
+            suggestion: "",
+            imgSource: "https://github.com/Genuine-Identity.png",
+          };
+
+          thisObject.messageService.register(message)
+            .subscribe(
+              data => {
+                console.log(data);
+              },
+              error => {
+                console.log(error);
+              });
+          break;
+        }
+      }
+    },
+      error => {
+        console.log(error);
+      }
+    );
+
+
   }
 }
