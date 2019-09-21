@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-import { _ } from 'lodash'; 
+import { _ } from 'lodash';
 
 import { UserSessionService } from '../../../core/services/application/user-session.service';
 import { LocalStorageService } from '../../../core/services/helpers/local-storage.service';
@@ -132,7 +132,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
           let id = urlParts[urlParts.length - 1];
-          let mail = messages.filter(message => { return message.to === id; });
+          let mail = messages.filter(message => { return message.to === id && message.type == "tarred"; });
           return of(new HttpResponse({ status: 200, body: mail }));
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
@@ -146,7 +146,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return of(new HttpResponse({ status: 200, body: mails == null ? false : true }));
       }
       /* Message Fake backend service Ends here*/
-
       return next.handle(request);
     }))
       .pipe(materialize())
