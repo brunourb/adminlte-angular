@@ -7,6 +7,7 @@ import { MailBoxRootComponent } from './mail-box/mail-box-root.component';
 import { ReadMailComponent } from './mail-box/read/component/read-mail.component';
 import { ComposeMailComponent } from './mail-box/compose/component/compose-mail.component';
 import { JunkComponent } from './mail-box/junk/component/junk.component';
+import { TrashComponent } from './mail-box/trash/component/trash.component';  
 
 const routes: Routes = [
   {
@@ -79,12 +80,12 @@ const routes: Routes = [
             },
           },
           {
-            path: 'trash', component: JunkComponent,
+            path: 'trash', component: TrashComponent,
             canActivate: [AuthGuard],
             data: {
-              breadcrumb: 'Junk',
-              breadcrumbs: 'Junk',
-              title: 'Junk',
+              breadcrumb: 'Trash',
+              breadcrumbs: 'Trash',
+              title: 'Trash',
               smallText: '13 New Messages',
               isHome: true,
               icon: 'fa fa-home',
