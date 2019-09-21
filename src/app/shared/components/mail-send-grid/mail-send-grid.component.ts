@@ -8,7 +8,7 @@ import { Message } from '../../../shared/models/message';
 import { LocalStorageService } from '../../../core/services/helpers/local-storage.service';
 
 @Component({
-  selector: 'app-mail-Sgrid',
+  selector: 'app-mail-grid',
   templateUrl: './mail-send-grid.component.html',
   styleUrls: ['./mail-send-grid.component.css'],
 })
