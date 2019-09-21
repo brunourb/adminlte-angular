@@ -46,7 +46,7 @@ export class MailSendGridComponent implements OnInit {
     this.messageService.getMessages(this.page, this.user.username, "this.messageType").subscribe(pagedData => {
       this.page = pagedData.page;
       this.rows = pagedData.data;
-      console.log(this.rows)
+      console.log(this.rows);
       this.loadingIndicator = false;
     });
   }
