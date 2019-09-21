@@ -6,12 +6,16 @@ import { UserService } from '../../../core/services/application/user.service';
 import { User } from '../../../shared/models/user';
 import { Message } from '../../../shared/models/message';
 
+import { LocalStorageService } from '../../../core/services/helpers/local-storage.service';
+
+
 @Component({
   selector: 'app-mail-compose',
   templateUrl: './mail-compose.component.html',
   styleUrls: ['./mail-compose.component.css'],
 })
 export class MailComposeComponent implements OnInit {
+  private user: User;
   submitted = false;
   mailsTo: any;
   mailToIds: any[];
@@ -19,11 +23,14 @@ export class MailComposeComponent implements OnInit {
 
   mailComposeForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
-    private userService: UserService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private localStorage: LocalStorageService, ) {
   }
 
   ngOnInit() {
+
     this.bindMailToList();
     this.bindFormGroup();
   }
@@ -61,26 +68,21 @@ export class MailComposeComponent implements OnInit {
         id: data.id,
         name: data.username
       }
-      console.log(option)
-      console.log("this.mailsTo")
       To.push(option);
-
     });
     this.mailsTo = To;
-  }
-  getValue() {
-    console.log(this.editor.value);
   }
   get f() {
     return this.mailComposeForm.controls;
   }
   onSubmit() {
+    this.user = JSON.parse(this.localStorage.getItem("userSession"));
+    console.log(this.user);
     this.submitted = true;
     if (this.mailComposeForm.invalid) {
       return;
     }
     this.f.mailToIds.value.forEach(function (data) {
-      console.log(data);
       this.SendMail(data);
     });
   }
@@ -88,9 +90,9 @@ export class MailComposeComponent implements OnInit {
   private SendMail(data: any): void {
     let message: Message = {
       id: 0,
-      from: "intelchiprules@yahoo.co.in",
-      fromName: "Girish Nandgawe",
-      to: "test@test.com",
+      from: this.user.username,
+      fromName: this.user.firstName + " " + this.user.lastName,
+      to: data,
       toName: "Test Name",
       subject: "Test Subject",
       body: "content",
