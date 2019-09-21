@@ -1,4 +1,4 @@
-type MessageReceivedType = "Junk" | "Starred";
+type MessageReceivedType = "Junk" | "Starred"; 
 export interface Message {
   id: number,
   from: string,

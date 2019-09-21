@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable, ViewChild, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 import { NgSelectModule, NgOption } from '@ng-select/ng-select';
 import { SkillService } from '../../../core/services/application/skill.service';
 import { UserService } from '../../../core/services/application/user.service';
@@ -29,7 +29,7 @@ export class MailComposeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private localStorage: LocalStorageService,
-    private messageService: MessageService ) {
+    private messageService: MessageService) {
   }
 
   ngOnInit() {
