@@ -13,9 +13,10 @@ import { User } from '../../../shared/models/user';
 export class MailComposeComponent implements OnInit {
   submitted = false;
   mailsTo: any;
-  userDetailsForm: FormGroup;
   mailToIds: any[];
   @ViewChild('editor') editor;
+
+  mailComposeForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
     private userService: UserService) {
@@ -26,11 +27,7 @@ export class MailComposeComponent implements OnInit {
     this.bindFormGroup();
   }
   bindFormGroup() {
-    this.userDetailsForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      education: ['', Validators.required],
+    this.mailComposeForm = this.formBuilder.group({
       mailToIds: [null, Validators.required],
     });
   }
@@ -74,26 +71,42 @@ export class MailComposeComponent implements OnInit {
     console.log(this.editor.value);
   }
   get f() {
-    return this.userDetailsForm.controls;
+    return this.mailComposeForm.controls;
   }
   onSubmit() {
-    console.log('a');
-    console.log(this.f.mailToIds.value);
     this.submitted = true;
-    if (this.userDetailsForm.invalid) {
+    if (this.mailComposeForm.invalid) {
       return;
     }
+    this.f.mailToIds.value.forEach(function (data) {
+      console.log(data);
+    });
+  }
 
-    // let user = new User(this.f.email.value, this.f.password.value, this.f.firstName.value, this.f.lastName.value, "", [], 1);
-    // this.userService.register(user)
+  private SendMail(): void {
+    let message: Message = {
+      id: 0,
+      from: "intelchiprules@yahoo.co.in",
+      fromName: "Girish Nandgawe",
+      to: "test@test.com",
+      toName: "Test Name",
+      subject: "Test Subject",
+      body: "content",
+      type: "Junk",
+      team: "Support Team",
+      time: "5 mins",
+      suggestion: "Why not buy a new awesome theme?",
+      imgSource: "https://github.com/Genuine-Identity.png",
+    };
+
+    // this.messageService.register(message)
     //   .pipe(first())
     //   .subscribe(
     //     data => {
-    //       this.alert = new Alert(AlertType.Success, "Success!", " Registered Successfully!!");
+    //       // console.log(data);
     //     },
     //     error => {
-    //       this.alert = new Alert(AlertType.Error, "Failure!", `Registration Failure:-  ${error}`);
-    //     }
-    //   );
+    //       // console.log(error);
+    //     });
   }
 }

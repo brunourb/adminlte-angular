@@ -1,11 +1,15 @@
+type MessageReceivedType = "Junk" | "Starred";
 export interface Message {
   id: number,
   from: string,
-  imgSource: string,
+  fromName: string,
+  to: string,
+  toName: string,
   subject: string,
-  suggestion: string,
   body: string,
   team: string,
   time: string,
-  status: number
+  type: MessageReceivedType,
+  suggestion: string,
+  imgSource: string,
 }
