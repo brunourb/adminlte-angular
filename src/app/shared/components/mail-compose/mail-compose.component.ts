@@ -4,6 +4,7 @@ import { NgSelectModule, NgOption } from '@ng-select/ng-select';
 import { SkillService } from '../../../core/services/application/skill.service';
 import { UserService } from '../../../core/services/application/user.service';
 import { User } from '../../../shared/models/user';
+import { Message } from '../../../shared/models/message';
 
 @Component({
   selector: 'app-mail-compose',
@@ -80,10 +81,11 @@ export class MailComposeComponent implements OnInit {
     }
     this.f.mailToIds.value.forEach(function (data) {
       console.log(data);
+      this.SendMail(data);
     });
   }
 
-  private SendMail(): void {
+  private SendMail(data: any): void {
     let message: Message = {
       id: 0,
       from: "intelchiprules@yahoo.co.in",
