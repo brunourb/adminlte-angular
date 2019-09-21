@@ -133,7 +133,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           let urlParts = request.url.split('/');
           let id = urlParts[urlParts.length - 1];
           let mail = messages.filter(message => { return message.to === id && message.type == "Starred"; });
-          return of(new HttpResponse({ status: 200, body: mail }));
+          return of(new HttpResponse({ status: 200, body: _.re(mail, message => message.time) }));
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
         }
