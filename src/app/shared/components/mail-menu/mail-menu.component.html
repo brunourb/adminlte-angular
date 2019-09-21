@@ -1,4 +1,4 @@
-<a [routerLink]="'/mail/compose'" class="btn btn-primary btn-block margin-bottom"> Compose</a>
+<a [routerLink]="'/mail/compose'" class="btn btn-primary btn-block margin-bottom"> Compose</a> 
 <div style="height:15px"></div>
 <div class="box box-solid">
 	<div class="box-header with-border">
@@ -11,14 +11,14 @@
     </div>
     <div class="box-body no-padding">
         <ul class="nav nav-stacked">
-            <li class="active"><a [class.disabled]="true"><i class="fa fa-inbox"></i> Inbox
+          <li class="active"><a [routerLink]="'/mail/inbox'"><i class="fa fa-inbox"></i> Inbox
                     <span class="label label-primary pull-right">12</span></a></li>
-            <li><a [class.disabled]="true"><i class="fa fa-envelope-o"></i> Sent</a></li>
-            <li><a [class.disabled]="true"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-            <li><a [class.disabled]="true"><i class="fa fa-filter"></i> Junk <span
+            <li><a [routerLink]="'/mail/sent'"><i class="fa fa-envelope-o"></i> Sent</a></li>
+            <!-- <li><a [class.disabled]="true"><i class="fa fa-file-text-o"></i> Drafts</a></li> -->
+            <li><a [routerLink]="'/mail/junk'"><i class="fa fa-filter"></i> Junk <span
                         class="label label-warning pull-right">65</span></a>
             </li>
-            <li><a [class.disabled]="true"><i class="fa fa-trash-o"></i> Trash</a></li>
+            <li><a [routerLink]="'/mail/thrash'"><i class="fa fa-trash-o"></i> Trash</a></li>
         </ul>
     </div>
 </div>

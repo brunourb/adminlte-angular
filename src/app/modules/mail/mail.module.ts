@@ -1,4 +1,4 @@
-import { NgModule, Component, ViewChild, AfterViewInit } from '@angular/core';
+import { NgModule, Component, ViewChild, AfterViewInit } from '@angular/core'; 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MailComponent } from './mail.component';
@@ -11,7 +11,7 @@ import { ReadMailComponent } from './mail-box/read/component/read-mail.component
 import { ComposeMailComponent } from './mail-box/compose/component/compose-mail.component';
 import { MailMenuModule } from '../../shared/components/mail-menu/mail-menu.module';
 import { MailComposeModule } from '../../shared/components/mail-compose/mail-compose.module';
-
+import { JunkComponent } from './mail-box/junk/component/junk.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -26,7 +26,8 @@ import { MailComposeModule } from '../../shared/components/mail-compose/mail-com
     InboxComponent,
     MailBoxRootComponent,
     ReadMailComponent,
-    ComposeMailComponent
+    ComposeMailComponent,
+    JunkComponent
    
   ],
 })
