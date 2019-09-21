@@ -56,18 +56,21 @@ export class AppComponent implements OnInit {
         });
   }
   private initMessageDatabase(): void {
-    let checkDatabaseIntialize;
-    this.messageService.isMessageDatabaseIntialize("intelchiprules@yahoo.co.in")
+    let thisObject = this;
+
+    this.messageService.isMessageDatabaseIntialize("intelchiprules@yahoo.co.in") 
       .subscribe(
         data => {
-          checkDatabaseIntialize = data;// console.log(data);
+          thisObject.test(data);         
         },
         error => {
           console.log(error);
-        });
-
-
-    if (checkDatabaseIntialize) {
+        }
+      );
+  }
+  test(checkDatabaseIntialize: any) {
+    console.log(checkDatabaseIntialize)
+    if (!checkDatabaseIntialize) {
       let message: Message = {
         id: 0,
         from: "intelchiprules@yahoo.co.in",
@@ -78,7 +81,7 @@ export class AppComponent implements OnInit {
         body: "Well Come",
         type: "Starred",
         team: "Admin Team",
-        time: new Date(),
+        time: new Date(), 
         suggestion: "Well Come?",
         imgSource: "https://github.com/Genuine-Identity.png",
       };
@@ -92,7 +95,6 @@ export class AppComponent implements OnInit {
             // console.log(error);
           });
     }
-
   }
 
   private navigationInterceptor(event: Event): void {

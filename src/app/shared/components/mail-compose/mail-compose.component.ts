@@ -100,7 +100,7 @@ export class MailComposeComponent implements OnInit {
       return;
     }
     this.f.mailToIds.value.forEach(function (data) {
-      console.log('a')
+
       //  thisObject.SendMail(data, thisObject);
     });
   }
