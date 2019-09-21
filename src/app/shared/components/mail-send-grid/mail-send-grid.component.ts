@@ -5,7 +5,7 @@ import { MessageService } from '../../../core/services/application/message.servi
 import { User } from '../../../shared/models/user';
 import { PagedData, CorporateEmployee, Page } from '../../../shared/models/page';
 import { Message } from '../../../shared/models/message';
-import { LocalStorageService } from '../../../core/services/helpers/local-storage.service'; 
+import { LocalStorageService } from '../../../core/services/helpers/local-storage.service';
  
 @Component({
   selector: 'app-mail-send-grid',
