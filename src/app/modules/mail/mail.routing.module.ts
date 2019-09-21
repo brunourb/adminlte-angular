@@ -65,6 +65,18 @@ const routes: Routes = [
               icon: 'fa fa-home',
               show: false
             },
+          },  {
+            path: 'sent', component: JunkComponent,
+            canActivate: [AuthGuard],
+            data: {
+              breadcrumb: 'Junk',
+              breadcrumbs: 'Junk',
+              title: 'Junk',
+              smallText: '13 New Messages',
+              isHome: true,
+              icon: 'fa fa-home',
+              show: false
+            },
           },
           {
             path: 'trash', component: JunkComponent,

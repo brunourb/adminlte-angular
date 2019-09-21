@@ -42,7 +42,7 @@ export class MailGridComponent implements OnInit {
     this.pageInfo = pageInfo;
     this.page.pageNumber = pageInfo.offset;
 
-    this.messageService.getMessages(this.page, this.user.username, "Starred").subscribe(pagedData => {
+    this.messageService.getMessages(this.page, this.user.username, "St").subscribe(pagedData => {
       this.page = pagedData.page;
       this.rows = pagedData.data;
       console.log(this.rows)

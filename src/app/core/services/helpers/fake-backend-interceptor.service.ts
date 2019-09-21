@@ -123,7 +123,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
 
 
-      /* Message Fake backend service Starts here*/ 
+      /* Message Fake backend service Starts here*/
       if (request.url.endsWith('/message/register') && request.method === 'POST') {
         let message = request.body;
         message.id = messages.length + 1;
@@ -135,7 +135,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if (request.url.match(`/message/id/`) && request.method === 'GET') {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
-          let messageType = (urlParts[3] != null || urlParts[3] != undefined) ? (urlParts[3] == "Junk") ? "Junk" : "Starred" : "Starred"
+          let messageType = (urlParts[3] != null || urlParts[3] != undefined) ? (urlParts[3] == "Junk" || urlParts[3] == "Starred" || urlParts[3] == "Trash") ? urlParts[3] : "Starred":"Starred" 
           console.log(messageType)
           console.log(messageType)
           let id = urlParts[urlParts.length - 1];
