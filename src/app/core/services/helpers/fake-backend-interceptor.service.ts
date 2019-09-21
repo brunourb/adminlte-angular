@@ -7,7 +7,6 @@ import { _ } from 'lodash';
 import { UserSessionService } from '../../../core/services/application/user-session.service';
 import { LocalStorageService } from '../../../core/services/helpers/local-storage.service';
 
-
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
   constructor(private localStorage: LocalStorageService, private userSessionService: UserSessionService) { }
