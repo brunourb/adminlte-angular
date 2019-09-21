@@ -13,6 +13,7 @@ import { MailMenuModule } from '../../shared/components/mail-menu/mail-menu.modu
 import { MailComposeModule } from '../../shared/components/mail-compose/mail-compose.module';
 import { JunkComponent } from './mail-box/junk/component/junk.component';
 import { TrashComponent } from './mail-box/trash/component/trash.component';
+import { MailSendGridModule } from '../../shared/components/mail-send-grid/mail-send-grid.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { TrashComponent } from './mail-box/trash/component/trash.component';
     FormsModule,
     MailGridModule,
     MailMenuModule,
-    MailComposeModule
+    MailComposeModule,
+    MailSendGridModule
   ],
   declarations: [
     MailComponent,
