@@ -13,7 +13,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   constructor(private localStorage: LocalStorageService, private userSessionService: UserSessionService) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let users: any[] = JSON.parse(this.localStorage.getItem('db.users')) || [];
-    let messages: any[] = JSON.parse(this.localStorage.getItem('db.message')) || [];
+    let messages: any[] = JSON.parse(this.localStorage.getItem('db.messages')) || [];
     return of(null).pipe(mergeMap(() => {
       /* User Fake backend service Starts here*/
       if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
@@ -110,6 +110,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
 
       /* Message Fake backend service Starts here*/
+      if (request.url.endsWith('/message/register') && request.method === 'POST') {
+        let message = request.body;
+        message.id = messages.length + 1;
+        messages.push(message);
+        this.localStorage.setItem('db.messages', JSON.stringify(_.sortBy(users, user => user.id)));
+        return of(new HttpResponse({ status: 200 }));
+      }
+      
       if (request.url.match(/\/message\/\d+$/) && request.method === 'GET') {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
@@ -121,20 +129,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return throwError({ error: { message: 'Unauthorised' } });
         }
       }
-      if (request.url.endsWith('/message/register') && request.method === 'POST') {
-        console.log("request.body");
-        console.log(request.body);
-        console.log("request.body");
-        // let newUser = request.body;
-        // let duplicateUser = users.filter(user => { return user.username === newUser.username; }).length;
-        // if (duplicateUser) {
-        //   return throwError({ error: { message: 'Username "' + newUser.username + '" is already taken' } });
-        // }
-        // newUser.id = (newUser.username === 'intelchiprules@yahoo.co.in') ? 1 : users.length + 1;
-        // users.push(newUser);
-        // this.localStorage.setItem('db.users', JSON.stringify(_.sortBy(users, user => user.id)));
-        // return of(new HttpResponse({ status: 200 }));
-      }
+      
       /* Message Fake backend service Ends here*/
 
 

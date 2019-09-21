@@ -5,9 +5,8 @@ import { SkillService } from '../../../core/services/application/skill.service';
 import { UserService } from '../../../core/services/application/user.service';
 import { User } from '../../../shared/models/user';
 import { Message } from '../../../shared/models/message';
-
 import { LocalStorageService } from '../../../core/services/helpers/local-storage.service';
-
+import { MessageService } from '../../../core/services/application/message.service';
 
 @Component({
   selector: 'app-mail-compose',
@@ -20,19 +19,27 @@ export class MailComposeComponent implements OnInit {
   mailsTo: any;
   mailToIds: any[];
   @ViewChild('editor') editor;
-
   mailComposeForm: FormGroup;
+
+  get f() {
+    return this.mailComposeForm.controls;
+  }
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private localStorage: LocalStorageService, ) {
+    private localStorage: LocalStorageService,
+    private messageService: MessageService,
+  ) {
   }
 
   ngOnInit() {
-
+    this.bindUserDetails();
     this.bindMailToList();
     this.bindFormGroup();
+  }
+  bindUserDetails() {
+    this.user = JSON.parse(this.localStorage.getItem("userSession"));
   }
   bindFormGroup() {
     this.mailComposeForm = this.formBuilder.group({
@@ -51,7 +58,6 @@ export class MailComposeComponent implements OnInit {
     })
   }
 
-
   bindMailToList() {
     this.userService.getAll().subscribe(
       data => {
@@ -61,6 +67,7 @@ export class MailComposeComponent implements OnInit {
         console.log(error);
       });
   }
+
   bindUserMailOption(users: User[]) {
     let To: NgOption[] = [];
     users.forEach(function (data) {
@@ -72,26 +79,24 @@ export class MailComposeComponent implements OnInit {
     });
     this.mailsTo = To;
   }
-  get f() {
-    return this.mailComposeForm.controls;
-  }
+
   onSubmit() {
-    this.user = JSON.parse(this.localStorage.getItem("userSession"));
-    console.log(this.user);
+    let thisObject = this;
     this.submitted = true;
     if (this.mailComposeForm.invalid) {
       return;
     }
     this.f.mailToIds.value.forEach(function (data) {
-      this.SendMail(data);
+      thisObject.SendMail(data, thisObject);
     });
   }
 
-  private SendMail(data: any): void {
+  SendMail(data: string, thisObject: any): void {
+    console.log(thisObject);
     let message: Message = {
       id: 0,
-      from: this.user.username,
-      fromName: this.user.firstName + " " + this.user.lastName,
+      from: thisObject.user.username,
+      fromName: thisObject.user.firstName + " " + thisObject.user.lastName,
       to: data,
       toName: "Test Name",
       subject: "Test Subject",
@@ -101,16 +106,14 @@ export class MailComposeComponent implements OnInit {
       time: "5 mins",
       suggestion: "Why not buy a new awesome theme?",
       imgSource: "https://github.com/Genuine-Identity.png",
-    };
-
-    // this.messageService.register(message)
-    //   .pipe(first())
-    //   .subscribe(
-    //     data => {
-    //       // console.log(data);
-    //     },
-    //     error => {
-    //       // console.log(error);
-    //     });
+    };   
+    thisObject.messageService.register(message)
+      .subscribe(
+        data => {
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
   }
 }
