@@ -1,5 +1,6 @@
 type MessageType = "Junk" | "Starred" | "Trash";
-export interface Message {
+type Status = "Active" | "InActive";
+export interface Message { 
   id: number,
   from: string,
   fromName: string,
@@ -15,6 +16,6 @@ export interface Message {
   fromType: MessageType,
   suggestion: string,
   imgSource: string,
-  toStatus: string,
-  fromStatus: string 
+  toStatus: Status,
+  fromStatus: Status
 }
