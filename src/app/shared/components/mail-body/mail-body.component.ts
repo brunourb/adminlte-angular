@@ -14,7 +14,7 @@ import { MessageService } from '../../../core/services/application/message.servi
   styleUrls: ['./mail-body.component.css'],
 })
 export class MailBodyComponent implements OnInit {
-  private message: Message;
+    message: Message;
   private user: User;
 
 
@@ -37,8 +37,9 @@ export class MailBodyComponent implements OnInit {
   bindDetails() {
     this.route.params.subscribe(params => {
       if (params['id']) {
-        this.messageService.getMessageById(params['id']).subscribe((message: any) => {
+        this.messageService.getMessageById(params['id']).subscribe((message: Message) => {
           this.message = message;
+          console.log(this.message)
         });
       }
     });
