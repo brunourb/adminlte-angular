@@ -14,9 +14,8 @@ import { MessageService } from '../../../core/services/application/message.servi
   styleUrls: ['./mail-body.component.css'],
 })
 export class MailBodyComponent implements OnInit {
-    message: Message;
+  message: Message;
   private user: User;
-
 
   constructor(
     private userService: UserService,
@@ -43,5 +42,8 @@ export class MailBodyComponent implements OnInit {
         });
       }
     });
+  }
+  onDelete(id: any) {
+    console.log(id);
   }
 } 
