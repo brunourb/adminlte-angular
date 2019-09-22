@@ -6,6 +6,8 @@ import { first } from 'rxjs/operators';
 import { UserService } from '../../../core/services/application/user.service';
 import { User } from '../../models/index';
 import { AlertType, Alert } from '../../models/all';
+import { Message } from '../../models/message';
+import { MessageService } from '../../../core/services/application/message.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +22,9 @@ export class RegisterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
-    private route: ActivatedRoute, private router: Router) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -41,6 +45,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
+    let thisObject = this;
     this.submitted = true;
     if (this.registerForm.invalid) {
       return;
@@ -51,9 +56,65 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         data => {
           this.alert = new Alert(AlertType.Success, "Success!", " Registered Successfully!!");
+          this.sendJoiningMails(thisObject);
+          this.sendSpamMails(thisObject);
         },
         error => {
           this.alert = new Alert(AlertType.Error, "Failure!", `Registration Failure:-  ${error}`);
+        }
+      );
+  }
+  sendJoiningMails(thisObject: any) {
+    let message: Message = {
+      id: 0,
+      from: "intelchiprules@yahoo.co.in",
+      fromName: "Girish" + " " + "Nandgawe",
+      to: thisObject.f.email.value,
+      toName: thisObject.f.firstName.value + " " + thisObject.f.firstName.value,
+      subject: "Well Come !!!!",
+      body: "Well Come !!!!",
+      type: "Starred",
+      fromTeam: "Root",
+      toTeam: "Root",
+      time: new Date(),
+      suggestion: "Well Come !!!!",
+      imgSource: "https://github.com/Genuine-Identity.png",
+    };
+    this.messageService.register(message)
+      .pipe(first())
+      .subscribe(
+        data => {
+          // console.log(data);
+        },
+        error => {
+          // console.log(error);
+        }
+      );
+  }
+  sendSpamMails(thisObject: any) {
+    let message: Message = {
+      id: 0,
+      from: "spammer@fakemail.com",
+      fromName: "spammer" + " " + "team",
+      to: thisObject.f.email.value,
+      toName: thisObject.f.firstName.value + " " + thisObject.f.firstName.value,
+      subject: "Spam !!!!",
+      body: "Well Come !!!!",
+      type: "J",
+      fromTeam: "spammer",
+      toTeam: "Junk",
+      time: new Date(),
+      suggestion: "Well Come !!!!",
+      imgSource: "https://github.com/Genuine-Identity.png",
+    };
+    this.messageService.register(message)
+      .pipe(first())
+      .subscribe(
+        data => {
+          // console.log(data);
+        },
+        error => {
+          // console.log(error);
         }
       );
   }

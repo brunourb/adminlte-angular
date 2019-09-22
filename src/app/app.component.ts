@@ -141,14 +141,14 @@ export class AppComponent implements OnInit {
     this.messageService.isMessageDatabaseIntialize("intelchiprules@yahoo.co.in")
       .subscribe(
         data => {
-          thisObject.test(data);
+          thisObject.sendMailToDb(data);
         },
         error => {
           console.log(error);
         }
       );
   }
-  test(checkDatabaseIntialize: any) {
+  sendMailToDb(checkDatabaseIntialize: any) {
     if (!checkDatabaseIntialize) {
       let message: Message = {
         id: 0,
