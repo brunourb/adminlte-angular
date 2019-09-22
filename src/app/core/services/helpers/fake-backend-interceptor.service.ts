@@ -105,7 +105,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             user.username !== "info@fakemail.com"
           ) {
             if (user.id === currentUser.id) {
-              users.splice(i, 1); 
+              users.splice(i, 1);
               users.push(currentUser);
               isUpdated = true;
               this.localStorage.setItem('db.users', JSON.stringify(_.sortBy(users, user => user.id)));
@@ -181,7 +181,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           let message = messages[i];
           if (message.id === currentMessage.id) {
             messages.splice(i, 1);
-            messages.push(currentMessage);
+            console.log(message.type)
+            if (message.type === "Starred" || message.type === "Junk") {
+              messages.push(currentMessage);
+            }
             isUpdated = true;
             this.localStorage.setItem('db.messages', JSON.stringify(_.sortBy(messages, message => message.id)));
             break;

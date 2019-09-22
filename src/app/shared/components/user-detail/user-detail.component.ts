@@ -18,7 +18,7 @@ import { SkillService } from '../../../core/services/application/skill.service';
 })
 export class UserDetailComponent implements OnInit {
   id: number;
-  submitted = false;
+  submitted = false; 
   alert: Alert;
   user: User;
   userDetailsForm: FormGroup;
