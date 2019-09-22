@@ -183,7 +183,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             messages.splice(i, 1);
             messages.push(currentMessage);
             isUpdated = true;
-            this.localStorage.setItem('db.messages', JSON.stringify(_.sortBy(messages, message => user.id)));
+            this.localStorage.setItem('db.messages', JSON.stringify(_.sortBy(messages, message => message.id)));
             break;
           }
         }

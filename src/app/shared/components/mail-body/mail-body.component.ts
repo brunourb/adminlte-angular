@@ -16,7 +16,12 @@ import { MessageService } from '../../../core/services/application/message.servi
 export class MailBodyComponent implements OnInit {
   message: Message;
   private user: User;
+  id: number;
+  submitted = false;
 
+  userDetailsForm: FormGroup;
+
+  skillIds: any[]
   constructor(
     private userService: UserService,
     private localStorage: LocalStorageService,
@@ -44,6 +49,17 @@ export class MailBodyComponent implements OnInit {
     });
   }
   onDelete(id: any) {
-    console.log(id); 
+    this.submitted = true;
+    this.message.type = "Trash";
+    this.message.update(this.message)
+      .subscribe(
+        data => {
+          console.log('deleted');
+        },
+        error => {
+          // this.alert = new Alert(AlertType.Error, "Failure!", `User details updation failure:-  ${error}`);
+          console.log(error);
+        }
+      );
   }
 } 
