@@ -6,7 +6,8 @@ import { User } from '../../../shared/models/user';
 import { PagedData, CorporateEmployee, Page } from '../../../shared/models/page';
 import { Message } from '../../../shared/models/message';
 import { LocalStorageService } from '../../../core/services/helpers/local-storage.service';
- 
+import { ActivatedRoute, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+
 @Component({
   selector: 'app-mail-send-grid',
   templateUrl: './mail-send-grid.component.html',
@@ -14,7 +15,6 @@ import { LocalStorageService } from '../../../core/services/helpers/local-storag
 })
 
 export class MailSendGridComponent implements OnInit {
-
   private user: User;
   editing = {};
   page = new Page();
@@ -28,12 +28,13 @@ export class MailSendGridComponent implements OnInit {
     private localStorage: LocalStorageService
   ) {
     this.page.pageNumber = 0;
-    this.page.size = 10;
+    this.page.size = 10; 
   }
 
   ngOnInit() {
     this.bindUserDetails();
     this.setPage({ offset: 0 });
+
   }
   bindUserDetails() {
     this.user = JSON.parse(this.localStorage.getItem("userSession"));
@@ -42,7 +43,6 @@ export class MailSendGridComponent implements OnInit {
     this.loadingIndicator = true;
     this.pageInfo = pageInfo;
     this.page.pageNumber = pageInfo.offset;
-
     this.messageService.getFromMessages(this.page, this.user.username).subscribe(pagedData => {
       this.page = pagedData.page;
       this.rows = pagedData.data;

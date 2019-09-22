@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http'; 
 
 import { Message } from '../../../shared/models/message';
 import { map } from 'rxjs/operators';
@@ -79,7 +79,7 @@ export class MessageService {
       const jsonObj = this.messages[i];
       const message: Message = {
         id: jsonObj.id,
-        from: jsonObj.suggestion,
+        from: jsonObj.from,
         fromName: jsonObj.fromName,
         to: jsonObj.to,
         toName: jsonObj.toName,
