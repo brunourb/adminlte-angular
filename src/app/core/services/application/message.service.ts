@@ -51,6 +51,13 @@ export class MessageService {
       return of(data).pipe(map(data => this.getPagedData(page)));
     })
   }
+
+
+  update(message: Message) {
+    return this.http.put(`/message/` + message.id, message);
+  }
+
+
   public getResults(page: Page): Observable<PagedData<Message>> {
     return this.getAll().flatMap(data => {
       this.messages = data;
@@ -78,7 +85,7 @@ export class MessageService {
         toName: jsonObj.toName,
         subject: jsonObj.subject,
         body: jsonObj.body,
-        fromTeam: jsonObj.fromTeam, 
+        fromTeam: jsonObj.fromTeam,
         toTeam: jsonObj.toTeam,
         time: jsonObj.time,
         type: jsonObj.type,

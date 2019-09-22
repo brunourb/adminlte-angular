@@ -173,6 +173,25 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let mails = matchedMessages.length ? matchedMessages[0] : null;
         return of(new HttpResponse({ status: 200, body: mails == null ? false : true }));
       }
+
+      if (request.url.match(/\/message\/\d+$/) && request.method === 'PUT') {
+        let isUpdated: boolean = false;
+        let currentMessage = request.body;
+        for (let i = 0; i < messages.length; i++) {
+          let message = messages[i];
+          if (message.id === currentMessage.id) {
+            messages.splice(i, 1);
+            messages.push(currentMessage);
+            isUpdated = true;
+            this.localStorage.setItem('db.messages', JSON.stringify(_.sortBy(messages, message => user.id)));
+            break;
+          }
+        }
+        if (!isUpdated) {
+          return throwError({ error: { message: 'Admin cannot be Updated.' } });
+        }
+        return of(new HttpResponse({ status: 200 }));
+      }
       /* Message Fake backend service Ends here*/
       return next.handle(request);
     }))

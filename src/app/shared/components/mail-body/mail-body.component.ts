@@ -44,6 +44,6 @@ export class MailBodyComponent implements OnInit {
     });
   }
   onDelete(id: any) {
-    console.log(id);
+    console.log(id); 
   }
 } 
