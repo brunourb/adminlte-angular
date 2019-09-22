@@ -31,7 +31,9 @@ export class MessageService {
     return this.http.get(`/message/checkdatabaseintialize/` + emailId);
   }
 
-
+public getMessageById(id: string) {
+    return this.http.get(`/message/read/id/` + id);
+  }
 
   public getAll(): Observable<Message[]> {
     return Observable.of(this.getMessage());
