@@ -31,7 +31,7 @@ export class MessageService {
     return this.http.get(`/message/checkdatabaseintialize/` + emailId);
   }
 
-public getMessageById(id: string) {
+  public getMessageById(id: string) {
     return this.http.get(`/message/read/id/` + id);
   }
 
@@ -78,7 +78,7 @@ public getMessageById(id: string) {
         toName: jsonObj.toName,
         subject: jsonObj.subject,
         body: jsonObj.body,
-        fromTeam: jsonObj.fromTeam,
+        fromTeam: jsonObj.fromTeam, 
         toTeam: jsonObj.toTeam,
         time: jsonObj.time,
         type: jsonObj.type,

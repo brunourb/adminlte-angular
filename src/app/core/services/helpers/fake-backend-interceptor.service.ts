@@ -136,7 +136,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
           let messageType = (urlParts[4] != null || urlParts[4] != undefined) ? (urlParts[4] == "Junk" || urlParts[4] == "Starred" || urlParts[4] == "Trash") ? urlParts[4] : "Starred" : "Starred";
-         
+
           let id = urlParts[urlParts.length - 1];
           let mail = messages.filter(message => { return message.to === id && message.type === messageType; });
           return of(new HttpResponse({ status: 200, body: _.reverse(mail, message => message.time) }));
@@ -151,6 +151,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           let id = urlParts[urlParts.length - 1];
           let mail = messages.filter(message => { return message.from === id });
           return of(new HttpResponse({ status: 200, body: _.reverse(mail, message => message.time) }));
+        } else {
+          return throwError({ error: { message: 'Unauthorised' } });
+        }
+      }
+      if (request.url.match(`/message/read/id/`) && request.method === 'GET') {
+        if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+          let urlParts = request.url.split('/');
+          let id = urlParts[urlParts.length - 1];
+          let mail = messages.filter(message => { return message.id == id });
+          return of(new HttpResponse({ status: 200, body: mail }));
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
         }
