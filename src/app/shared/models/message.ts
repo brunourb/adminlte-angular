@@ -1,4 +1,4 @@
-type MessageReceivedType = "Junk" | "Starred" | "Trash" | "Delete";
+type MessageType = "Junk" | "Starred" | "Trash";
 export interface Message {
   id: number,
   from: string,
@@ -10,7 +10,11 @@ export interface Message {
   fromTeam: string,
   toTeam: string,
   time: string,
-  type: MessageReceivedType,
+  type: MessageType,
+  toType: MessageType,
+  fromType: MessageType,
   suggestion: string,
   imgSource: string,
+  toStatus: string,
+  fromStatus: string 
 }
