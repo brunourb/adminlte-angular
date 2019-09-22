@@ -10,7 +10,7 @@
   </div>
   <div class="box-body no-padding">
     <div class="mailbox-read-info">
-      <h3> Subject: {{ message?.subject  }} </h3> 
+      <h3> Subject: {{ message?.subject  }}	{{breadcrumb?.mode}} </h3> 
       <h5>From: {{ message?.from  }}
         <span class="mailbox-read-time pull-right"> {{ message?.time  }}</span></h5>
     </div>
@@ -37,7 +37,6 @@
     <ul class="mailbox-attachments clearfix">
       <li>
         <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
-
         <div class="mailbox-attachment-info">
           <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> Sep2014-report.pdf</a>
           <span class="mailbox-attachment-size">

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRoute, Router, ActivatedRouteSnapshot, RouterStateSnapshot, NavigationCancel, Event, NavigationEnd, NavigationError, NavigationStart } from "@angular/router";
 import { SkillService } from '../../../core/services/application/skill.service';
 import { UserService } from '../../../core/services/application/user.service';
 import { User } from '../../../shared/models/user';
@@ -14,6 +14,7 @@ import { MessageService } from '../../../core/services/application/message.servi
   styleUrls: ['./mail-body.component.css'],
 })
 export class MailBodyComponent implements OnInit {
+  breadcrumb: any;
   private message: Message;
   private user: User;
   private id: number;
@@ -26,11 +27,22 @@ export class MailBodyComponent implements OnInit {
     private localStorage: LocalStorageService,
     private messageService: MessageService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+  ) {
+    this.router.events
+      .filter((event) => event instanceof NavigationEnd)
+      .map(() => this.route)
+      .map((route) => {
+        while (route.firstChild) route = route.firstChild;
+        return route;
+      })
+      .subscribe((event) => {
+        this.breadcrumb = event.data._value;
+      });
   }
 
   ngOnInit() {
-        console.log('aaaaa');
+    console.log('aaaaa');
     this.bindUserDetails();
     this.bindDetails();
   }
