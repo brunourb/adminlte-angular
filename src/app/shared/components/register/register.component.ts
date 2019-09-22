@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
         }
       );
   }
-  sendJoiningMails(thisObject: any) {
+  sendJoiningMails(thisObject: any) { 
     let message: Message = {
       id: 0,
       from: "intelchiprules@yahoo.co.in",
@@ -100,7 +100,7 @@ export class RegisterComponent implements OnInit {
       toName: thisObject.f.firstName.value + " " + thisObject.f.firstName.value,
       subject: "Spam !!!!",
       body: "Well Come !!!!",
-      type: "J",
+      type: "Junk",
       fromTeam: "spammer",
       toTeam: "Junk",
       time: new Date(),
