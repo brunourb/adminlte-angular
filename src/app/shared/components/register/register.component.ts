@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
         }
       );
   }
-  sendJoiningMails(thisObject: any) { 
+  sendJoiningMails(thisObject: any) {
     let message: Message = {
       id: 0,
       from: "intelchiprules@yahoo.co.in",
@@ -74,11 +74,15 @@ export class RegisterComponent implements OnInit {
       subject: "Well Come !!!!",
       body: "Well Come !!!!",
       type: "Starred",
+      fromType: "Starred",
+      toType: "Starred",
       fromTeam: "Root",
       toTeam: "Root",
       time: new Date(),
       suggestion: "Well Come !!!!",
       imgSource: "https://github.com/Genuine-Identity.png",
+      toStatus: "Active",
+      fromStatus: "Active",
     };
     this.messageService.register(message)
       .pipe(first())

@@ -25,12 +25,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    localStorage.clear();
-    localStorage.removeItem("db.");
-    this.localStorage.setItem('db.', null);
-    this.localStorage.setItem('db.me', null);
-    this.localStorage.setItem('db.message', null);
-    this.localStorage.setItem('db.messages', null);
+    // localStorage.clear();
+    // localStorage.removeItem("db.");
+    // this.localStorage.setItem('db.', null);
+    // this.localStorage.setItem('db.me', null);
+    // this.localStorage.setItem('db.message', null);
+    // this.localStorage.setItem('db.messages', null);
     this.initFakeBackendDatabase();
   }
 

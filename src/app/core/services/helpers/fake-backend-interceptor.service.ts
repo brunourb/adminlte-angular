@@ -135,20 +135,19 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
           let messageType = (urlParts[4] != null || urlParts[4] != undefined) ? (urlParts[4] == "Junk" || urlParts[4] == "Starred" || urlParts[4] == "Trash") ? urlParts[4] : "Starred" : "Starred";
-
+          console.log(messageType);
           let id = urlParts[urlParts.length - 1];
-          let mail = messages.filter(message => { return message.to === id && message.type === messageType; });
+          let mail = messages.filter(message => { return message.to === id && message.toType === messageType; });
           return of(new HttpResponse({ status: 200, body: _.reverse(mail, message => message.time) }));
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
         }
       }
       if (request.url.match(`/message/from/id/`) && request.method === 'GET') {
-        console.log('aaaa');
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
           let id = urlParts[urlParts.length - 1];
-          let mail = messages.filter(message => { return message.from === id && message.type != 'Trash' });
+          let mail = messages.filter(message => { return message.from === id && message.fromStatus == 'Active' });
           return of(new HttpResponse({ status: 200, body: _.reverse(mail, message => message.time) }));
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
@@ -156,14 +155,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       }
       if (request.url.match(`/message/read/id/`) && request.method === 'GET') {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-          console.log(messages);
           let urlParts = request.url.split('/');
           let id = urlParts[urlParts.length - 1];
-          console.log(id);
           let mail = messages.filter(message => { return message.id == id });
           let mailMessage = mail.length ? mail[0] : null;
-          console.log("messages");
-          console.log(mail);
           return of(new HttpResponse({ status: 200, body: mailMessage }));
         } else {
           return throwError({ error: { message: 'Unauthorised' } });

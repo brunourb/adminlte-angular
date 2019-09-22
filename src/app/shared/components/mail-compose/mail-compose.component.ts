@@ -105,11 +105,15 @@ export class MailComposeComponent implements OnInit {
             subject: thisObject.f.subject.value,
             body: thisObject.editor.value,
             type: thisObject.user.username === "spammer@fakemail.com" ? "Junk" : "Starred",
+            fromType: thisObject.user.username === "spammer@fakemail.com" ? "Junk" : "Starred",
+            toType: thisObject.user.username === "spammer@fakemail.com" ? "Junk" : "Starred",
             fromTeam: thisObject.user.team,
             toTeam: user.team,
             time: new Date(),
             suggestion: "",
             imgSource: "https://github.com/Genuine-Identity.png",
+            toStatus: "Active",
+            fromStatus: "Active",
           };
 
           thisObject.messageService.register(message)

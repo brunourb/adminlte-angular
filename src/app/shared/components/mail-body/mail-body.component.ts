@@ -41,7 +41,6 @@ export class MailBodyComponent implements OnInit {
       if (params['id']) {
         this.messageService.getMessageById(params['id']).subscribe((message: Message) => {
           this.message = message;
-          console.log(message)
         });
       }
     });
@@ -50,6 +49,7 @@ export class MailBodyComponent implements OnInit {
     let messageType = this.message.type;
     this.submitted = true;
     this.message.type = "Trash";
+    this.message.toType = "Trash";
     this.messageService.update(this.message)
       .subscribe(
         data => {
@@ -72,6 +72,6 @@ export class MailBodyComponent implements OnInit {
         error => {
           console.log(error);
         }
-      ); 
+      );
   }
 } 
