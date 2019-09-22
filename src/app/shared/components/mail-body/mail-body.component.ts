@@ -14,7 +14,7 @@ import { MessageService } from '../../../core/services/application/message.servi
   styleUrls: ['./mail-body.component.css'],
 })
 export class MailBodyComponent implements OnInit {
-  message: Message;
+  message:  Message;
   private user: User;
   id: number;
   submitted = false;
@@ -51,7 +51,7 @@ export class MailBodyComponent implements OnInit {
   onDelete(id: any) {
     this.submitted = true;
     this.message.type = "Trash";
-    this.message.update(this.message)
+    this.messageService.update(this.message)
       .subscribe(
         data => {
           console.log('deleted');

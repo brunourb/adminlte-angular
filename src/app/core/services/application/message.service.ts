@@ -53,7 +53,7 @@ export class MessageService {
   }
 
 
-  update(message: Message) {
+  update(message:  Message) {
     return this.http.put(`/message/` + message.id, message);
   }
 
