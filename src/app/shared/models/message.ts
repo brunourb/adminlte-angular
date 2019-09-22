@@ -1,6 +1,7 @@
 type MessageType = "Junk" | "Starred" | "Trash";
 type Status = "Active" | "InActive";
-export interface Message { 
+type InBoxComponentType = "Junk" | "Starred" | "Trash" | "Sent";
+export interface Message {
   id: number,
   from: string,
   fromName: string,
@@ -17,5 +18,6 @@ export interface Message {
   suggestion: string,
   imgSource: string,
   toStatus: Status,
-  fromStatus: Status
+  fromStatus: Status,
+  InBoxComponentType: InBoxComponentType
 }
