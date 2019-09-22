@@ -14,7 +14,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let users: any[] = JSON.parse(this.localStorage.getItem('db.users')) || [];
     let messages: any[] = JSON.parse(this.localStorage.getItem('db.messages')) || [];
-    
+
     return of(null).pipe(mergeMap(() => {
       /* User Fake backend service Starts here*/
       if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
@@ -153,7 +153,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
       }
       if (request.url.match(`/message/read/id/`) && request.method === 'GET') {
-        console.log('amessage')
+
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
           let id = urlParts[urlParts.length - 1];
@@ -164,17 +164,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return throwError({ error: { message: 'Unauthorised' } });
         }
       }
-      if (request.url.match(`/mesasage/read/i/id/`) && request.method === 'GET') {
-        if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-          let urlParts = request.url.split('/');
-          let id = urlParts[urlParts.length - 1];
-          let mail = messages.filter(message => { return message.id == id });
-          let mailMessage = mail.length ? mail[0] : null;
-          return of(new HttpResponse({ status: 200, body: mailMessage }));
-        } else {
-          return throwError({ error: { message: 'Unauthorised' } });
-        }
-      }
+      // if (request.url.match(`/mesasage/read/i/id/`) && request.method === 'GET') {
+      //   if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+      //     let urlParts = request.url.split('/');
+      //     let id = urlParts[urlParts.length - 1];
+      //     let mail = messages.filter(message => { return message.id == id });
+      //     let mailMessage = mail.length ? mail[0] : null;
+      //     return of(new HttpResponse({ status: 200, body: mailMessage }));
+      //   } else {
+      //     return throwError({ error: { message: 'Unauthorised' } });
+      //   }
+      // }
       if (request.url.match(`/message/checkdatabaseintialize/`) && request.method === 'GET') {
         let urlParts = request.url.split('/');
         let id = urlParts[urlParts.length - 1];
