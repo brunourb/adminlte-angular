@@ -33,6 +33,7 @@ export class MailComposeComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.bindUserDetails();
     this.bindMailToList();
     this.bindFormGroup();

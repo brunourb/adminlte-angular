@@ -107,13 +107,26 @@ const routes: Routes = [
             },
           },
           {
-            path: 'read/:id', component: ReadMailComponent,
+            path: 'read/s/:id', component: ReadMailComponent,
             canActivate: [AuthGuard],
             data: {
-              breadcrumb: 'User Details',
-              breadcrumbs: 'User Details',
-              title: 'User Details Title',
-              smallText: 'User Details Small Text',
+              breadcrumb: 'Sent Details',
+              breadcrumbs: 'Sent Details',
+              title: 'Sent Details Title',
+              smallText: 'Sent Details Small Text',
+              isHome: true,
+              icon: 'fa fa-home',
+              show: false
+            },
+          },
+           {
+            path: 'read/i/:id', component: ReadMailComponent,
+            canActivate: [AuthGuard],
+            data: {
+              breadcrumb: 'Inbox Details',
+              breadcrumbs: 'Inbox Details',
+              title: 'Inbox Details Title',
+              smallText: 'Inbox Details Small Text',
               isHome: true,
               icon: 'fa fa-home',
               show: false

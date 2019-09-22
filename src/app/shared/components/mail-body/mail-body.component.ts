@@ -30,6 +30,7 @@ export class MailBodyComponent implements OnInit {
   }
 
   ngOnInit() {
+        console.log('aaaaa');
     this.bindUserDetails();
     this.bindDetails();
   }
@@ -50,6 +51,7 @@ export class MailBodyComponent implements OnInit {
     this.submitted = true;
     this.message.type = "Trash";
     this.message.toType = "Trash";
+    this.message.fromType = "Trash";
     this.messageService.update(this.message)
       .subscribe(
         data => {

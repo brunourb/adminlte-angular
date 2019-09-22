@@ -32,7 +32,8 @@ export class MessageService {
   }
 
   public getMessageById(id: string) {
-    return this.http.get(`/message/read/id/` + id);
+    console.log('aaaa')
+    return this.http.get(`/message/read/s/id/` + id);
   }
 
   public getAll(): Observable<Message[]> {

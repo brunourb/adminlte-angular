@@ -46,7 +46,7 @@
                 <ngx-datatable-column [resizeable]="true" [draggable]="true"
                     [canAutoResize]="true" [width]="300">
                     <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-                    	<a [routerLink]="['/mail/read',row.id]">{{row.subject}}</a>    
+                    	<a [routerLink]="['/mail/read/i',row.id]">{{row.subject}}</a>    
                     </ng-template>
                 </ngx-datatable-column>    
                   <ngx-datatable-column [resizeable]="true" [sortable]="true" [draggable]="true"
