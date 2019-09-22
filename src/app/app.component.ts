@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-import * as jQuery from "jquery"; 
+import * as jQuery from "jquery";
 
 import { User } from './shared/models/index';
 import { UserService } from './core/services/application/user.service';
@@ -21,16 +21,16 @@ export class AppComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private messageService: MessageService,
-    private localStorage: LocalStorageService ) {
+    private localStorage: LocalStorageService) {
   }
 
   ngOnInit() {
-    // localStorage.clear();
-    // localStorage.removeItem("db."); 
-    // this.localStorage.setItem('db.', null);
-    // this.localStorage.setItem('db.me', null);
-    // this.localStorage.setItem('db.message', null);
-    // this.localStorage.setItem('db.messages', null);
+    localStorage.clear();
+    localStorage.removeItem("db.");
+    this.localStorage.setItem('db.', null);
+    this.localStorage.setItem('db.me', null);
+    this.localStorage.setItem('db.message', null);
+    this.localStorage.setItem('db.messages', null);
     this.initFakeBackendDatabase();
   }
 
@@ -157,13 +157,17 @@ export class AppComponent implements OnInit {
         to: "intelchiprules@yahoo.co.in",
         toName: "Girish" + " " + "Nandgawe",
         subject: "Well Come !!!!",
-        body: "Well Come !!!!",
-        type: "Starred",
+        body: "Well Come !!!!",        
         fromTeam: "Root",
         toTeam: "Root",
         time: new Date(),
         suggestion: "Well Come !!!!",
         imgSource: "https://github.com/Genuine-Identity.png",
+        type: "Starred",
+        toType: "Starred",
+        fromType: "Starred",
+        toStatus: "Active",
+        fromStatus: "Active",
       };
       this.messageService.register(message)
         .pipe(first())
