@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'; 
+import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
@@ -132,14 +132,24 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return of(new HttpResponse({ status: 200 }));
       }
 
-      if (request.url.match(`/message/id/`) && request.method === 'GET') {
+      if (request.url.match(`/message/to/id/`) && request.method === 'GET') {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
-          let messageType = (urlParts[3] != null || urlParts[3] != undefined) ? (urlParts[3] == "Junk" || urlParts[3] == "Starred" || urlParts[3] == "Trash") ? urlParts[3] : "Starred":"Starred" 
-          console.log(messageType)
-          console.log(messageType)
+          let messageType = (urlParts[4] != null || urlParts[4] != undefined) ? (urlParts[4] == "Junk" || urlParts[4] == "Starred" || urlParts[4] == "Trash") ? urlParts[4] : "Starred" : "Starred";
+         
           let id = urlParts[urlParts.length - 1];
           let mail = messages.filter(message => { return message.to === id && message.type === messageType; });
+          return of(new HttpResponse({ status: 200, body: _.reverse(mail, message => message.time) }));
+        } else {
+          return throwError({ error: { message: 'Unauthorised' } });
+        }
+      }
+      if (request.url.match(`/message/from/id/`) && request.method === 'GET') {
+        console.log('aaaa');
+        if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+          let urlParts = request.url.split('/');
+          let id = urlParts[urlParts.length - 1];
+          let mail = messages.filter(message => { return message.from === id });
           return of(new HttpResponse({ status: 200, body: _.reverse(mail, message => message.time) }));
         } else {
           return throwError({ error: { message: 'Unauthorised' } });

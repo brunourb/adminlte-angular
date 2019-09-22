@@ -8,6 +8,7 @@ import { ReadMailComponent } from './mail-box/read/component/read-mail.component
 import { ComposeMailComponent } from './mail-box/compose/component/compose-mail.component';
 import { JunkComponent } from './mail-box/junk/component/junk.component';
 import { TrashComponent } from './mail-box/trash/component/trash.component';  
+import { SendComponent } from './mail-box/send/component/send.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
           smallText: '13 New Messages',
           isHome: true,
           icon: 'fa fa-home',
-          show: false
+          show: false,
         },
         children: [
           {
@@ -67,7 +68,7 @@ const routes: Routes = [
               show: false
             },
           },  {
-            path: 'sent', component: JunkComponent,
+            path: 'sent', component: SendComponent,
             canActivate: [AuthGuard],
             data: {
               breadcrumb: 'Junk',

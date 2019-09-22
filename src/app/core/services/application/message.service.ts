@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'; 
+import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -20,13 +20,75 @@ export class MessageService {
     return this.http.post(`/message/register`, message);
   }
 
-  public getById(emailId: string, mailType: string) {
-    return this.http.get(`/message/id/` + mailType + `/` + emailId);
+  public getByToId(emailId: string, mailType: string) {
+    return this.http.get(`/message/to/id/` + mailType + `/` + emailId);
   }
 
+  public getByFromId(emailId: string) {
+    return this.http.get(`/message/from/id/` + emailId);
+  }
   public isMessageDatabaseIntialize(emailId: string) {
     return this.http.get(`/message/checkdatabaseintialize/` + emailId);
   }
+
+
+
+  public getAll(): Observable<Message[]> {
+    return Observable.of(this.getMessage());
+  }
+  public getMessages(page: Page, id: string, mailType: string): Observable<PagedData<Message>> {
+    return this.getByToId(id, mailType).flatMap(data => {
+      this.messages = data;
+      return of(data).pipe(map(data => this.getPagedData(page)));
+    })
+  }
+  public getFromMessages(page: Page, id: string): Observable<PagedData<Message>> {
+    console.log('a');
+    return this.getByFromId(id).flatMap(data => {
+      this.messages = data;
+      return of(data).pipe(map(data => this.getPagedData(page)));
+    })
+  }
+  public getResults(page: Page): Observable<PagedData<Message>> {
+    return this.getAll().flatMap(data => {
+      this.messages = data;
+      return of(data).pipe(map(data => this.getPagedData(page)));
+    })
+  }
+  /**
+   * Package companyData into a PagedData object based on the selected Page
+   * @param page The page data used to get the selected data from companyData
+   * @returns {PagedData<User>} An array of the selected data and page
+   */
+  private getPagedData(page: Page): PagedData<Message> {
+    const pagedData = new PagedData<Message>();
+    page.totalElements = this.messages.length;
+    page.totalPages = page.totalElements / page.size;
+    const start = page.pageNumber * page.size;
+    const end = Math.min((start + page.size), page.totalElements);
+    for (let i = start; i < end; i++) {
+      const jsonObj = this.messages[i];
+      const message: Message = {
+        id: jsonObj.id,
+        from: jsonObj.suggestion,
+        fromName: jsonObj.fromName,
+        to: jsonObj.to,
+        toName: jsonObj.toName,
+        subject: jsonObj.subject,
+        body: jsonObj.body,
+        fromTeam: jsonObj.fromTeam,
+        toTeam: jsonObj.toTeam,
+        time: jsonObj.time,
+        type: jsonObj.type,
+        suggestion: jsonObj.suggestion,
+        imgSource: jsonObj.imgSource,
+      };
+      pagedData.data.push(message);
+    }
+    pagedData.page = page;
+    return pagedData;
+  }
+
 
   public getMessage(): Message[] {
     let message: Message[] = [
@@ -60,53 +122,5 @@ export class MessageService {
       },
     ];
     return message;
-  }
-
-  public getAll(): Observable<Message[]> {
-    return Observable.of(this.getMessage());
-  }
-  public getMessages(page: Page, id: string, mailType: string): Observable<PagedData<Message>> {
-    return this.getById(id, mailType).flatMap(data => {
-      this.messages = data;
-      return of(data).pipe(map(data => this.getPagedData(page)));
-    })
-  }
-  public getResults(page: Page): Observable<PagedData<Message>> {
-    return this.getAll().flatMap(data => {
-      this.messages = data;
-      return of(data).pipe(map(data => this.getPagedData(page)));
-    })
-  }
-  /**
-   * Package companyData into a PagedData object based on the selected Page
-   * @param page The page data used to get the selected data from companyData
-   * @returns {PagedData<User>} An array of the selected data and page
-   */
-  private getPagedData(page: Page): PagedData<Message> {
-    const pagedData = new PagedData<Message>();
-    page.totalElements = this.messages.length;
-    page.totalPages = page.totalElements / page.size;
-    const start = page.pageNumber * page.size;
-    const end = Math.min((start + page.size), page.totalElements);
-    for (let i = start; i < end; i++) {
-      const jsonObj = this.messages[i];
-      const message: Message = {
-        id: jsonObj.id,
-        from: jsonObj.suggestion,
-        fromName: jsonObj.fromName,
-        to: jsonObj.to,
-        toName: jsonObj.toName,
-        subject: jsonObj.subject,
-        body: jsonObj.body,
-        team: jsonObj.team,
-        time: jsonObj.time,
-        type: jsonObj.type,
-        suggestion: jsonObj.suggestion,
-        imgSource: jsonObj.imgSource,
-      };
-      pagedData.data.push(message);
-    }
-    pagedData.page = page;
-    return pagedData;
   }
 }

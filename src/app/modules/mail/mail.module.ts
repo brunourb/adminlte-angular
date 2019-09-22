@@ -14,6 +14,8 @@ import { MailComposeModule } from '../../shared/components/mail-compose/mail-com
 import { JunkComponent } from './mail-box/junk/component/junk.component';
 import { TrashComponent } from './mail-box/trash/component/trash.component';
 import { MailSendGridModule } from '../../shared/components/mail-send-grid/mail-send-grid.module';
+import { SendComponent } from './mail-box/send/component/send.component';  
+
 
 @NgModule({
   imports: [
@@ -23,7 +25,7 @@ import { MailSendGridModule } from '../../shared/components/mail-send-grid/mail-
     MailGridModule,
     MailMenuModule,
     MailComposeModule,
-    MailSendGridModule
+    MailSendGridModule,
   ],
   declarations: [
     MailComponent,
@@ -32,7 +34,8 @@ import { MailSendGridModule } from '../../shared/components/mail-send-grid/mail-
     ReadMailComponent,
     ComposeMailComponent,
     JunkComponent,
-    TrashComponent
+    TrashComponent,
+    SendComponent
   ],
 })
 

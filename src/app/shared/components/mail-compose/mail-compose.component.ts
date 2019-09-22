@@ -105,7 +105,8 @@ export class MailComposeComponent implements OnInit {
             subject: thisObject.f.subject.value,
             body: thisObject.editor.value,
             type: thisObject.user.username === "spammer@fakemail.com" ? "Junk" : "Starred",
-            team: thisObject.user.team,
+            fromTeam: thisObject.user.team,
+            toTeam: user.team,
             time: new Date(),
             suggestion: "",
             imgSource: "https://github.com/Genuine-Identity.png",
@@ -128,4 +129,4 @@ export class MailComposeComponent implements OnInit {
       }
     );
   }
-}
+} 

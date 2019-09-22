@@ -138,7 +138,6 @@ export class AppComponent implements OnInit {
   }
   private initMessageDatabase(): void {
     let thisObject = this;
-
     this.messageService.isMessageDatabaseIntialize("intelchiprules@yahoo.co.in")
       .subscribe(
         data => {
@@ -160,7 +159,8 @@ export class AppComponent implements OnInit {
         subject: "Well Come !!!!",
         body: "Well Come !!!!",
         type: "Starred",
-        team: "Root",
+        fromTeam: "Root",
+        toTeam: "Root",
         time: new Date(),
         suggestion: "Well Come !!!!",
         imgSource: "https://github.com/Genuine-Identity.png",
