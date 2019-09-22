@@ -14,7 +14,7 @@ import { MessageService } from '../../../core/services/application/message.servi
   styleUrls: ['./mail-body.component.css'],
 })
 export class MailBodyComponent implements OnInit {
-  message:  Message;
+  message: Message;
   private user: User;
   id: number;
   submitted = false;
@@ -43,23 +43,41 @@ export class MailBodyComponent implements OnInit {
       if (params['id']) {
         this.messageService.getMessageById(params['id']).subscribe((message: Message) => {
           this.message = message;
-          console.log(this.message)
+          console.log(this.message) 
         });
       }
     });
   }
   onDelete(id: any) {
+    let messageType = this.message.type;
     this.submitted = true;
     this.message.type = "Trash";
-    this.messageService.update(this.message)
-      .subscribe(
-        data => {
-          console.log('deleted');
-        },
-        error => {
-          // this.alert = new Alert(AlertType.Error, "Failure!", `User details updation failure:-  ${error}`);
-          console.log(error);
-        }
-      );
+
+    console.log('deleted/updated');
+    if (messageType === "Trash") {
+      this.router.navigate(['/mail/trash']);
+    }
+    if (messageType === "Junk") {
+      this.router.navigate(['/mail/junk']);
+    }
+    if (messageType === "Starred") {
+      this.router.navigate(['/mail/inbox']);
+    }
+    if (this.message.from == this.user.username) {
+      this.router.navigate(['/mail/sent']);
+    }
+
+
+
+    // this.messageService.update(this.message)
+    //   .subscribe(
+    //     data => {
+
+    //     },
+    //     error => {
+    //       // this.alert = new Alert(AlertType.Error, "Failure!", `User details updation failure:-  ${error}`);
+    //       console.log(error);
+    //     }
+    //   );
   }
 } 

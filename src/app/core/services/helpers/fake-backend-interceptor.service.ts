@@ -185,7 +185,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (message.type === "Starred" || message.type === "Junk") {
               messages.push(currentMessage);
             }
-            isUpdated = true;
+            isUpdated = true; 
             this.localStorage.setItem('db.messages', JSON.stringify(_.sortBy(messages, message => message.id)));
             break;
           }
