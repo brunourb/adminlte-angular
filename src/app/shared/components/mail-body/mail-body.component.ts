@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable, ViewChild, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot, RouterStateSnapshot, NavigationCancel, Event, NavigationEnd, NavigationError, NavigationStart } from "@angular/router";
 import { SkillService } from '../../../core/services/application/skill.service';
 import { UserService } from '../../../core/services/application/user.service';
@@ -41,7 +41,7 @@ export class MailBodyComponent implements OnInit {
       });
   }
 
-  ngOnInit() {  
+  ngOnInit() {
     this.bindUserDetails();
     this.bindDetails();
   }
@@ -49,8 +49,10 @@ export class MailBodyComponent implements OnInit {
     this.user = JSON.parse(this.localStorage.getItem("userSession"));
   }
   bindDetails() {
-   
-    this.route.params.subscribe(params => { console.log(params['id'])
+
+    this.route.params.subscribe(params => {
+      console.log("params['id']")
+      console.log(params['id'])
       if (params['id']) {
         this.messageService.getMessageById(params['id']).subscribe((message: Message) => {
           this.message = message;

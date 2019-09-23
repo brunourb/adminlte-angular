@@ -155,8 +155,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if (request.url.match(`/message/read/id/`) && request.method === 'GET') {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
+          console.log(urlParts)
           let id = urlParts[urlParts.length - 1];
-          
+           console.log("id")
+           console.log(messages)
           let mail = messages.filter(message => { return message.id == id });
           let mailMessage = mail.length ? mail[0] : null;
           console.log("id")
