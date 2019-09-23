@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    let user = new User(this.f.email.value, this.f.password.value, this.f.firstName.value, this.f.lastName.value, "", [], 1);
+    let user = new User(this.f.email.value, this.f.password.value, this.f.firstName.value, this.f.lastName.value, "", [], "Friend", 1);
     this.userService.register(user)
       .pipe(first())
       .subscribe(
@@ -104,12 +104,15 @@ export class RegisterComponent implements OnInit {
       toName: thisObject.f.firstName.value + " " + thisObject.f.firstName.value,
       subject: "Spam !!!!",
       body: "Well Come !!!!",
-      type: "Junk",
+      fromType: "Starred",
+      toType: "Junk",
       fromTeam: "spammer",
-      toTeam: "Junk",
+      toTeam: "Friend",
       time: new Date(),
-      suggestion: "Well Come !!!!",
+      suggestion: "Well Come Spam Mail !!!!",
       imgSource: "https://github.com/Genuine-Identity.png",
+      toStatus: "Active",
+      fromStatus: "Active",
     };
     this.messageService.register(message)
       .pipe(first())

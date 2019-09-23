@@ -1,4 +1,4 @@
-<section class="content"> 
+<section class="content">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-primary">
@@ -25,6 +25,11 @@
 							</ng-template>
 						</ngx-datatable-column>
 						<ngx-datatable-column name="lastName" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="180">
+							<ng-template>
+								{{value}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="team" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="180">
 							<ng-template>
 								{{value}}
 							</ng-template>
