@@ -41,8 +41,7 @@ export class MailBodyComponent implements OnInit {
       });
   }
 
-  ngOnInit() {
-    console.log('aaaaa');
+  ngOnInit() {  
     this.bindUserDetails();
     this.bindDetails();
   }
@@ -50,7 +49,8 @@ export class MailBodyComponent implements OnInit {
     this.user = JSON.parse(this.localStorage.getItem("userSession"));
   }
   bindDetails() {
-    this.route.params.subscribe(params => {
+   
+    this.route.params.subscribe(params => { console.log(params['id'])
       if (params['id']) {
         this.messageService.getMessageById(params['id']).subscribe((message: Message) => {
           this.message = message;
