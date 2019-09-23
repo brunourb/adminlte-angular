@@ -16,7 +16,8 @@ import { LocalStorageService } from './core/services/helpers/local-storage.servi
 })
 export class AppComponent implements OnInit {
 
-  constructor(private userService: UserService,
+  constructor(
+    private userService: UserService,
     private skillService: SkillService,
     private router: Router,
     private route: ActivatedRoute,
@@ -26,9 +27,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // localStorage.clear();
-    // localStorage.removeItem("db.");
-    // this.localStorage.setItem('db.', null);
-    // this.localStorage.setItem('db.me', null);
     // this.localStorage.setItem('db.message', null);
     // this.localStorage.setItem('db.messages', null);
     this.initFakeBackendDatabase();
