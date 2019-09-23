@@ -15,7 +15,7 @@ import { ActivatedRoute, Router, ActivatedRouteSnapshot, RouterStateSnapshot, Na
 
 export class MailSendGridComponent implements OnInit {
   private user: User;
-  
+  breadcrumb: any;
   editing = {};
   page = new Page();
   rows = new Array<Message>();

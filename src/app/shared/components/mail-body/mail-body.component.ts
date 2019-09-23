@@ -62,6 +62,7 @@ export class MailBodyComponent implements OnInit {
     this.submitted = true;
     this.message.toType = "Trash";
     this.message.fromType = "Trash";
+    console.log(this.breadcrumb.mode);
     this.messageService.update(this.message, (
       this.breadcrumb.mode === "inbox"
       || this.breadcrumb.mode === "trash"
@@ -69,7 +70,7 @@ export class MailBodyComponent implements OnInit {
     )
       .subscribe(
         data => {
-          console.log('deleted/updated');
+
           if (this.breadcrumb.mode === "inbox") {
             this.router.navigate(['/mail/inbox']);
           }

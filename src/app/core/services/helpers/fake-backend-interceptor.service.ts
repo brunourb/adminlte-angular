@@ -163,17 +163,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return throwError({ error: { message: 'Unauthorised' } });
         }
       }
-      // if (request.url.match(`/mesasage/read/i/id/`) && request.method === 'GET') {
-      //   if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-      //     let urlParts = request.url.split('/');
-      //     let id = urlParts[urlParts.length - 1];
-      //     let mail = messages.filter(message => { return message.id == id });
-      //     let mailMessage = mail.length ? mail[0] : null;
-      //     return of(new HttpResponse({ status: 200, body: mailMessage }));
-      //   } else {
-      //     return throwError({ error: { message: 'Unauthorised' } });
-      //   }
-      // }
+  
       if (request.url.match(`/message/checkdatabaseintialize/`) && request.method === 'GET') {
         let urlParts = request.url.split('/');
         let id = urlParts[urlParts.length - 1];
