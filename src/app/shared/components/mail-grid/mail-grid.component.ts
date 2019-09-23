@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable } from '@angular/core';
 import { Observable, of } from "rxjs";
 import { delay, map } from "rxjs/operators";
-import { MessageService } from '../../../core/services/application/message.service';
+import { MessageService } from '../../../core/services/application/message.service'; 
 import { User } from '../../../shared/models/user';
 import { PagedData, CorporateEmployee, Page } from '../../../shared/models/page';
 import { Message } from '../../../shared/models/message';

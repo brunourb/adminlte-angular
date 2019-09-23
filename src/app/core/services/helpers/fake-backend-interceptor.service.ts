@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ActivatedRoute, Router } from "@angular/router";
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs'; 
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import { _ } from 'lodash';
 import { UserSessionService } from '../../../core/services/application/user-session.service';
@@ -162,8 +162,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
         }
-      }
-  
+      }  
       if (request.url.match(`/message/checkdatabaseintialize/`) && request.method === 'GET') {
         let urlParts = request.url.split('/');
         let id = urlParts[urlParts.length - 1];

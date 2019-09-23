@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable, ViewChild, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 import { ActivatedRoute, Router, ActivatedRouteSnapshot, RouterStateSnapshot, NavigationCancel, Event, NavigationEnd, NavigationError, NavigationStart } from "@angular/router";
 import { SkillService } from '../../../core/services/application/skill.service';
 import { UserService } from '../../../core/services/application/user.service';
