@@ -10,4 +10,4 @@ export class Singleton {
   public register(): void {
 
   }
-}
+} 

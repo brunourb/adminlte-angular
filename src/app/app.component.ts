@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; 
 import { first } from 'rxjs/operators';
 import * as jQuery from "jquery";
 

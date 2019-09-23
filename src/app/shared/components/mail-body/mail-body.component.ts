@@ -6,7 +6,7 @@ import { UserService } from '../../../core/services/application/user.service';
 import { User } from '../../../shared/models/user';
 import { Message } from '../../../shared/models/message';
 import { LocalStorageService } from '../../../core/services/helpers/local-storage.service';
-import { MessageService } from '../../../core/services/application/message.service';
+import { MessageService } from '../../../core/services/application/message.service'; 
 
 @Component({
   selector: 'app-mail-body',
