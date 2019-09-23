@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ActivatedRoute, Router } from "@angular/router";
-import { Observable, of, throwError } from 'rxjs'; 
+import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import { _ } from 'lodash';
 import { UserSessionService } from '../../../core/services/application/user-session.service';
@@ -123,9 +123,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
       /* Message Fake backend service Starts here*/
       if (request.url.endsWith('/message/register') && request.method === 'POST') {
+        let counter = _.reverse(messages, message => message.id)
+        let messageCounter = counter.length ? counter[0].id : 0;
         let message = request.body;
-        message.id = messages.length + 1;
-        messages.push(message);
+        message.id = messageCounter + 1;
+        messages.push(message);      
         this.localStorage.setItem('db.messages', JSON.stringify(_.sortBy(messages, message => message.id)));
         return of(new HttpResponse({ status: 200 }));
       }
@@ -136,7 +138,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           let messageType = (urlParts[4] != null || urlParts[4] != undefined) ? (urlParts[4] == "Junk" || urlParts[4] == "Starred" || urlParts[4] == "Trash") ? urlParts[4] : "Starred" : "Starred";
           console.log(messageType);
           let id = urlParts[urlParts.length - 1];
-          let mail = messages.filter(message => { return message.to === id && message.toType === messageType && message.toStatus == 'Active' ; });
+          let mail = messages.filter(message => { return message.to === id && message.toType === messageType && message.toStatus == 'Active'; });
           return of(new HttpResponse({ status: 200, body: _.reverse(mail, message => message.time) }));
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
@@ -157,17 +159,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           let urlParts = request.url.split('/');
           console.log(urlParts)
           let id = urlParts[urlParts.length - 1];
-           console.log("id")
-           console.log(messages)
+          console.log("id")
+          console.log(messages)
           let mail = messages.filter(message => { return message.id == id });
           let mailMessage = mail.length ? mail[0] : null;
           console.log("id")
-            console.log(mailMessage)
+          console.log(mailMessage)
           return of(new HttpResponse({ status: 200, body: mailMessage }));
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
         }
-      }  
+      }
       if (request.url.match(`/message/checkdatabaseintialize/`) && request.method === 'GET') {
         let urlParts = request.url.split('/');
         let id = urlParts[urlParts.length - 1];
