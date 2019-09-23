@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, Input, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http'; 
-
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Message } from '../../../shared/models/message';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { User } from '../../../shared/models/index';
-import { PagedData, CorporateEmployee, Page } from '../../../shared/models/page';
+import { PagedData, CorporateEmployee, Page } from '../../../shared/models/page'; 
 
 @Injectable()
 export class MessageService {
@@ -31,7 +30,7 @@ export class MessageService {
     return this.http.get(`/message/checkdatabaseintialize/` + emailId);
   }
 
-  public getMessageById(id: string) {     
+  public getMessageById(id: string) {
     return this.http.get(`/message/read/id/` + id);
   }
 
@@ -53,10 +52,10 @@ export class MessageService {
   }
 
 
-  update(message:  Message) {
-    return this.http.put(`/message/` + message.id, message);
+  update(message: Message, type: string) {
+    console.log(`/message/${type}/`);
+    return this.http.put(`/message/${type}/` + message.id, message);
   }
-
 
   public getResults(page: Page): Observable<PagedData<Message>> {
     return this.getAll().flatMap(data => {

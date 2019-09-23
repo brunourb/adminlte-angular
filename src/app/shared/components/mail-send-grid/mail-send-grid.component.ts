@@ -6,8 +6,7 @@ import { User } from '../../../shared/models/user';
 import { PagedData, CorporateEmployee, Page } from '../../../shared/models/page';
 import { Message } from '../../../shared/models/message';
 import { LocalStorageService } from '../../../core/services/helpers/local-storage.service';
-import { ActivatedRoute, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
-
+import { ActivatedRoute, Router, ActivatedRouteSnapshot, RouterStateSnapshot, NavigationCancel, Event, NavigationEnd, NavigationError, NavigationStart } from "@angular/router";
 @Component({
   selector: 'app-mail-send-grid',
   templateUrl: './mail-send-grid.component.html',
@@ -16,6 +15,7 @@ import { ActivatedRoute, Router, ActivatedRouteSnapshot, RouterStateSnapshot } f
 
 export class MailSendGridComponent implements OnInit {
   private user: User;
+  
   editing = {};
   page = new Page();
   rows = new Array<Message>();
@@ -25,16 +25,27 @@ export class MailSendGridComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
-    private localStorage: LocalStorageService
+    private localStorage: LocalStorageService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
     this.page.pageNumber = 0;
-    this.page.size = 10; 
+    this.page.size = 10;
+    this.router.events
+      .filter((event) => event instanceof NavigationEnd)
+      .map(() => this.route)
+      .map((route) => {
+        while (route.firstChild) route = route.firstChild;
+        return route;
+      })
+      .subscribe((event) => {
+        this.breadcrumb = event.data._value;
+      });
   }
 
   ngOnInit() {
     this.bindUserDetails();
     this.setPage({ offset: 0 });
-
   }
   bindUserDetails() {
     this.user = JSON.parse(this.localStorage.getItem("userSession"));
@@ -46,7 +57,6 @@ export class MailSendGridComponent implements OnInit {
     this.messageService.getFromMessages(this.page, this.user.username).subscribe(pagedData => {
       this.page = pagedData.page;
       this.rows = pagedData.data;
-      console.log(this.rows);
       this.loadingIndicator = false;
     });
   }

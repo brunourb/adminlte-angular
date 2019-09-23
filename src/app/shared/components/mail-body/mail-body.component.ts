@@ -59,28 +59,28 @@ export class MailBodyComponent implements OnInit {
     });
   }
   onDelete(id: any) {
-    let messageType = this.message.type;
     this.submitted = true;
-    this.message.type = "Trash";
     this.message.toType = "Trash";
     this.message.fromType = "Trash";
-    this.messageService.update(this.message)
+    this.messageService.update(this.message, (
+      this.breadcrumb.mode === "inbox"
+      || this.breadcrumb.mode === "trash"
+      || this.breadcrumb.mode === "junk") ? "i" : "s"
+    )
       .subscribe(
         data => {
           console.log('deleted/updated');
-          if (this.message.from == this.user.username && this.message.to != this.user.username) {
-            this.router.navigate(['/mail/sent']);
+          if (this.breadcrumb.mode === "inbox") {
+            this.router.navigate(['/mail/inbox']);
           }
-          else {
-            if (messageType === "Trash") {
-              this.router.navigate(['/mail/trash']);
-            }
-            if (messageType === "Junk") {
-              this.router.navigate(['/mail/junk']);
-            }
-            if (messageType === "Starred") {
-              this.router.navigate(['/mail/inbox']);
-            }
+          if (this.breadcrumb.mode === "trash") {
+            this.router.navigate(['/mail/trash']);
+          }
+          if (this.breadcrumb.mode === "junk") {
+            this.router.navigate(['/mail/junk']);
+          }
+          if (this.breadcrumb.mode === "sent") {
+            this.router.navigate(['/mail/sent']);
           }
         },
         error => {

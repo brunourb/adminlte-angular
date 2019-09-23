@@ -71,10 +71,10 @@ const routes: Routes = [
             path: 'sent', component: SendComponent,
             canActivate: [AuthGuard],
             data: {
-              breadcrumb: 'Junk',
-              breadcrumbs: 'Junk',
-              title: 'Junk',
-              smallText: '13 New Messages',
+              breadcrumb: 'Sent',
+              breadcrumbs: 'Sent',
+              title: 'Sent',
+              smallText: 'Sent Messages',
               isHome: true,
               icon: 'fa fa-home',
               show: false
@@ -131,7 +131,35 @@ const routes: Routes = [
               isHome: true,
               icon: 'fa fa-home',
               show: false,
-              mode: "in"
+              mode: "inbox"
+            },
+          },
+          {
+            path: 'read/j/:id', component: ReadMailComponent,
+            canActivate: [AuthGuard],
+            data: {
+              breadcrumb: 'Junk Details',
+              breadcrumbs: 'Junk Details',
+              title: 'Junk Details Title',
+              smallText: 'Junk Details Small Text',
+              isHome: true,
+              icon: 'fa fa-home',
+              show: false,
+              mode: "junk"
+            },
+          },
+          {
+            path: 'read/t/:id', component: ReadMailComponent,
+            canActivate: [AuthGuard],
+            data: {
+              breadcrumb: 'Trash Details',
+              breadcrumbs: 'Trash Details',
+              title: 'Trash Details Title',
+              smallText: 'Trash Details Small Text',
+              isHome: true,
+              icon: 'fa fa-home',
+              show: false,
+              mode: "trash"
             },
           },
         ]

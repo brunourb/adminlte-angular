@@ -136,7 +136,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           let messageType = (urlParts[4] != null || urlParts[4] != undefined) ? (urlParts[4] == "Junk" || urlParts[4] == "Starred" || urlParts[4] == "Trash") ? urlParts[4] : "Starred" : "Starred";
           console.log(messageType);
           let id = urlParts[urlParts.length - 1];
-          let mail = messages.filter(message => { return message.to === id && message.toType === messageType; });
+          let mail = messages.filter(message => { return message.to === id && message.toType === messageType && message.toStatus == 'Active' ; });
           return of(new HttpResponse({ status: 200, body: _.reverse(mail, message => message.time) }));
         } else {
           return throwError({ error: { message: 'Unauthorised' } });
@@ -153,7 +153,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
       }
       if (request.url.match(`/message/read/id/`) && request.method === 'GET') {
-
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           let urlParts = request.url.split('/');
           let id = urlParts[urlParts.length - 1];
@@ -183,16 +182,33 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return of(new HttpResponse({ status: 200, body: mails == null ? false : true }));
       }
 
-      if (request.url.match(/\/message\/\d+$/) && request.method === 'PUT') {
+      if (request.url.match(/\/message\/s\/\d+$/) && request.method === 'PUT') {
         let isUpdated: boolean = false;
         let currentMessage = request.body;
         for (let i = 0; i < messages.length; i++) {
           let message = messages[i];
           if (message.id === currentMessage.id) {
             messages.splice(i, 1);
-            console.log(message.type)
-            if (message.type === "Trash") {
-              currentMessage.type = "Delete";
+            currentMessage.fromType = "Delete";
+            isUpdated = true;
+            this.localStorage.setItem('db.messages', JSON.stringify(_.sortBy(messages, message => message.id)));
+            break;
+          }
+        }
+        if (!isUpdated) {
+          return throwError({ error: { message: 'Admin cannot be Updated.' } });
+        }
+        return of(new HttpResponse({ status: 200 }));
+      }
+      if (request.url.match(/\/message\/i\/\d+$/) && request.method === 'PUT') {
+        let isUpdated: boolean = false;
+        let currentMessage = request.body;
+        for (let i = 0; i < messages.length; i++) {
+          let message = messages[i];
+          if (message.id === currentMessage.id) {
+            messages.splice(i, 1);
+            if (message.toType === "Trash") {
+              currentMessage.toType = "Delete";
               messages.push(currentMessage);
             }
             else {
