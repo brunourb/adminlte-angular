@@ -26,7 +26,7 @@
                 </div>
             </div>  
         </div>
-        <div class="table-responsive mailbox-messages">
+        <div class="table-responsive mailbox-messages" style="padding-left:10px">
             <ngx-datatable class="material" [rows]="rows" [columnMode]="'standard'" [headerHeight]="2"
                 [footerHeight]="45" [rowHeight]="'auto'" [externalPaging]="true" [count]="page.totalElements"
                 [offset]="page.pageNumber" [limit]="page.size" (page)='setPage($event)'
