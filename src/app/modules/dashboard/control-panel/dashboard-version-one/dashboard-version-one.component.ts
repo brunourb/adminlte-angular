@@ -27,7 +27,7 @@ export class DashbardVersionOneComponent implements OnInit {
 
   public barChartLegend = true;
   public barChartType: ChartType = "bar";
-
+  private sendMailRecords: any;
   page = new Page();
   rows = new Array<Message>();
   pageInfo: any;
@@ -41,10 +41,9 @@ export class DashbardVersionOneComponent implements OnInit {
   }
   ngOnInit() {
     this.bindUserDetails();
-    this.bindBarChartLabels();
-    this.bindBarChartOptions();
-    this.bindBarChartData();
-    this.getSendMailsDetails({ offset: 0 });
+    this.getSendMailsDetails({ offset: 0 });this.bindBarChartLabels();
+        this.bindBarChartOptions();
+        this.bindBarChartData();
   }
   bindUserDetails() {
     this.user = JSON.parse(this.localStorage.getItem("userSession"));
@@ -54,12 +53,7 @@ export class DashbardVersionOneComponent implements OnInit {
       responsive: true
     };
   }
-  bindBarChartData() {
-    this.barChartData = [
-      { data: [65, 59, 80, 81, 56, 55, 40], label: "Received Mails" },
-      { data: [28, 48, 40, 19, 86, 27, 90], label: "Sent Mails" }
-    ];
-  }
+
   bindBarChartLabels() {
     this.barChartLabels = [
       "1",
@@ -99,14 +93,26 @@ export class DashbardVersionOneComponent implements OnInit {
         for (let i = 0; i < this.rows.length; i++) {
           this.rows[i].hour = new Date(this.rows[i].time).getHours() + 1;
         }
-        var records = _.countBy(this.rows, "hour");
+        this.sendMailRecords = _.countBy(this.rows, "hour");
+
         for (let i = 1; i < 25; i++) {
-          if (records[i] != null || records[i] != undefined) {
-            console.log(i);
+          if (
+            !(
+              this.sendMailRecords[i] != null ||
+              this.sendMailRecords[i] != undefined
+            )
+          ) {
+            this.sendMailRecords[i] = 0;
           }
         }
-
-        console.log(records);
+        
+        console.log(this.sendMailRecords);
       });
+  }
+  bindBarChartData() {
+    this.barChartData = [
+      { data: [65, 59, 80, 81, 56, 55, 40], label: "Received Mails" },
+      { data: [28, 48, 40, 19, 86, 27, 90], label: "Sent Mails" }
+    ];
   }
 }
