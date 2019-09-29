@@ -52,7 +52,7 @@
             <div class="box-body no-padding">
               <div class="row">
                 <div class="col-md-9 col-sm-8">  
-                  <div  style="display: block;" *ngIf="barChartData"> 
+                  <div  style="display: block;" *ngIf="getRecords()"> 
                     <canvas baseChart 
                     [datasets]="barChartData"
                     [labels]="barChartLabels"
@@ -73,7 +73,7 @@
                     </div>
                     <div class="description-block margin-bottom">
                       <div class="sparkbar pad" data-color="#fff"><canvas width="34" height="25" style="display: inline-block; width: 34px; height: 25px; vertical-align: top;"></canvas></div>
-                      <h5 class="description-header">{{page.totalElements}}</h5>
+                      <h5 class="description-header">{{receivedPage.totalElements}}</h5>
                       <span class="description-text">Mail Received</span>
                     </div>
                     <div class="description-block">

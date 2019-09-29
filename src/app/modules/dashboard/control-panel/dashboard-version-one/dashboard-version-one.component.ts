@@ -25,32 +25,8 @@ export class DashbardVersionOneComponent implements OnInit {
     responsive: true
   };
   public barChartPlugins;
-  public barChartLabels: Label[] = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-    "21",
-    "22",
-    "23",
-    "24"
-  ];
+  public barChartLabels: Label[];
+
   public barChartData: ChartDataSets[] = [];
 
   public barChartLegend = true;
@@ -64,21 +40,28 @@ export class DashbardVersionOneComponent implements OnInit {
   receivedRows = new Array<Message>();
   pageInfo: any;
   records: boolean;
+
+  private records1: boolean;
+  private records2: boolean;
   constructor(
     private messageService: MessageService,
     private localStorage: LocalStorageService
   ) {
     this.page.pageNumber = 0;
     this.page.size = 1000;
+    this.receivedPage.pageNumber = 0;
+    this.receivedPage.size = 1000;
     this.bindUserDetails();
-    this.getSendMailsDetails({ offset: 0 });
-    this.getReceivedMailsDetails({ offset: 0 });
 
     this.bindBarChartLabels();
     this.bindBarChartOptions();
   }
+  getRecords(): boolean {
+    return this.records1 && this.records2;
+  }
   ngOnInit() {
-    this.records = false;
+    this.getSendMailsDetails({ offset: 0 });
+    this.getReceivedMailsDetails({ offset: 0 });
   }
   bindUserDetails() {
     this.user = JSON.parse(this.localStorage.getItem("userSession"));
@@ -125,6 +108,8 @@ export class DashbardVersionOneComponent implements OnInit {
       .subscribe(pagedData => {
         this.page = pagedData.page;
         this.rows = pagedData.data;
+        console.log("this.rows");
+        console.log(this.rows);
         for (let i = 0; i < this.rows.length; i++) {
           this.rows[i].hour = new Date(this.rows[i].time).getHours() + 1;
         }
@@ -143,7 +128,8 @@ export class DashbardVersionOneComponent implements OnInit {
           data: _.values(this.sendMailRecords),
           label: "Sent Mails"
         });
-        console.log(this.barChartData);
+        this.records1 = true;
+        console.log(this.sendMailRecords);
       });
   }
 
@@ -153,14 +139,17 @@ export class DashbardVersionOneComponent implements OnInit {
     this.messageService
       .getMessages(this.receivedPage, this.user.username, "ALL")
       .subscribe(pagedData => {
+        console.log(pagedData);
         this.receivedPage = pagedData.page;
         this.receivedRows = pagedData.data;
-
+        console.log("this.receivedRows");
+        console.log(this.receivedRows);
         for (let i = 0; i < this.receivedRows.length; i++) {
           this.receivedRows[i].hour =
             new Date(this.receivedRows[i].time).getHours() + 1;
+          console.log(new Date(this.receivedRows[i].time).getHours() + 1);
         }
-        this.receivedMailRecords = _.countBy(this.rows, "hour");
+        this.receivedMailRecords = _.countBy(this.receivedRows, "hour");
         for (let i = 0; i < 25; i++) {
           if (
             !(
@@ -176,6 +165,10 @@ export class DashbardVersionOneComponent implements OnInit {
           data: _.values(this.receivedMailRecords),
           label: "Received Mails"
         });
+        this.records2 = true;
+        console.log("Received Mails");
+        console.log(this.receivedMailRecords);
+
         console.log(this.barChartData);
       });
   }
