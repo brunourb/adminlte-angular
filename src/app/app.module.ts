@@ -24,7 +24,9 @@ import { AppRoutingModule } from './app.routing.module';
 
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AceEditorModule } from 'ng2-ace-editor';
+import { ChartsModule } from 'ng2-charts';
 
+import { ChartModule } from 'angular-highcharts';
 @NgModule({
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { AceEditorModule } from 'ng2-ace-editor';
     ReactiveFormsModule,
     CoreModule,
     NgSelectModule,
-    AceEditorModule
+    AceEditorModule,
+    ChartsModule
   ],
   declarations: [
     AppComponent

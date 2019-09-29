@@ -2,6 +2,8 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import $ from 'jquery';
 
 import { AppSettings } from '../../../../core/services/application/app-settings.service'
+// import { ChartsModule } from 'ng2-charts';
+
 @Component({
   selector: 'dashboard-version-one',
   templateUrl: './dashboard-version-one.component.html',
