@@ -101,7 +101,9 @@ export class DashbardVersionOneComponent implements OnInit {
         }
         var records = _.countBy(this.rows, "hour");
         for (let i = 1; i < 25; i++) {
-          console.log(i);
+          if (records[i] != null || records[i] != undefined) {
+            console.log(i);
+          }
         }
 
         console.log(records);
