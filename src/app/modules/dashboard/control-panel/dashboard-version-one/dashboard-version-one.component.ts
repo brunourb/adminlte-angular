@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 import { AppSettings } from "../../../../core/services/application/app-settings.service";
-import { ChartOptions, ChartType, ChartDataSets } from "chart.js"; 
+import { ChartOptions, ChartType, ChartDataSets } from "chart.js";
 import { Label } from "ng2-charts";
 
 @Component({
@@ -10,14 +10,11 @@ import { Label } from "ng2-charts";
 })
 export class DashbardVersionOneComponent implements OnInit {
   public barChartLabels: Label[];
-  public barChartType: ChartType = "bar";
+  public barChartOptions: ChartOption; 
   public barChartLegend = true;
   public barChartPlugins = [];
 
-  public barChartOptions: ChartOptions = {
-    responsive: true
-  };
-
+  public barChartType: ChartType = "bar";
   public barChartData: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: "Received Mails" },
     { data: [28, 48, 40, 19, 86, 27, 90], label: "Sent Mails" }
@@ -27,6 +24,12 @@ export class DashbardVersionOneComponent implements OnInit {
 
   ngOnInit() {
     this.bindBarChartLabels();
+    this.bindBarChartOptions();
+  }
+  bindBarChartOptions() {
+    this.barChartOptions = {
+      responsive: true
+    };
   }
 
   bindBarChartLabels() {
@@ -45,5 +48,4 @@ export class DashbardVersionOneComponent implements OnInit {
       "2017"
     ];
   }
- 
 }
