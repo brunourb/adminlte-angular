@@ -9,27 +9,29 @@ import { Label } from "ng2-charts";
   styleUrls: ["./dashboard-version-one.component.css"]
 })
 export class DashbardVersionOneComponent implements OnInit {
-  public barChartLabels: Label[];
-  public barChartOptions: ChartOption; 
-  public barChartLegend = true;
+  public barChartOptions: ChartOptions;
   public barChartPlugins = [];
+  public barChartLabels: Label[];
+  public barChartData: ChartDataSets[];
 
+  public barChartLegend = true;
   public barChartType: ChartType = "bar";
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: "Received Mails" },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: "Sent Mails" }
-  ];
-
-  constructor(private appSettings: AppSettings) {}
-
+  constructor() {}
   ngOnInit() {
     this.bindBarChartLabels();
     this.bindBarChartOptions();
+    this.bindBarChartData();
   }
   bindBarChartOptions() {
     this.barChartOptions = {
       responsive: true
     };
+  }
+  bindBarChartData() {
+    this.barChartData = [
+      { data: [65, 59, 80, 81, 56, 55, 40], label: "Received Mails" },
+      { data: [28, 48, 40, 19, 86, 27, 90], label: "Sent Mails" }
+    ];
   }
 
   bindBarChartLabels() {
