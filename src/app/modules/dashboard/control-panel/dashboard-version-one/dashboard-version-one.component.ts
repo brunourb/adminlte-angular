@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import $ from 'jquery';
 
-import { AppSettings } from '../../../..//core/services/application/app-settings.service'
+import { AppSettings } from '../../../../core/services/application/app-settings.service'
 @Component({
   selector: 'dashboard-version-one',
   templateUrl: './dashboard-version-one.component.html',
@@ -15,7 +15,7 @@ export class DashbardVersionOneComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.bindCards();
+    this.bindCards(); 
   }
 
   clcikMe() {
