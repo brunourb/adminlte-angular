@@ -52,19 +52,22 @@
             <div class="box-body no-padding">
               <div class="row">
                 <div class="col-md-9 col-sm-8">  
-                  <canvas baseChart 
+                  <div  style="display: block;" *ngIf="barChartData"> 
+                    <canvas baseChart 
                     [datasets]="barChartData"
                     [labels]="barChartLabels"
                     [options]="barChartOptions"
                     [plugins]="barChartPlugins"
                     [legend]="barChartLegend"
                     [chartType]="barChartType">
-                  </canvas>            
+                    </canvas>   
+                  </div>
+                          
                 </div>
                 <div class="col-md-3 col-sm-4">
                   <div class="pad box-pane-right bg-green" style="min-height: 200px">
                     <div class="description-block margin-bottom">
-                      <div class="sparkbar pad" data-color="#fff"><canvas width="34" height="25" style="display: inline-block; width: 34px; height: 25px; vertical-align: top;"></canvas></div>
+                      <div class="sparkbar pad" data-color="#fff"><canvas width="34" height="15" style="display: inline-block; width: 34px; height: 15px; vertical-align: top;"></canvas></div>
                       <h5 class="description-header">{{page.totalElements}}</h5>
                       <span class="description-text">Mail Send</span>
                     </div>
