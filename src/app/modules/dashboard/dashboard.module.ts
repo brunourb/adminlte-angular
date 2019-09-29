@@ -8,7 +8,7 @@ import { DashboardComponent } from './dashboard.component';
 import { CardDetailsModule } from '../../shared/components/card-details/card-details.module';
 import { DashbardControlPanelComponent } from './control-panel/pages/dashboard-control-panel.component'
 import { DashboardRoutingModule } from './dashboard.routing.module'
-
+import { DashbardVersionOneComponent } from './control-panel/dashboard-version-one/dashboard-version-one.component';
 
 @NgModule({
   imports: [
@@ -19,7 +19,8 @@ import { DashboardRoutingModule } from './dashboard.routing.module'
   ],
   declarations: [
     DashboardComponent,
-    DashbardControlPanelComponent
+    DashbardControlPanelComponent,
+    DashbardVersionOneComponent
   ],
 })
 
