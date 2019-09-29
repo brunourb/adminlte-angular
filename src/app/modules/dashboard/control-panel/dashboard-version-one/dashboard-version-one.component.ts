@@ -97,10 +97,14 @@ export class DashbardVersionOneComponent implements OnInit {
         this.page = pagedData.page;
         this.rows = pagedData.data;
         for (let i = 0; i < this.rows.length; i++) {
-          this.rows[i].hour = new Date(this.rows[i].time).getHours()+;
+          this.rows[i].hour = new Date(this.rows[i].time).getHours() + 1;
         }
-        var x = _.countBy(this.rows, "hour");
-        console.log(x);
+        var records = _.countBy(this.rows, "hour");
+        for (let i = 1; i < 25; i++) {
+          console.log(i);
+        }
+
+        console.log(records);
       });
   }
 }
