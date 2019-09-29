@@ -133,7 +133,7 @@ export class DashbardVersionOneComponent implements OnInit {
       });
   }
 
-  getReceivedMailsDetails(pageInfo) {
+  getReceivedMailsDetails(pageInfo) { 
     this.pageInfo = pageInfo;
     this.receivedPage.pageNumber = pageInfo.offset;
     this.messageService

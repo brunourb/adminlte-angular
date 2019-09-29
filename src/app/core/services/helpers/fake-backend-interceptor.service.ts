@@ -210,7 +210,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 ) {
                   console.log(urlParts);
                   messageType = urlParts[4];
-                } else {
+                } else { 
                   if (urlParts[4] == "ALL") {
                     messageType = "ALL";
                   } else {
