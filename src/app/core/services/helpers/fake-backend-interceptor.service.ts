@@ -196,26 +196,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             request.url.match(`/message/to/id/`) &&
             request.method === "GET"
           ) {
-          
             if (
               request.headers.get("Authorization") === "Bearer fake-jwt-token"
             ) {
               let urlParts = request.url.split("/");
               let messageType;
-                
+
               if (urlParts[4] != null || urlParts[4] != undefined) {
                 if (
                   urlParts[4] == "Junk" ||
                   urlParts[4] == "Starred" ||
                   urlParts[4] == "Trash"
-                ) {console.log(urlParts)
+                ) {
+                  console.log(urlParts);
                   messageType = urlParts[4];
                 } else {
                   if (urlParts[4] == "ALL") {
-                  messageType = "ALL";
-                } else {
-                  messageType = "Starred";
-                }
+                    messageType = "ALL";
+                  } else {
+                    messageType = "Starred";
+                  }
                 }
               } else {
                 messageType = "Starred";

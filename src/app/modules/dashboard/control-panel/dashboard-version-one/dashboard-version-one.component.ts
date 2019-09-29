@@ -51,14 +51,17 @@ export class DashbardVersionOneComponent implements OnInit {
     "23",
     "24"
   ];
-  public barChartData: ChartDataSets[];
+  public barChartData: ChartDataSets[] = [];
 
   public barChartLegend = true;
   public barChartType: ChartType = "bar";
   private sendMailRecords: any;
+  private receivedMailRecords: any;
 
   page = new Page();
   rows = new Array<Message>();
+  receivedPage = new Page();
+  receivedRows = new Array<Message>();
   pageInfo: any;
   records: boolean;
   constructor(
@@ -68,9 +71,9 @@ export class DashbardVersionOneComponent implements OnInit {
     this.page.pageNumber = 0;
     this.page.size = 1000;
     this.bindUserDetails();
-    // this.getSendMailsDetails({ offset: 0 });
+    this.getSendMailsDetails({ offset: 0 });
     this.getReceivedMailsDetails({ offset: 0 });
-    
+
     this.bindBarChartLabels();
     this.bindBarChartOptions();
   }
@@ -136,44 +139,44 @@ export class DashbardVersionOneComponent implements OnInit {
             this.sendMailRecords[i] = 0;
           }
         }
-
-        this.bindBarChartData();
+        this.barChartData.push({
+          data: _.values(this.sendMailRecords),
+          label: "Sent Mails"
+        });
         console.log(this.barChartData);
       });
   }
 
   getReceivedMailsDetails(pageInfo) {
     this.pageInfo = pageInfo;
-    this.page.pageNumber = pageInfo.offset;
+    this.receivedPage.pageNumber = pageInfo.offset;
     this.messageService
-      .getMessages(this.page, this.user.username,"ALL")
+      .getMessages(this.receivedPage, this.user.username, "ALL")
       .subscribe(pagedData => {
-        this.page = pagedData.page;
-        this.rows = pagedData.data;
-        console.log( this.rows)
-        for (let i = 0; i < this.rows.length; i++) {
-          this.rows[i].hour = new Date(this.rows[i].time).getHours() + 1;
+        this.receivedPage = pagedData.page;
+        this.receivedRows = pagedData.data;
+
+        for (let i = 0; i < this.receivedRows.length; i++) {
+          this.receivedRows[i].hour =
+            new Date(this.receivedRows[i].time).getHours() + 1;
         }
-        this.sendMailRecords = _.countBy(this.rows, "hour");
+        this.receivedMailRecords = _.countBy(this.rows, "hour");
         for (let i = 0; i < 25; i++) {
           if (
             !(
-              this.sendMailRecords[i] != null ||
-              this.sendMailRecords[i] != undefined
+              this.receivedMailRecords[i] != null ||
+              this.receivedMailRecords[i] != undefined
             )
           ) {
-            this.sendMailRecords[i] = 0;
+            this.receivedMailRecords[i] = 0;
           }
         }
 
-        this.bindBarChartData();
+        this.barChartData.push({
+          data: _.values(this.receivedMailRecords),
+          label: "Received Mails"
+        });
         console.log(this.barChartData);
       });
-  }
-  bindBarChartData() {
-    this.barChartData = [
-      { data: _.values(this.sendMailRecords), label: "Received Mails" },
-      // { data: _.values(this.sendMailRecords), label: "Sent Mails" }
-    ];
   }
 }
