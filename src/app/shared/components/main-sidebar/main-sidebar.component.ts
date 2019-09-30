@@ -146,11 +146,9 @@ export class MainSidebarComponent implements OnInit, AfterViewInit {
       Plugin.call($(this));
     });
   }
-   
+
   onSubmit() {
-    
     if (this.searchForm.invalid) {
-      
       return;
     }
   }
