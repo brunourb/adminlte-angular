@@ -151,9 +151,8 @@ export class MainSidebarComponent implements OnInit, AfterViewInit {
   onSubmit() {
     if (this.searchForm.invalid) {
       return;
-    } else {
-      console.log(this.f.search.value);
-      this.router.navigate(["/search"], { queryParams: { page: this.f.search.value } });
+    } else {  
+      this.router.navigate(["/search"], { queryParams: { q: this.f.search.value } });
     }
   }
 }
