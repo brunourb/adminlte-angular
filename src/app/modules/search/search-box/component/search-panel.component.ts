@@ -11,7 +11,7 @@ export class SearchPanleComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}
   ngOnInit() {
     this.subscriber = this.route.queryParams.subscribe(params => {
-      this.words = params["page"];       
+      this.words = params["page"];
     });
   }
   ngOnDestroy() {

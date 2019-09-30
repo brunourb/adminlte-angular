@@ -26,6 +26,8 @@ import { JsonWebTokenInterceptorProvider } from './services/helpers/json-web-tok
  * fake backend service: interceptors... ends here
  */
 import { EnsureModuleLoadedOnceGuard } from './ensure-module-loaded-once.guard';
+import { SearchService } from './services/application/search.service'; 
+
 
 @NgModule({
   providers: [
@@ -45,7 +47,7 @@ import { EnsureModuleLoadedOnceGuard } from './ensure-module-loaded-once.guard';
     JsonWebTokenInterceptorProvider,
     ErrorInterceptorProvider,
     FakeBackendInterceptorProvider,
-
+SearchService
   ]
 })
 export class CoreModule extends EnsureModuleLoadedOnceGuard {
