@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        component: SearchBoxRootComponent,
+        component: SearchPanleComponent,
         canActivate: [AuthGuard],
         data: {
           breadcrumb: "search",
@@ -37,7 +37,7 @@ const routes: Routes = [
               icon: "fa fa-home",
               show: false
             }
-          },
+          }
           // {
           //   path: "",
           //   redirectTo: "inbox"

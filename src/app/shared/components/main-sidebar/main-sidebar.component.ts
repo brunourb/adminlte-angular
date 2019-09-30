@@ -11,7 +11,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import * as JQuery from "jquery";
 const $ = JQuery.default;
-
+import { Router } from "@angular/router";
 @Component({
   selector: "app-main-sidebar",
   templateUrl: "./main-sidebar.component.html",
@@ -22,7 +22,8 @@ export class MainSidebarComponent implements OnInit, AfterViewInit {
 
   constructor(
     private elementRef: ElementRef,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
   ngOnInit() {
     this.bindSearchFormGroup();
@@ -150,6 +151,9 @@ export class MainSidebarComponent implements OnInit, AfterViewInit {
   onSubmit() {
     if (this.searchForm.invalid) {
       return;
+    } else {
+      console.log(this.f.search.value);
+      this.router.navigate(["/search"], { queryParams: { page: this.f.search.value } });
     }
   }
 }
