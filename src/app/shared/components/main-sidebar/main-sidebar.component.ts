@@ -150,6 +150,7 @@ export class MainSidebarComponent implements OnInit, AfterViewInit {
   onSubmit() {
     
     if (this.searchForm.invalid) {
+      
       return;
     }
   }
