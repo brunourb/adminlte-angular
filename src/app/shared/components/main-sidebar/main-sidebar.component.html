@@ -9,11 +9,15 @@
 				<a href="https://www.linkedin.com/in/genuine-identity/" target="_blank"><i class="fa fa-circle text-success"></i>Online</a>
         </div>
       </div>
-        <form action="#" method="get" class="sidebar-form">
-          <div class="input-group">
-            <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                  <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" autocomplete="off" class="sidebar-form">
+          <div class="input-group"><div class="form-group has-feedback" [ngClass]="{'has-error': (f.search?.invalid && (f.search?.dirty || f.search?.touched)) || submitted && f.search.errors , 'has-success': f.search?.valid && (f.search?.dirty || f.search?.touched)}">
+                <input type='text' 
+                      class="form-control" 
+                        placeholder="Search..." 
+                        formControlName="search">                
+              </div>
+              <span class="input-group-btn">
+                  <button   name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                   </button>
                 </span>
           </div>
