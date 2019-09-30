@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-mail-box-root',
+  selector: 'app-search-box-root',
   template: '<router-outlet></router-outlet>',
 })
-export class SBoxRootComponent implements OnInit {
+export class SearchBoxRootComponent implements OnInit {
   constructor() { }
   ngOnInit() { }
 }
