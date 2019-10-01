@@ -34,9 +34,17 @@
 								{{value}}
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="password" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="180">
+						<ngx-datatable-column name="password" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="150">
 							<ng-template ngx-datatable-header-template>
 								password
+							</ng-template>
+							<ng-template>
+								{{value}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="status" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="80">
+							<ng-template ngx-datatable-header-template>
+								status
 							</ng-template>
 							<ng-template>
 								{{value}}

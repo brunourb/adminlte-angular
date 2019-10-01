@@ -1,22 +1,33 @@
-import { Injectable } from '@angular/core'; 
-import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, Input, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewEncapsulation
+} from "@angular/core";
 
-import { map } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { map } from "rxjs/operators";
+import { Observable, of } from "rxjs";
+import { first } from "rxjs/operators";
 
-import { User } from '../../../shared/models/index';
-import { PagedData, CorporateEmployee, Page } from '../../../shared/models/page';
-import { NgSelectModule, NgOption } from '@ng-select/ng-select';
+import { User } from "../../../shared/models/index"; 
+import {
+  PagedData,
+  CorporateEmployee,
+  Page
+} from "../../../shared/models/page";
+import { NgSelectModule, NgOption } from "@ng-select/ng-select";
 
 @Injectable()
 export class UserService {
   users: User[];
   private usersInOption: NgOption[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAll() {
     return this.http.get<User[]>(`/users`);
@@ -47,7 +58,7 @@ export class UserService {
     return this.getAll().flatMap(data => {
       this.users = data;
       return of(data).pipe(map(data => this.getPagedData(page)));
-    })
+    });
   }
 
   /**
@@ -60,10 +71,10 @@ export class UserService {
     page.totalElements = this.users.length;
     page.totalPages = page.totalElements / page.size;
     const start = page.pageNumber * page.size;
-    const end = Math.min((start + page.size), page.totalElements);
+    const end = Math.min(start + page.size, page.totalElements);
     for (let i = start; i < end; i++) {
       const jsonObj = this.users[i];
-      const user = new User(
+      const user = new User(  
         jsonObj.username,
         jsonObj.password,
         jsonObj.firstName,
@@ -71,7 +82,9 @@ export class UserService {
         jsonObj.education,
         jsonObj.skills,
         jsonObj.team,
-        jsonObj.id);
+        jsonObj.status,
+        jsonObj.id
+      );
       pagedData.data.push(user);
     }
     pagedData.page = page;

@@ -13,6 +13,7 @@ import { delay, mergeMap, materialize, dematerialize } from "rxjs/operators";
 import { _ } from "lodash";
 import { UserSessionService } from "../../../core/services/application/user-session.service";
 import { LocalStorageService } from "../../../core/services/helpers/local-storage.service";
+import { User, Status } from "../../../shared/models/user";
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -39,7 +40,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             let filteredUsers = users.filter(user => {
               return (
                 user.username === request.body.username &&
-                user.password === request.body.password
+                user.password === request.body.password &&
+                user.status == "Active"
               );
             });
             if (filteredUsers.length) {
@@ -50,8 +52,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 team: user.team,
-                token: "fake-jwt-token"
+                token: "fake-jwt-token",
+                status: user.status
               };
+              console.log(body);
               return of(new HttpResponse({ status: 200, body: body }));
             } else {
               return throwError({
@@ -124,14 +128,23 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               for (let i = 0; i < users.length; i++) {
                 let user = users[i];
                 if (user.id === id) {
+                  user.status = "InActive";
                   users.splice(i, 1);
+                  users.push(user);
                   this.localStorage.setItem(
                     "db.users",
                     JSON.stringify(_.sortBy(users, user => user.id))
                   );
-                  // this.localStorage.setItem('db.users', null);
                   break;
                 }
+                // if (user.id === id) {
+                //   users.splice(i, 1);
+                //   this.localStorage.setItem(
+                //     "db.users",
+                //     JSON.stringify(_.sortBy(users, user => user.id))
+                //   );
+                //   break;
+                // }
               }
               return of(new HttpResponse({ status: 200 }));
             } else {
@@ -210,7 +223,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 ) {
                   console.log(urlParts);
                   messageType = urlParts[4];
-                } else { 
+                } else {
                   if (urlParts[4] == "ALL") {
                     messageType = "ALL";
                   } else {
@@ -230,7 +243,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   message.toStatus == "Active"
                 );
               });
-             
+
               return of(
                 new HttpResponse({
                   status: 200,

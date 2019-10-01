@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    let user = new User(this.f.email.value, this.f.password.value, this.f.firstName.value, this.f.lastName.value, "", [], "Friend", 1);
+    let user = new User(this.f.email.value, this.f.password.value, this.f.firstName.value, this.f.lastName.value, "", [], "Friend", "Active",1);
     this.userService.register(user)
       .pipe(first())
       .subscribe(

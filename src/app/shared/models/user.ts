@@ -1,5 +1,5 @@
-
-export class User { 
+export type Status = "Active" | "InActive";
+export class User {
   username: string;
   password: string;
   firstName: string;
@@ -9,8 +9,9 @@ export class User {
   skillIds: number[];
   id?: number;
   imgSource: string;
+  status: Status;
 
-  constructor(
+  constructor( 
     username: string,
     password: string,
     firstName: string,
@@ -18,7 +19,8 @@ export class User {
     education: string,
     skillIds: number[],
     team: string,
-    id?: number
+    Status: Status,
+    id?: number 
   ) {
     this.id = id;
     this.username = username;
@@ -29,5 +31,6 @@ export class User {
     this.skillIds = skillIds;
     this.team = team;
     this.imgSource = "https://github.com/Genuine-Identity.png";
+    this.status = Status;
   }
 }
