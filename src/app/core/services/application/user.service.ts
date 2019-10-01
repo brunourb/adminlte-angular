@@ -14,7 +14,7 @@ import { map } from "rxjs/operators";
 import { Observable, of } from "rxjs";
 import { first } from "rxjs/operators";
 
-import { User } from "../../../shared/models/index"; 
+import { User } from "../../../shared/models/index";
 import {
   PagedData,
   CorporateEmployee,
@@ -74,7 +74,7 @@ export class UserService {
     const end = Math.min(start + page.size, page.totalElements);
     for (let i = start; i < end; i++) {
       const jsonObj = this.users[i];
-      const user = new User(  
+      const user = new User(
         jsonObj.username,
         jsonObj.password,
         jsonObj.firstName,

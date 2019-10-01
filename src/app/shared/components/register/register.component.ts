@@ -1,18 +1,25 @@
-import { Component, Input, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewEncapsulation
+} from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
-import { first } from 'rxjs/operators';
-import { UserService } from '../../../core/services/application/user.service';
-import { User } from '../../models/index';
-import { AlertType, Alert } from '../../models/all';
-import { Message } from '../../models/message';
-import { MessageService } from '../../../core/services/application/message.service';
+import { first } from "rxjs/operators";
+import { UserService } from "../../../core/services/application/user.service";
+import { User } from "../../models/index";
+import { AlertType, Alert } from "../../models/all";
+import { Message } from "../../models/message";
+import { MessageService } from "../../../core/services/application/message.service";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  selector: "app-register",
+  templateUrl: "./register.component.html",
+  styleUrls: ["./register.component.css"],
   encapsulation: ViewEncapsulation.None
 })
 export class RegisterComponent implements OnInit {
@@ -20,12 +27,13 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-    private messageService: MessageService) {
-  }
+    private messageService: MessageService
+  ) {}
 
   ngOnInit() {
     this.bindRegistrationFormGroup();
@@ -33,10 +41,10 @@ export class RegisterComponent implements OnInit {
 
   bindRegistrationFormGroup() {
     this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      firstName: ["", Validators.required],
+      lastName: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -50,17 +58,36 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    let user = new User(this.f.email.value, this.f.password.value, this.f.firstName.value, this.f.lastName.value, "", [], "Friend", "Active",1);
-    this.userService.register(user)
+    let user = new User(
+      this.f.email.value,
+      this.f.password.value,
+      this.f.firstName.value,
+      this.f.lastName.value,
+      "",
+      [],
+      "Friend",
+      "Active",
+      1
+    );
+    this.userService
+      .register(user)
       .pipe(first())
       .subscribe(
         data => {
-          this.alert = new Alert(AlertType.Success, "Success!", " Registered Successfully!!");
+          this.alert = new Alert(
+            AlertType.Success,
+            "Success!",
+            " Registered Successfully!!"
+          );
           this.sendJoiningMails(thisObject);
           this.sendSpamMails(thisObject);
         },
         error => {
-          this.alert = new Alert(AlertType.Error, "Failure!", `Registration Failure:-  ${error}`);
+          this.alert = new Alert(
+            AlertType.Error,
+            "Failure!",
+            `Registration Failure:-  ${error}`
+          );
         }
       );
   }
@@ -82,9 +109,10 @@ export class RegisterComponent implements OnInit {
       suggestion: "Well Come !!!!",
       imgSource: "https://github.com/Genuine-Identity.png",
       toStatus: "Active",
-      fromStatus: "Active",
+      fromStatus: "Active"
     };
-    this.messageService.register(message)
+    this.messageService
+      .register(message)
       .pipe(first())
       .subscribe(
         data => {
@@ -112,9 +140,10 @@ export class RegisterComponent implements OnInit {
       suggestion: "Well Come Spam Mail !!!!",
       imgSource: "https://github.com/Genuine-Identity.png",
       toStatus: "Active",
-      fromStatus: "Active",
+      fromStatus: "Active"
     };
-    this.messageService.register(message)
+    this.messageService
+      .register(message)
       .pipe(first())
       .subscribe(
         data => {
