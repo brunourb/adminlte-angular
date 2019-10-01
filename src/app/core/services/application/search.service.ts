@@ -10,25 +10,16 @@ export class SearchService {
   constructor(private _http: HttpClient) {}
 
   public searchRepositoriesByName(name: string): Observable<Object> {
-    const url = this._generateSearchInRepositoriesUrl(name);
-    let headers = new HttpHeaders();
-    headers.append("Content-Type", "application/json");
-    headers.append(
-      "Authorization",
-      "Basic dXN1YXJpb09wZW5UZWNoOm9wZW5UZWNoJkRlbFNvbDE5OTUyMDE2"
-    );
-    
-    return this._http.get(url, { withCredentials: true, headers: headers });
+    const url = this._generateSearchInRepositoriesUrl(name);    
+    return this._http.get(url);
   }
 
   public getRepositoryIssues(owner: string, repo: string): Observable<Object> {
     const url: string = this._generateRepositoryIssuesUrl(owner, repo);
-
     return this._http.get(url);
   }
 
-  public getRepositoryByOwnerAndRepo(
-    owner: string,
+  public getRepositoryByOwnerAndRepo(    owner: string,
     repo: string
   ): Observable<Object> {
     const url: string = this._generateRepositoryUrl(owner, repo);

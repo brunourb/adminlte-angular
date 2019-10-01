@@ -23,24 +23,15 @@ export class SearchPanleComponent implements OnInit {
       this.words = params["q"];
       this.searchService.searchRepositoriesByName(this.words).subscribe(
         (data: any) => {
-          // this._loaderService.setVisiblility(false);
-          // this.searchSubmitted = true;
           const { total_count: totalCount, items } = data;
 
           if (totalCount > 0) {
-            // this.repositoryList = items;
           } else {
-            // this.repositoryList = [];
-            // this.error =
             "Not found. Please try again or use a different name is the search input above.";
           }
         },
-        // (err: HttpErrorResponse) => {
         (err: any) => {
-          // this._loaderService.setVisiblility(false);
-          // this.searchSubmitted = true;
-          // this.error = err.statusText;
-          console.log(err)
+          console.log(err);
         }
       );
     });
@@ -48,5 +39,4 @@ export class SearchPanleComponent implements OnInit {
   ngOnDestroy() {
     this.subscriber.unsubscribe();
   }
- 
 }
