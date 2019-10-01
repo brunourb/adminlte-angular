@@ -1,33 +1,50 @@
-import { Injectable } from "@angular/core";
-// import { Http } from "@angular/http";
+import { Injectable, Inject } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/debounceTime";
-import "rxjs/add/operator/distinctUntilChanged";
-import "rxjs/add/operator/switchMap";
 
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpClientModule
-} from "@angular/common/http";
+const SEARCH_ITEMS_PER_PAGE = 1000;
+const ISSUES_ITEMS_PER_PAGE = 100;
 
 @Injectable()
 export class SearchService {
-  baseUrl: string = "https://api.cdnjs.com/libraries";
-  queryUrl: string = "?search=";
-  httpOptions = {
-    headers: new HttpHeaders({
-      "Access-Control-Allow-Origin": "*"
-    })
-  };
-  constructor(private http: HttpClient) {}
+  constructor(private _http: HttpClient) {}
 
-  public search(key): Observable<any> {
-    return this.http.get(
-      "https://www.googleapis.com/customsearch/v1?key=AIzaSyD6vu4LBh19zdXHhLItH-NEGbEZn38efIQ&cx=017576662512468239146:omuauf_lfve&q=" +
-        key +
-        "&callback=hndlr"
+  public searchRepositoriesByName(name: string): Observable<Object> {
+    const url = this._generateSearchInRepositoriesUrl(name);
+    let headers = new HttpHeaders();
+    headers.append("Content-Type", "application/json");
+    headers.append(
+      "Authorization",
+      "Basic dXN1YXJpb09wZW5UZWNoOm9wZW5UZWNoJkRlbFNvbDE5OTUyMDE2"
     );
+    
+    return this._http.get(url, { withCredentials: true, headers: headers });
+  }
+
+  public getRepositoryIssues(owner: string, repo: string): Observable<Object> {
+    const url: string = this._generateRepositoryIssuesUrl(owner, repo);
+
+    return this._http.get(url);
+  }
+
+  public getRepositoryByOwnerAndRepo(
+    owner: string,
+    repo: string
+  ): Observable<Object> {
+    const url: string = this._generateRepositoryUrl(owner, repo);
+
+    return this._http.get(url);
+  }
+
+  private _generateSearchInRepositoriesUrl(name: string): string {
+    return `https://api.github.com/search/repositories?q=${name}&per_page=${SEARCH_ITEMS_PER_PAGE}`;
+  }
+
+  private _generateRepositoryIssuesUrl(owner: string, repo: string): string {
+    return `https://api.github.com/repos/${owner}/${repo}/issues?&per_page=${ISSUES_ITEMS_PER_PAGE}`;
+  }
+
+  private _generateRepositoryUrl(owner: string, repo: string) {
+    return `https://api.github.com/repos/${owner}/${repo}`;
   }
 }
