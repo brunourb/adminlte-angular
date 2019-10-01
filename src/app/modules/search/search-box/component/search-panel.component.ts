@@ -12,13 +12,12 @@ export class SearchPanleComponent implements OnInit {
   private words: string;
   private subscriber: any;
   results: Object;
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private searchService: SearchService
   ) {}
-  ngOnInit() {
+  ngOnInit() { 
     this.subscriber = this.route.queryParams.subscribe(params => {
       this.words = params["q"];
       this.searchService.searchRepositoriesByName(this.words).subscribe(

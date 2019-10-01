@@ -8,9 +8,8 @@ const ISSUES_ITEMS_PER_PAGE = 100;
 @Injectable()
 export class SearchService {
   constructor(private _http: HttpClient) {}
-
   public searchRepositoriesByName(name: string): Observable<Object> {
-    const url = this._generateSearchInRepositoriesUrl(name);    
+    const url = this._generateSearchInRepositoriesUrl(name);
     return this._http.get(url);
   }
 
@@ -19,7 +18,8 @@ export class SearchService {
     return this._http.get(url);
   }
 
-  public getRepositoryByOwnerAndRepo(    owner: string,
+  public getRepositoryByOwnerAndRepo(
+    owner: string,
     repo: string
   ): Observable<Object> {
     const url: string = this._generateRepositoryUrl(owner, repo);
