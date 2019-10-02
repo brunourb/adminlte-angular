@@ -7,17 +7,17 @@ import { UserSessionService } from "../../../core/services/application/user-sess
 @Injectable()
 export class LoggerService {
   private basePath: string = "/log";
-  private user: string;
+  private userName: string;
   constructor(
     private db: AngularFirestore,
     private userSession: UserSessionService
   ) {
-    this.user = this.userSession.getUser();
+    this.userName = this.userSession.getUserName();
   }
   private;
   public Verbose(string, description: string): void {
     this.db.collection(this.basePath).add({
-      userId: this.user,
+      userName: this.userName,
       description: description,
       timeStamp: new Date(),
       severity: Severity[Severity.Verbose]
@@ -25,15 +25,15 @@ export class LoggerService {
   }
   public Debug(description: string): void {
     this.db.collection(this.basePath).add({
-      userId: this.user,
+      userName: this.userName,
       description: description,
       timeStamp: new Date(),
       severity: Severity[Severity.Debug]
     });
   }
-  public Information(description: string): void {
+  public Information(description: string): void {     
     this.db.collection(this.basePath).add({
-      userId: this.user,
+      userName: this.userName,
       description: description,
       timeStamp: new Date(),
       severity: Severity[Severity.Information]
@@ -41,7 +41,7 @@ export class LoggerService {
   }
   public Warning(description: string): void {
     this.db.collection(this.basePath).add({
-      userId: this.user,
+      userName: this.userName,
       description: description,
       timeStamp: new Date(),
       severity: Severity[Severity.Warning]
@@ -49,7 +49,7 @@ export class LoggerService {
   }
   public Error(description: string): void {
     this.db.collection(this.basePath).add({
-      userId: this.user,
+      userName: this.userName,
       description: description,
       timeStamp: new Date(),
       severity: Severity[Severity.Error]
@@ -57,7 +57,7 @@ export class LoggerService {
   }
   public Fatal(description: string): void {
     this.db.collection(this.basePath).add({
-      userId: this.user,
+      userName: this.userName,
       description: description,
       timeStamp: new Date(),
       severity: Severity[Severity.Fatal]

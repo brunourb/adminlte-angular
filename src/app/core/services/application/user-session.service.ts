@@ -7,9 +7,10 @@ export class UserSessionService {
   getUserSession(): any {
     return this.localStorage.getItem("userSession");
   }
-  getUser(): string {
+  getUserName(): string {
     let user = this.getUserSession();
-    return user == null || user == undefined ? "System" : user.username;
+    return user == null || user == undefined
+      ? "System@fakemail.com"
+      : JSON.parse(user).username;
   }
 }
- 

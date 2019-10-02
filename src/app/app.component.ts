@@ -35,18 +35,17 @@ export class AppComponent implements OnInit {
     private localStorage: LocalStorageService,
     private log: LoggerService
   ) {}
- 
-  ngOnInit() { 
+
+  ngOnInit() {
     // localStorage.clear();
     // this.localStorage.setItem('db.message', null);
     // this.localStorage.setItem('db.messages', null);
     this.initFakeBackendDatabase();
-    
     this.log.Information("Well Come!!!!!!!");
   }
 
-  private initFakeBackendDatabase(): void { 
-    this.initUserDatabase(); 
+  private initFakeBackendDatabase(): void {
+    this.initUserDatabase();
     this.initMessageDatabase();
   }
 
@@ -223,7 +222,6 @@ export class AppComponent implements OnInit {
       "Active",
       8
     );
-
     this.userService
       .register(info)
       .pipe(first())

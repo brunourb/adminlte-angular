@@ -5,10 +5,10 @@ export enum Severity {
   Warning = 3,
   Error = 4,
   Fatal = 5
-} 
+}
 export interface Log {
-  userId: string;
+  userName: string;
   description: string;
-  timeStamp: Date; 
+  timeStamp: Date;
   severity: Severity;
 }
