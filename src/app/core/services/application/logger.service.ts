@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { AngularFirestore } from "@angular/fire/firestore";
 
-import { Log, Severity, User } from "../../../shared/models/index"; 
+import { Log, Severity, User } from "../../../shared/models/index";
 import { UserSessionService } from "../../../core/services/application/user-session.service";
 @Injectable()
 export class LoggerService {
@@ -31,7 +31,7 @@ export class LoggerService {
       severity: Severity[Severity.Debug]
     });
   }
-  public Information(description: string): void {     
+  public Information(description: string): void {
     this.db.collection(this.basePath).add({
       userName: this.userName,
       description: description,
