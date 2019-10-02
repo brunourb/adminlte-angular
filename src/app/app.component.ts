@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
     // this.localStorage.setItem('db.messages', null);
     this.initFakeBackendDatabase();
     
-    this.log.Information("Well Come!!!");
+    this.log.Information("1 Come!!!!!!!");
   }
 
   private initFakeBackendDatabase(): void {

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { AngularFirestore } from "@angular/fire/firestore";
 
-import { Log, Severity, User } from "../../../shared/models/index";
+import { Log, Severity, User } from "../../../shared/models/index"; 
 import { UserSessionService } from "../../../core/services/application/user-session.service";
 @Injectable()
 export class LoggerService {
@@ -20,7 +20,7 @@ export class LoggerService {
       userId: this.user,
       description: description,
       timeStamp: new Date(),
-      severity: Severity.Verbose
+      severity: Severity[Severity.Verbose]
     });
   }
   public Debug(description: string): void {
@@ -28,7 +28,7 @@ export class LoggerService {
       userId: this.user,
       description: description,
       timeStamp: new Date(),
-      severity: Severity.Debug
+      severity: Severity[Severity.Debug]
     });
   }
   public Information(description: string): void {
@@ -36,7 +36,7 @@ export class LoggerService {
       userId: this.user,
       description: description,
       timeStamp: new Date(),
-      severity: Severity.Information
+      severity: Severity[Severity.Information]
     });
   }
   public Warning(description: string): void {
@@ -44,7 +44,7 @@ export class LoggerService {
       userId: this.user,
       description: description,
       timeStamp: new Date(),
-      severity: Severity.Warning
+      severity: Severity[Severity.Warning]
     });
   }
   public Error(description: string): void {
@@ -52,7 +52,7 @@ export class LoggerService {
       userId: this.user,
       description: description,
       timeStamp: new Date(),
-      severity: Severity.Error
+      severity: Severity[Severity.Error]
     });
   }
   public Fatal(description: string): void {
@@ -60,8 +60,7 @@ export class LoggerService {
       userId: this.user,
       description: description,
       timeStamp: new Date(),
-      severity: Severity.Fatal
+      severity: Severity[Severity.Fatal]
     });
   }
 }
- 
