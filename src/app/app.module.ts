@@ -25,6 +25,11 @@ import { AppRoutingModule } from "./app.routing.module";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { AceEditorModule } from "ng2-ace-editor";
 
+import { AngularFireModule } from "angularfire2";
+import { AngularFireDatabaseModule } from "angularfire2/database";
+import { environment } from "./core/environment";
+import { AngularFirestoreModule } from "angularfire2/firestore";
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -35,7 +40,13 @@ import { AceEditorModule } from "ng2-ace-editor";
     ReactiveFormsModule,
     CoreModule,
     NgSelectModule,
-    AceEditorModule
+    AceEditorModule,
+    AngularFireModule.initializeApp(
+      environment.firebaseConfig,
+      "stackblitz-firebase-database"
+    ),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent]

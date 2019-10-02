@@ -26,7 +26,7 @@ import { JsonWebTokenInterceptorProvider } from "./services/helpers/json-web-tok
  */
 import { EnsureModuleLoadedOnceGuard } from "./ensure-module-loaded-once.guard";
 import { SearchService } from "./services/application/search.service";
-
+import { LoggerService } from "./services/application/logger.service";
 @NgModule({
   providers: [
     AppSettings,
@@ -37,6 +37,7 @@ import { SearchService } from "./services/application/search.service";
     MessageService,
     NotificationService,
     SearchService,
+    LoggerService,
 
     AuthGuardService,
     UserSessionService,

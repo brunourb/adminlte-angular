@@ -6,6 +6,7 @@ import { User } from "./shared/models/index";
 import { UserService } from "./core/services/application/user.service";
 import { MessageService } from "./core/services/application/message.service";
 import { SkillService } from "./core/services/application/skill.service";
+import { LoggerService } from "./core/services/application/logger.service";
 import {
   NavigationCancel,
   Event,
@@ -16,7 +17,9 @@ import {
   ActivatedRoute
 } from "@angular/router";
 import { Message } from "./shared/models/message";
+import { Log, Severity } from "./shared/models/index";
 import { LocalStorageService } from "./core/services/helpers/local-storage.service";
+
 @Component({
   selector: "my-app",
   templateUrl: "./app.component.html",
@@ -29,14 +32,17 @@ export class AppComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private messageService: MessageService,
-    private localStorage: LocalStorageService
+    private localStorage: LocalStorageService,
+    private log: LoggerService
   ) {}
 
-  ngOnInit() {
+  ngOnInit() { 
     // localStorage.clear();
     // this.localStorage.setItem('db.message', null);
     // this.localStorage.setItem('db.messages', null);
     this.initFakeBackendDatabase();
+    
+    this.log.Information("Well Come!!!");
   }
 
   private initFakeBackendDatabase(): void {

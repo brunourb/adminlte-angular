@@ -1,5 +1,4 @@
 export const environment = {
-  production: false,
   firebaseConfig: {
     apiKey: "AIzaSyC3yy_-Ag_uA_ROcfxIWoilsFkvEfYEQYE",
     authDomain: "stackblitz-firebase-database.firebaseapp.com",
