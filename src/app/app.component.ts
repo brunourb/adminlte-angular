@@ -17,7 +17,7 @@ import {
   ActivatedRoute
 } from "@angular/router";
 import { Message } from "./shared/models/message";
-import { Log, Severity } from "./shared/models/index";
+
 import { LocalStorageService } from "./core/services/helpers/local-storage.service";
 
 @Component({
@@ -35,18 +35,18 @@ export class AppComponent implements OnInit {
     private localStorage: LocalStorageService,
     private log: LoggerService
   ) {}
-
+ 
   ngOnInit() { 
     // localStorage.clear();
     // this.localStorage.setItem('db.message', null);
     // this.localStorage.setItem('db.messages', null);
     this.initFakeBackendDatabase();
     
-    this.log.Information("1 Come!!!!!!!");
+    this.log.Information("Well Come!!!!!!!");
   }
 
-  private initFakeBackendDatabase(): void {
-    this.initUserDatabase();
+  private initFakeBackendDatabase(): void { 
+    this.initUserDatabase(); 
     this.initMessageDatabase();
   }
 
