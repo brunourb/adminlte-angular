@@ -5,7 +5,7 @@ import { first } from "rxjs/operators";
 
 import { AuthService } from "../../../../core/services/application/auth.service";
 import { LoggerService } from "../../../../core/services/application/logger.service";
-@Component({
+@Component({ 
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"]

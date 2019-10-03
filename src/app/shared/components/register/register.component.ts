@@ -15,7 +15,7 @@ import { User } from "../../models/index";
 import { AlertType, Alert } from "../../models/all";
 import { Message } from "../../models/message";
 import { MessageService } from "../../../core/services/application/message.service";
-
+import { LoggerService } from "../../../core/services/application/logger.service";
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
@@ -32,7 +32,8 @@ export class RegisterComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private log: LoggerService
   ) {}
 
   ngOnInit() {
@@ -81,12 +82,19 @@ export class RegisterComponent implements OnInit {
           );
           this.sendJoiningMails(thisObject);
           this.sendSpamMails(thisObject);
+
+          this.log.Information(
+            ` User Registered Successfully!! <br/>${JSON.stringify(user)} )`
+          );
         },
         error => {
           this.alert = new Alert(
             AlertType.Error,
             "Failure!",
             `Registration Failure:-  ${error}`
+          );
+          this.log.Error(
+            ` Registration Failure!! ${error} <br/>${JSON.stringify(user)} )`
           );
         }
       );
