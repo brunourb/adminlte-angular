@@ -1,6 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { AngularFirestore } from "@angular/fire/firestore";
+import {
+  AngularFirestore,
+  AngularFirestoreCollection
+} from "@angular/fire/firestore";
 
 import { Log, Severity, User } from "../../../shared/models/index";
 import { UserSessionService } from "../../../core/services/application/user-session.service";
@@ -8,6 +11,7 @@ import { UserSessionService } from "../../../core/services/application/user-sess
 export class LoggerService {
   private basePath: string = "/log";
   private userName: string;
+
   constructor(
     private db: AngularFirestore,
     private userSession: UserSessionService
@@ -62,5 +66,8 @@ export class LoggerService {
       timeStamp: new Date(),
       severity: Severity[Severity.Fatal]
     });
+  }
+  public get(): Observable<any[]> {
+    return this.db.collection(this.basePath).valueChanges();
   }
 }

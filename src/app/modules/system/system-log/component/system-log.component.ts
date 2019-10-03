@@ -9,6 +9,11 @@ import { LoggerService } from "../../.../../../../core/services/application/logg
 })
 export class SystemLogComponent implements OnInit {
   constructor(private log: LoggerService) {}
-  ngOnInit() {}
-  ngOnDestroy() {}
+  ngOnInit() {
+    this.bindLog();
+  }
+  bindLog() {
+    var x = this.log.get();
+    console.log(x);
+  }
 }
