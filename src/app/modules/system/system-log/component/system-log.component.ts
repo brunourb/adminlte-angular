@@ -17,12 +17,16 @@ export class SystemLogComponent implements OnInit {
     this.page.size = 10;
   }
   ngOnInit() {
-    
     this.bindLog();
   }
   bindLog() {
-    this.loadingIndicator = true;
-    this.rows = this.log.get();
-    this.loadingIndicator = false;
+    try {
+      // this.loadingIndicator = true;
+      this.rows = this.log.get();
+     
+      // this.loadingIndicator = false;
+    } catch (e) {
+      console.log("e");
+    }
   }
 }
