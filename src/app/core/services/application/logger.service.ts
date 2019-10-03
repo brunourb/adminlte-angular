@@ -71,6 +71,8 @@ export class LoggerService {
     });
   }
   public get(): Observable<any[]> {
-    return this.db.collection<Log>(this.basePath).valueChanges();
+    return this.db
+      .collection<Log>(this.basePath, ref => ref.orderBy("timeStamp", "desc"))
+      .valueChanges();
   }
 }
