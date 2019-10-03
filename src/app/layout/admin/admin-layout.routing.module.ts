@@ -71,6 +71,20 @@ const routes: Routes = [
           icon: "fa fa-home",
           show: false
         }
+      },
+      {
+        path: "system",
+        loadChildren: "../../modules/system/system.module#SystemModule",
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumb: "System",
+          breadcrumbs: "System",
+          title: "System Title",
+          smallText: "System Small Text",
+          isHome: true,
+          icon: "fa fa-home",
+          show: false
+        }
       }
     ]
   }
