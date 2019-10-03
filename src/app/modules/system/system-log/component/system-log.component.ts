@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { LoggerService } from "../../.../../../../core/services/application/logger.service";
 
 @Component({
   selector: "app-system-log",
@@ -7,7 +8,7 @@ import { ActivatedRoute, Router } from "@angular/router";
   styleUrls: ["./system-log.component.css"]
 })
 export class SystemLogComponent implements OnInit {
-  constructor() {}
+  constructor(private log: LoggerService) {}
   ngOnInit() {}
   ngOnDestroy() {}
 }
