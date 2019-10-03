@@ -16,8 +16,7 @@
 								{{value}}
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="description" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true"
-						 [width]="180">
+						<ngx-datatable-column name="description" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true">
 							<ng-template ngx-datatable-header-template>
 								Description
 							</ng-template>
@@ -25,7 +24,7 @@
 								{{value}}
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="severity" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="180">
+						<ngx-datatable-column name="severity" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="80">
 							<ng-template ngx-datatable-header-template>
 								Severity
 							</ng-template>
@@ -33,12 +32,12 @@
 								{{value}}
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column prop="timeStamp" [width]="120">
+						<ngx-datatable-column prop="timeStamp" [width]="80">
 							<ng-template let-column="column" ngx-datatable-header-template>
 								TimeStamp
 							</ng-template>
 							<ng-template let-value="value" ngx-datatable-cell-template>
-								{{value.toDate() | date: 'MM/dd/yyyy'}}
+								{{value.toDate() | date: 'medium'}}
 							</ng-template>
 						</ngx-datatable-column>
 					</ngx-datatable>
