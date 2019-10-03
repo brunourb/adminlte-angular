@@ -54,7 +54,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onSignOut() {
-    
     this.log.Information(
       `User (${JSON.stringify(this.user.username)}) Logged Out!!`
     );
