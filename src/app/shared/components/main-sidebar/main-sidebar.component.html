@@ -71,6 +71,20 @@
               <a [routerLink]="'/mail/inbox'"><i class="fa fa-envelope"></i>Mail-Box</a>
             </li>
           </ul>
+        </li> 
+        <li class="treeview" [routerLinkActive]="'active'">
+          <a style="cursor:pointer">
+            <i class="fa fa-gears"></i>
+            <span>System</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li [routerLinkActive]="'active'">
+              <a [routerLink]="'/system/log'"><i class="fa fa-envelope"></i>Log</a>
+            </li>
+          </ul>
         </li>        
       </ul>
     </section>

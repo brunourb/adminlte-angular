@@ -1,10 +1,9 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuardService as AuthGuard } from "../../core/services/guards/auth-guard.service";
-import { SystemComponent } from "./system.component";
-// import { SearchPanleComponent } from "./search-box/component/search-panel.component";
 
-// import { SearchBoxRootComponent } from "./search-box/search-box-root.component";
+import { SystemComponent } from "./system.component";
+import { SystemLogComponent } from "./system-log/component/system-log.component";
 
 const routes: Routes = [
   {
@@ -26,12 +25,16 @@ const routes: Routes = [
         },
         children: [
           {
+            path: "",
+            redirectTo: "log"
+          },
+          {
             path: "log",
-            component: SystemComponent,
+            component: SystemLogComponent,
             canActivate: [AuthGuard],
             data: {
-              title: "Inbox",
-              smallText: "13 New Messages",
+              title: "Log",
+              smallText: "Log small text",
               isHome: true,
               icon: "fa fa-home",
               show: false
@@ -46,4 +49,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class SearchRoutingModule {}
+export class SystemRoutingModule {}
