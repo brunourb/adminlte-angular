@@ -13,7 +13,8 @@ export class LoggerService {
   private basePath: string = "/log";
   private userName: string;
   private angularFirestoreCollection: AngularFirestoreCollection<Log>;
-  Logs: Observable<Log[]>;
+  private Logs: Observable<Log[]>;
+
   constructor(
     private db: AngularFirestore,
     private userSession: UserSessionService
