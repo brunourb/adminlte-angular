@@ -56,7 +56,7 @@ export class LoggerService {
   }
   public Error(description: string): void {
     this.db.collection(this.basePath).add({
-      userName: this.userName,
+      userName: this.userSession.getUserName(),
       description: description,
       timeStamp: new Date(),
       severity: Severity[Severity.Error]

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { LoggerService } from "../../.../../../../core/services/application/logger.service";
 import { Observable } from "rxjs/Observable";
-import { PagedData, Page } from "../../../../shared/models/page"; 
+import { PagedData, Page } from "../../../../shared/models/page";
 @Component({
   selector: "app-system-log",
   templateUrl: "./system-log.component.html",
@@ -17,6 +17,7 @@ export class SystemLogComponent implements OnInit {
     this.page.size = 10;
   }
   ngOnInit() {
+    
     this.bindLog();
   }
   bindLog() {

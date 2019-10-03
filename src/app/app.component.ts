@@ -40,8 +40,7 @@ export class AppComponent implements OnInit {
     // localStorage.clear();
     // this.localStorage.setItem('db.message', null);
     // this.localStorage.setItem('db.messages', null);
-    this.initFakeBackendDatabase();
-    this.log.Information("Well Come!!!!!!!");
+    this.initFakeBackendDatabase();   
   }
 
   private initFakeBackendDatabase(): void {
