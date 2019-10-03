@@ -8,13 +8,13 @@ import { Observable } from "rxjs/Observable";
   styleUrls: ["./system-log.component.css"]
 })
 export class SystemLogComponent implements OnInit {
-  public records: Observable<any[]>;
+  public rows: Observable<any[]>;
   constructor(private log: LoggerService) {}
   ngOnInit() {
     this.bindLog();
   }
   bindLog() {
-    this.records = this.log.get();
-    console.log(this.records);
+    this.rows = this.log.get();
+    console.log(this.rows);
   }
 }
