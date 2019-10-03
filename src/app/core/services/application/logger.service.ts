@@ -9,7 +9,7 @@ import {
 import { Log, Severity, User } from "../../../shared/models/index";
 import { UserSessionService } from "../../../core/services/application/user-session.service";
 @Injectable()
-export class LoggerService { 
+export class LoggerService {
   private basePath: string = "/log";
   private userName: string;
   private angularFirestoreCollection: AngularFirestoreCollection<Log>;
