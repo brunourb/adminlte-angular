@@ -22,7 +22,8 @@ export class SystemLogComponent implements OnInit {
   bindLog() {
     try {
       // this.loadingIndicator = true;
-      this.rows = this.log.get();
+      this.rows = this.log.get(); 
+
       // this.loadingIndicator = false;
     } catch (e) {
       console.log("e");

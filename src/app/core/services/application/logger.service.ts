@@ -15,6 +15,8 @@ export class LoggerService {
   private angularFirestoreCollection: AngularFirestoreCollection<Log>;
   private Logs: Observable<Log[]>;
 
+  Logs$: Observable<Log[]>;
+  LogsAngularFirestoreCollection: AngularFirestoreCollection<Log>;
   constructor(
     private db: AngularFirestore,
     private userSession: UserSessionService
@@ -83,5 +85,14 @@ export class LoggerService {
       )
       .valueChanges();
   }
-   
+  getUserCollection() {
+    this.LogsAngularFirestoreCollection = this.db.collection<Log>("Log");
+    this.Logs$ = this.LogsAngularFirestoreCollection.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Log;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    });
+  }
 }
