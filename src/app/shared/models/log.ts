@@ -3,7 +3,7 @@ export enum Severity {
   Debug = 1,
   Information = 2,
   Warning = 3,
-  Error = 4,
+  Error = 4, 
   Fatal = 5
 }
 export interface Log {

@@ -9,7 +9,7 @@ import {
 import { Log, Severity, User } from "../../../shared/models/index";
 import { UserSessionService } from "../../../core/services/application/user-session.service";
 @Injectable()
-export class LoggerService {
+export class LoggerService { 
   private basePath: string = "/log";
   private userName: string;
   private angularFirestoreCollection: AngularFirestoreCollection<Log>;
@@ -71,8 +71,16 @@ export class LoggerService {
     });
   }
   public get(): Observable<any[]> {
+    var start = new Date();
+    start.setDate(start.getDate() - 1);
+    var end = new Date();
     return this.db
-      .collection<Log>(this.basePath, ref => ref.orderBy("timeStamp", "desc"))
+      .collection<Log>(this.basePath, ref =>
+        ref
+          .where("timeStamp", ">=", start)
+          .where("timeStamp", "<=", end)
+          .orderBy("timeStamp", "desc")
+      )
       .valueChanges();
   }
 }
