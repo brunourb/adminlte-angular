@@ -84,7 +84,7 @@ export class RegisterComponent implements OnInit {
           this.sendSpamMails(thisObject);
 
           this.log.Information(
-            ` User Registered Successfully!! <br/>${JSON.stringify(user)} )`
+            `User Registered Successfully!! <br/>${JSON.stringify(user)}`
           );
         },
         error => {
@@ -94,7 +94,7 @@ export class RegisterComponent implements OnInit {
             `Registration Failure:-  ${error}`
           );
           this.log.Error(
-            ` Registration Failure!! ${error} <br/>${JSON.stringify(user)} )`
+            `Registration Failure!! ${error} <br/>${JSON.stringify(user)}`
           );
         }
       );

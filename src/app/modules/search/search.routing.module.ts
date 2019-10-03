@@ -24,8 +24,7 @@ const routes: Routes = [
           isHome: true,
           icon: "fa fa-home",
           show: false
-        },
-         
+        }
       }
     ]
   }
