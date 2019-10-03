@@ -8,11 +8,11 @@ import "jquery";
 import { SearchPanleComponent } from "./search-box/component/search-panel.component";
 import { SearchComponent } from "./search.component";
 
-import { SearchBoxRootComponent } from "./search-box/search-box-root.component";
+// import { SearchBoxRootComponent } from "./search-box/search-box-root.component";
 
 import { SearchRoutingModule } from "./search.routing.module";
 @NgModule({
   imports: [CommonModule, FormsModule, SearchRoutingModule],
-  declarations: [SearchPanleComponent, SearchComponent, SearchBoxRootComponent]
+  declarations: [SearchPanleComponent, SearchComponent]
 })
 export class SearchModule {}

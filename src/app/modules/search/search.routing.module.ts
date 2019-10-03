@@ -5,7 +5,7 @@ import { AuthGuardService as AuthGuard } from "../../core/services/guards/auth-g
 import { SearchPanleComponent } from "./search-box/component/search-panel.component";
 import { SearchComponent } from "./search.component";
 
-import { SearchBoxRootComponent } from "./search-box/search-box-root.component";
+// import { SearchBoxRootComponent } from "./search-box/search-box-root.component";
 
 const routes: Routes = [
   {
@@ -25,24 +25,7 @@ const routes: Routes = [
           icon: "fa fa-home",
           show: false
         },
-        children: [
-          {
-            path: "inbox",
-            component: SearchPanleComponent,
-            canActivate: [AuthGuard],
-            data: {
-              title: "Inbox",
-              smallText: "13 New Messages",
-              isHome: true,
-              icon: "fa fa-home",
-              show: false
-            }
-          }
-          // {
-          //   path: "",
-          //   redirectTo: "inbox"
-          // }
-        ]
+         
       }
     ]
   }
