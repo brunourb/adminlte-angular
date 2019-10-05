@@ -1,21 +1,34 @@
-import { Injectable } from '@angular/core'; 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, Input, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Message } from '../../../shared/models/message';
-import { map } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewEncapsulation
+} from "@angular/core";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Message } from "../../../shared/models/message";
+import { map } from "rxjs/operators";
+import { Observable, of } from "rxjs";
+import { first } from "rxjs/operators";
 
-import { User } from '../../../shared/models/index';
-import { PagedData, CorporateEmployee, Page } from '../../../shared/models/page'; 
+import { User } from "../../../shared/models/index";
+
+import {
+  PagedData,
+  CorporateEmployee,
+  Page
+} from "../../../shared/models/page";
 
 @Injectable()
 export class MessageService {
   messages: Message[];
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public register(message: Message) {
+    
     return this.http.post(`/message/register`, message);
   }
 
@@ -37,20 +50,26 @@ export class MessageService {
   public getAll(): Observable<Message[]> {
     return Observable.of(this.getMessage());
   }
-  public getMessages(page: Page, id: string, mailType: string): Observable<PagedData<Message>> {
+  public getMessages(
+    page: Page,
+    id: string,
+    mailType: string
+  ): Observable<PagedData<Message>> {
     return this.getByToId(id, mailType).flatMap(data => {
       this.messages = data;
       return of(data).pipe(map(data => this.getPagedData(page)));
-    })
+    });
   }
-  public getFromMessages(page: Page, id: string): Observable<PagedData<Message>> {
-    console.log('a');
+  public getFromMessages(
+    page: Page,
+    id: string
+  ): Observable<PagedData<Message>> {
+    console.log("a");
     return this.getByFromId(id).flatMap(data => {
       this.messages = data;
       return of(data).pipe(map(data => this.getPagedData(page)));
-    })
+    });
   }
-
 
   update(message: Message, type: string) {
     console.log(`/message/${type}/`);
@@ -61,7 +80,7 @@ export class MessageService {
     return this.getAll().flatMap(data => {
       this.messages = data;
       return of(data).pipe(map(data => this.getPagedData(page)));
-    })
+    });
   }
   /**
    * Package companyData into a PagedData object based on the selected Page
@@ -73,7 +92,7 @@ export class MessageService {
     page.totalElements = this.messages.length;
     page.totalPages = page.totalElements / page.size;
     const start = page.pageNumber * page.size;
-    const end = Math.min((start + page.size), page.totalElements);
+    const end = Math.min(start + page.size, page.totalElements);
     for (let i = start; i < end; i++) {
       const jsonObj = this.messages[i];
       const message: Message = {
@@ -89,14 +108,13 @@ export class MessageService {
         time: jsonObj.time,
         type: jsonObj.type,
         suggestion: jsonObj.suggestion,
-        imgSource: jsonObj.imgSource,
+        imgSource: jsonObj.imgSource
       };
       pagedData.data.push(message);
     }
     pagedData.page = page;
     return pagedData;
   }
-
 
   public getMessage(): Message[] {
     let message: Message[] = [
@@ -127,7 +145,7 @@ export class MessageService {
         team: "Sales Department",
         time: "1 hours",
         suggestion: "Why not buy a new awesome theme?"
-      },
+      }
     ];
     return message;
   }

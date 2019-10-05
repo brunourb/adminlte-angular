@@ -1,24 +1,34 @@
-import { Component, Input, OnInit, Output, EventEmitter, ElementRef, Injectable, ViewChild, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgSelectModule, NgOption } from '@ng-select/ng-select';
-import { SkillService } from '../../../core/services/application/skill.service';
-import { UserService } from '../../../core/services/application/user.service';
-import { User } from '../../../shared/models/user';
-import { Message } from '../../../shared/models/message';
-import { LocalStorageService } from '../../../core/services/helpers/local-storage.service';
-import { MessageService } from '../../../core/services/application/message.service';
-
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  ElementRef,
+  Injectable,
+  ViewChild,
+  AfterViewInit
+} from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { NgSelectModule, NgOption } from "@ng-select/ng-select";
+import { SkillService } from "../../../core/services/application/skill.service";
+import { UserService } from "../../../core/services/application/user.service";
+import { User } from "../../../shared/models/user";
+import { Message } from "../../../shared/models/message";
+import { LocalStorageService } from "../../../core/services/helpers/local-storage.service";
+import { MessageService } from "../../../core/services/application/message.service";
+import { LoggerService } from "../../../core/services/application/logger.service";
 @Component({
-  selector: 'app-mail-compose',
-  templateUrl: './mail-compose.component.html',
-  styleUrls: ['./mail-compose.component.css'],
+  selector: "app-mail-compose",
+  templateUrl: "./mail-compose.component.html",
+  styleUrls: ["./mail-compose.component.css"]
 })
 export class MailComposeComponent implements OnInit {
   private user: User;
   submitted = false;
   mailsTo: any;
   mailToIds: any[];
-  @ViewChild('editor') editor;
+  @ViewChild("editor") editor;
   mailComposeForm: FormGroup;
 
   get f() {
@@ -29,11 +39,11 @@ export class MailComposeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private localStorage: LocalStorageService,
-    private messageService: MessageService) {
-  }
+    private messageService: MessageService,
+    private log: LoggerService
+  ) {}
 
   ngOnInit() {
-
     this.bindUserDetails();
     this.bindMailToList();
     this.bindFormGroup();
@@ -44,7 +54,7 @@ export class MailComposeComponent implements OnInit {
   bindFormGroup() {
     this.mailComposeForm = this.formBuilder.group({
       mailToIds: [null, Validators.required],
-      subject: [null, Validators.required],
+      subject: [null, Validators.required]
     });
   }
   ngAfterViewInit() {
@@ -55,8 +65,8 @@ export class MailComposeComponent implements OnInit {
     this.editor.getEditor().commands.addCommand({
       name: "showOtherCompletions",
       bindKey: "Ctrl-.",
-      exec: function (editor) { }
-    })
+      exec: function(editor) {}
+    });
   }
 
   bindMailToList() {
@@ -66,16 +76,17 @@ export class MailComposeComponent implements OnInit {
       },
       error => {
         console.log(error);
-      });
+      }
+    );
   }
 
   bindUserMailOption(users: User[]) {
     let To: NgOption[] = [];
-    users.forEach(function (data) {
+    users.forEach(function(data) {
       var option: NgOption = {
         id: data.id,
         name: data.username
-      }
+      };
       To.push(option);
     });
     this.mailsTo = To;
@@ -87,51 +98,66 @@ export class MailComposeComponent implements OnInit {
     if (this.mailComposeForm.invalid) {
       return;
     }
-    this.f.mailToIds.value.forEach(function (id) {
+    this.f.mailToIds.value.forEach(function(id) {
       thisObject.SendMail(id, thisObject);
     });
   }
 
   SendMail(emailid: string, thisObject: any): void {
-    this.userService.getAll().subscribe(data => {
-      for (let i = 0; i < data.length; i++) {
-        let user = data[i];
-        if (user.username === emailid) {
-          let message: Message = {
-            id: 0,
-            from: thisObject.user.username,
-            fromName: thisObject.user.firstName + " " + thisObject.user.lastName,
-            to: emailid,
-            toName: user.firstName + "  " + user.lastName,
-            subject: thisObject.f.subject.value,
-            body: thisObject.editor.value,
-            type: thisObject.user.username === "spammer@fakemail.com" ? "Junk" : "Starred",
-            fromType: thisObject.user.username === "spammer@fakemail.com" ? "Junk" : "Starred",
-            toType: thisObject.user.username === "spammer@fakemail.com" ? "Junk" : "Starred",
-            fromTeam: thisObject.user.team,
-            toTeam: user.team,
-            time: new Date(),
-            suggestion: "",
-            imgSource: "https://github.com/Genuine-Identity.png",
-            toStatus: "Active",
-            fromStatus: "Active",
-          };
+    this.userService.getAll().subscribe(
+      data => {
+        for (let i = 0; i < data.length; i++) {
+          let user = data[i];
+          if (user.username === emailid) {
+            let message: Message = {
+              id: 0,
+              from: thisObject.user.username,
+              fromName:
+                thisObject.user.firstName + " " + thisObject.user.lastName,
+              to: emailid,
+              toName: user.firstName + "  " + user.lastName,
+              subject: thisObject.f.subject.value,
+              body: thisObject.editor.value,
+              type:
+                thisObject.user.username === "spammer@fakemail.com"
+                  ? "Junk"
+                  : "Starred",
+              fromType:
+                thisObject.user.username === "spammer@fakemail.com"
+                  ? "Junk"
+                  : "Starred",
+              toType:
+                thisObject.user.username === "spammer@fakemail.com"
+                  ? "Junk"
+                  : "Starred",
+              fromTeam: thisObject.user.team,
+              toTeam: user.team,
+              time: new Date(),
+              suggestion: "",
+              imgSource: "https://github.com/Genuine-Identity.png",
+              toStatus: "Active",
+              fromStatus: "Active"
+            };
 
-          thisObject.messageService.register(message)
-            .subscribe(
+            thisObject.messageService.register(message).subscribe(
               data => {
                 console.log(data);
+                this.log.Information(
+                  `message send!! <br/>${JSON.stringify(message)}`
+                );
               },
               error => {
                 console.log(error);
-              });
-          break;
+                this.log.Error(`Error message send <br/>${error}`);
+              }
+            );
+            break;
+          }
         }
-      }
-    },
+      },
       error => {
         console.log(error);
       }
     );
   }
-} 
+}
