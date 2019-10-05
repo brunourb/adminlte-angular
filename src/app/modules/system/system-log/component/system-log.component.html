@@ -6,9 +6,11 @@
 					<h3 class="box-title">System Log</h3>
 				</div>
 				<div class="box-body table-responsive">
-					<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="40" [footerHeight]="50" [rowHeight]="'auto'"
-					 [offset]="page.pageNumber" [limit]="page.size" [loadingIndicator]="loadingIndicator">
-						<ngx-datatable-column name="userName" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="180">
+					<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="40"
+						[footerHeight]="50" [rowHeight]="'auto'" [offset]="page.pageNumber" [limit]="page.size"
+						[loadingIndicator]="loadingIndicator">
+						<ngx-datatable-column name="userName" [resizeable]="false" [sortable]="true" [draggable]="true"
+							[canAutoResize]="false" [width]="280">
 							<ng-template ngx-datatable-header-template>
 								User Name
 							</ng-template>
@@ -16,7 +18,8 @@
 								{{value}}
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="description" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true">
+						<ngx-datatable-column name="description" [sortable]="true" [draggable]="true"
+							[resizeable]="true" [canAutoResize]="true" [width]="400">
 							<ng-template ngx-datatable-header-template>
 								Description
 							</ng-template>
@@ -24,7 +27,8 @@
 								{{value}}
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="severity" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="80">
+						<ngx-datatable-column name="severity" [resizeable]="false" [sortable]="true" [draggable]="true"
+							[canAutoResize]="false" [width]="100">
 							<ng-template ngx-datatable-header-template>
 								Severity
 							</ng-template>
@@ -32,7 +36,8 @@
 								{{value}}
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column prop="timeStamp" [width]="80">
+						<ngx-datatable-column prop="timeStamp" [resizeable]="false" [sortable]="true" [draggable]="true"
+							[canAutoResize]="false" [width]="200">
 							<ng-template let-column="column" ngx-datatable-header-template>
 								TimeStamp
 							</ng-template>

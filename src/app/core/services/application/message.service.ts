@@ -28,7 +28,6 @@ export class MessageService {
   constructor(private http: HttpClient) {}
 
   public register(message: Message) {
-    
     return this.http.post(`/message/register`, message);
   }
 
