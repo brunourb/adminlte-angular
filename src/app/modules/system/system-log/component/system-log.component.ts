@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { LoggerService } from "../../.../../../../core/services/application/logger.service";
 import { Observable } from "rxjs/Observable";
 import { PagedData, Page } from "../../../../shared/models/page";
+
 @Component({
   selector: "app-system-log",
   templateUrl: "./system-log.component.html",
@@ -20,13 +21,16 @@ export class SystemLogComponent implements OnInit {
     this.bindLog();
   }
   bindLog() {
-    try {
-      // this.loadingIndicator = true;
-      this.rows = this.log.get(); 
-
-      // this.loadingIndicator = false;
-    } catch (e) {
-      console.log("e");
-    }
+    this.loadingIndicator = true;
+    this.log.get().subscribe(
+      data => {
+        this.rows = data;
+        this.loadingIndicator = false;
+      },
+      err => {
+        console.log(err);
+        this.loadingIndicator = false;
+      }
+    );
   }
 }

@@ -6,7 +6,7 @@
 					<h3 class="box-title">System Log</h3>
 				</div>
 				<div class="box-body table-responsive">
-					<ngx-datatable class="material" [rows]="rows |async" [columnMode]="'force'" [headerHeight]="40" [footerHeight]="50" [rowHeight]="'auto'"
+					<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="40" [footerHeight]="50" [rowHeight]="'auto'"
 					 [offset]="page.pageNumber" [limit]="page.size" [loadingIndicator]="loadingIndicator">
 						<ngx-datatable-column name="userName" [resizeable]="true" [sortable]="true" [draggable]="true" [canAutoResize]="true" [width]="180">
 							<ng-template ngx-datatable-header-template>
