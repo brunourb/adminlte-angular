@@ -11,7 +11,7 @@ import { UserSessionService } from "../../../core/services/application/user-sess
 @Injectable()
 export class LoggerService {
   private basePath: string = "/log";
-  private userName: string;
+  // private userName: string;
   private angularFirestoreCollection: AngularFirestoreCollection<Log>;
   private Logs: Observable<Log[]>;
 
@@ -21,12 +21,12 @@ export class LoggerService {
     private db: AngularFirestore,
     private userSession: UserSessionService
   ) {
-    this.userName = this.userSession.getUserName();
+    // this.userName = this.userSession.getUserName();
   }
   private;
   public Verbose(string, description: string): void {
     this.db.collection(this.basePath).add({
-      userName: this.userName,
+      userName: this.userSession.getUserName(),
       description: description,
       timeStamp: new Date(),
       severity: Severity[Severity.Verbose]
@@ -34,7 +34,7 @@ export class LoggerService {
   }
   public Debug(description: string): void {
     this.db.collection(this.basePath).add({
-      userName: this.userName,
+      userName: this.userSession.getUserName(),
       description: description,
       timeStamp: new Date(),
       severity: Severity[Severity.Debug]
@@ -42,7 +42,7 @@ export class LoggerService {
   }
   public Information(description: string): void {
     this.db.collection(this.basePath).add({
-      userName: this.userName,
+      userName: this.userSession.getUserName(),
       description: description,
       timeStamp: new Date(),
       severity: Severity[Severity.Information]
@@ -66,7 +66,7 @@ export class LoggerService {
   }
   public Fatal(description: string): void {
     this.db.collection(this.basePath).add({
-      userName: this.userName,
+      userName: this.userSession.getUserName(),
       description: description,
       timeStamp: new Date(),
       severity: Severity[Severity.Fatal]
@@ -87,12 +87,14 @@ export class LoggerService {
   }
   getUserCollection() {
     this.LogsAngularFirestoreCollection = this.db.collection<Log>("Log");
-    this.Logs$ = this.LogsAngularFirestoreCollection.snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Log;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      });
-    });
+    this.Logs$ = this.LogsAngularFirestoreCollection.snapshotChanges().map(
+      actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Log;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      }
+    );
   }
 }
