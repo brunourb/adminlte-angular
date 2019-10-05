@@ -74,7 +74,7 @@ export class LoggerService {
   }
   public get(): Observable<any[]> {
     var start = new Date();
-    start.setDate(start.getDate() - 1);
+    start.setDate(start.getDate() - 10);
     var end = new Date();
     return this.db
       .collection<Log>(this.basePath, ref =>
