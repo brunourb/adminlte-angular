@@ -8,7 +8,7 @@ Topics Covered/will Covered.
 
 1. Two Way Data binding (Will Covered)
 2. User Registration
-  1. JWTTokenServices
+ 
   2. localStorage
   3. Validation
   4. Server side Validation (Will Covered)
